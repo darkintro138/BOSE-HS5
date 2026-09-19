@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HongQi HS5">
+<meta name="theme-color" content="#0b0c0e">
+<title>HongQi HS5 · BOSE Sound</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body { position:fixed; inset:0; width:100%; height:100%; overflow:hidden; overscroll-behavior:none; touch-action:manipulation; }
+
+/* ═══════ ТЁМНАЯ ТЕМА ═══════ */
+:root, [data-theme="dark"] {
+  --blue:#35c8ff; --blue-bright:#aee9ff; --blue-deep:#0a5a8a;
+  --screen-bg:#02101d; --screen-glow:rgba(53,200,255,.15);
+  --screen-text:var(--blue-bright); --screen-dim:var(--blue);
+  --cabinet-1:#2c2c32; --cabinet-2:#1c1c21; --cabinet-3:#111114;
+  --console-1:#303038; --console-2:#22222a; --console-3:#121216;
+  --speaker-cone:#5a5a64; --speaker-cone-dark:#19191e;
+  --speaker-cap:#8a8a95; --speaker-cap-dark:#141418;
+  --tweeter:#4a4a52; --tweeter-dark:#0c0c0f;
+  --btn-bg:linear-gradient(180deg,#43434c 0%,#26262d 45%,#15151a 100%);
+  --btn-color:#8a9aa6; --btn-active-color:#cdf0ff;
+  --ring-color:rgba(53,200,255,.55); --brand-color:#b9c3cc;
+  --label-color:#6a747c; --screw:#6a6a72; --badge-color:#5c5c66;
+  --eq-bar:linear-gradient(to top, var(--blue-deep) 0%, #1e90d8 40%, var(--blue) 75%, var(--blue-bright) 100%);
+  --vol-lit:var(--blue); --vol-lit-max:var(--blue-bright); --vol-off:rgba(10,90,138,.22);
+  --power-led:#ff3b30;
+  --bg-outer:linear-gradient(160deg,#17181c 0%,#0b0c0e 100%);
+  --bg-glow:rgba(53,200,255,.07); --overlay-bg:rgba(2,16,29,.98);
+  --fader-cap:linear-gradient(180deg,#e8e8ec 0%,#b8b8c0 45%,#88888f 55%,#5a5a62 100%);
+  --theme-color:#0b0c0e;
+}
+
+/* ═══════ ЗОЛОТАЯ ТЕМА (тёмная, контрастная, позолоченная) ═══════ */
+[data-theme="light"] {
+  --blue:#ffb02e; --blue-bright:#ffd880; --blue-deep:#8a5a10;
+  --screen-bg:#150d02; --screen-glow:rgba(255,176,46,.22);
+  --screen-text:#ffc550; --screen-dim:#e09828;
+  --cabinet-1:#b09458; --cabinet-2:#8a7040; --cabinet-3:#54401e;
+  --console-1:#c4a86c; --console-2:#9a7e48; --console-3:#6e582c;
+  --speaker-cone:#4a3c24; --speaker-cone-dark:#241a0c;
+  --speaker-cap:#6a5636; --speaker-cap-dark:#161006;
+  --tweeter:#5a4830; --tweeter-dark:#20180c;
+  --btn-bg:linear-gradient(180deg,#f0d898 0%,#c8a860 45%,#a08440 55%,#74592a 100%);
+  --btn-color:#4a3818; --btn-active-color:#241a08;
+  --ring-color:rgba(255,176,46,.7); --brand-color:#2e2210;
+  --label-color:#4a3a1c; --screw:#8a7444; --badge-color:#3a2e14;
+  --eq-bar:linear-gradient(to top, #8a5a10 0%, #d89020 40%, #ffb02e 75%, #ffe0a0 100%);
+  --vol-lit:#ffb02e; --vol-lit-max:#ffe0a0; --vol-off:rgba(255,176,46,.15);
+  --power-led:#ff4020;
+  --bg-outer:linear-gradient(160deg,#332b1c 0%,#14100a 100%);
+  --bg-glow:rgba(255,176,46,.1); --overlay-bg:rgba(21,13,2,.98);
+  --fader-cap:linear-gradient(180deg,#ffe8b0 0%,#d8b870 45%,#b09048 55%,#806830 100%);
+  --theme-color:#14100a;
+}
+
+body {
+  font-family:'Share Tech Mono','Courier New',monospace;
+  background:radial-gradient(ellipse at 50% 0%, var(--bg-glow) 0%, transparent 55%), var(--bg-outer);
+  color:#ccc; user-select:none; display:flex; align-items:center; justify-content:center; transition:background .6s;
+  padding:max(6px,env(safe-area-inset-top)) max(6px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left));
+}
+
+/* ═══ СИСТЕМА (ШИРЕ) ═══ */
+.system { display:flex; gap:14px; align-items:stretch; width:100%; max-width:1400px; height:100%; max-height:640px; }
+
+/* ═══ КОЛОНКИ ═══ */
+.speaker { flex:0 0 190px; display:flex; flex-direction:column; }
+.cabinet { flex:1; position:relative; border-radius:14px;
+  background:linear-gradient(160deg,var(--cabinet-1) 0%,var(--cabinet-2) 40%,var(--cabinet-3) 100%);
+  box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 2px 2px rgba(255,255,255,.18), inset 0 -4px 10px rgba(0,0,0,.45), inset 4px 0 8px rgba(0,0,0,.2), inset -4px 0 8px rgba(0,0,0,.2);
+  display:flex; flex-direction:column; align-items:center; padding:16px 10px; gap:12px; overflow:hidden; transition:background .6s; }
+.cabinet::before { content:''; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.02) 3px,rgba(255,255,255,.02) 4px); }
+body.playing .cabinet { animation:cabVib .38s ease-in-out infinite; }
+@keyframes cabVib { 0%,100%{transform:translate(0,0)} 25%{transform:translate(.4px,-.3px)} 50%{transform:translate(-.3px,.4px)} 75%{transform:translate(.3px,.3px)} }
+.tweeter { width:52px; height:52px; border-radius:50%; position:relative; margin-top:4px;
+  background:radial-gradient(circle at 38% 32%, var(--tweeter) 0%, var(--tweeter-dark) 100%);
+  box-shadow:inset 0 3px 6px rgba(0,0,0,.75), inset 0 -1px 2px rgba(255,255,255,.15), 0 3px 8px rgba(0,0,0,.4); }
+.tweeter::after { content:''; position:absolute; top:14%; left:18%; width:34%; height:26%; border-radius:50%; background:radial-gradient(ellipse,rgba(255,255,255,.35),transparent 70%); filter:blur(1px); }
+body.playing .tweeter { animation:tweeterPulse .19s ease-in-out infinite; }
+@keyframes tweeterPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.018)} }
+.mid-driver { width:84px; height:84px; border-radius:50%; position:relative;
+  background:radial-gradient(circle at 50% 50%, var(--cabinet-2) 0%, var(--cabinet-3) 100%);
+  box-shadow:inset 0 4px 10px rgba(0,0,0,.75), 0 2px 6px rgba(0,0,0,.4); display:flex; align-items:center; justify-content:center; }
+.mid-cone { width:64px; height:64px; border-radius:50%;
+  background:radial-gradient(circle at 38% 32%, var(--speaker-cone) 0%, var(--speaker-cone-dark) 100%);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.65), inset 0 -2px 4px rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; }
+.mid-cone .cap { width:24px; height:24px; border-radius:50%;
+  background:radial-gradient(circle at 36% 30%, var(--speaker-cap) 0%, var(--speaker-cap-dark) 100%);
+  box-shadow:inset 0 1px 3px rgba(255,255,255,.4), 0 2px 5px rgba(0,0,0,.5); }
+body.playing .mid-cone { animation:wooferPump .38s ease-in-out infinite .04s; }
+.woofer { width:138px; height:138px; border-radius:50%; position:relative; margin-top:auto;
+  background:radial-gradient(circle at 50% 50%, var(--cabinet-2) 0%, var(--cabinet-3) 100%);
+  box-shadow:inset 0 5px 14px rgba(0,0,0,.75), inset 0 -2px 5px rgba(255,255,255,.08), 0 4px 12px rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; }
+.woofer::before { content:''; position:absolute; inset:9px; border-radius:50%; background:radial-gradient(circle, transparent 62%, rgba(0,0,0,.5) 64%, rgba(100,100,110,.35) 72%, rgba(0,0,0,.55) 80%); }
+.woofer::after { content:''; position:absolute; inset:0; border-radius:50%;
+  background:radial-gradient(circle at 50% 4%, var(--screw) 0 2.5px, var(--cabinet-3) 2.5px 4px, transparent 4px),
+    radial-gradient(circle at 50% 96%, var(--screw) 0 2.5px, var(--cabinet-3) 2.5px 4px, transparent 4px),
+    radial-gradient(circle at 4% 50%, var(--screw) 0 2.5px, var(--cabinet-3) 2.5px 4px, transparent 4px),
+    radial-gradient(circle at 96% 50%, var(--screw) 0 2.5px, var(--cabinet-3) 2.5px 4px, transparent 4px); }
+.woofer-cone { width:100px; height:100px; border-radius:50%; position:relative; z-index:2;
+  background:radial-gradient(circle at 38% 32%, var(--speaker-cone) 0%, var(--speaker-cone-dark) 100%);
+  box-shadow:inset 0 3px 10px rgba(0,0,0,.75), inset 0 -3px 6px rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; }
+.woofer-cone::before { content:''; position:absolute; inset:8px; border-radius:50%; background:repeating-radial-gradient(circle at 50% 50%, transparent 0 5px, rgba(0,0,0,.18) 5px 6px); }
+.dust-cap { width:38px; height:38px; border-radius:50%; position:relative; z-index:3;
+  background:radial-gradient(circle at 35% 30%, var(--speaker-cap) 0%, var(--speaker-cap-dark) 100%);
+  box-shadow:inset 0 2px 4px rgba(255,255,255,.4), 0 3px 8px rgba(0,0,0,.6); }
+body.playing .woofer-cone { animation:wooferPump .38s ease-in-out infinite; }
+@keyframes wooferPump { 0%,100%{transform:scale(1)} 42%{transform:scale(1.075)} 70%{transform:scale(.985)} }
+.spk-badge { font-family:'Orbitron',sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; color:var(--badge-color); margin-top:8px; }
+.bass-port { width:28px; height:28px; border-radius:50%; position:absolute; bottom:50px; background:radial-gradient(circle, #000 55%, var(--cabinet-2) 75%, var(--cabinet-1) 100%); box-shadow:inset 0 3px 6px rgba(0,0,0,1); }
+.speaker.left .bass-port { right:12px; } .speaker.right .bass-port { left:12px; }
+
+/* ═══ КОНСОЛЬ ═══ */
+.console { flex:1; position:relative; border-radius:16px; min-width:0;
+  background:linear-gradient(180deg,var(--console-1) 0%,var(--console-2) 12%,var(--console-3) 100%);
+  box-shadow:0 25px 60px rgba(0,0,0,.55), inset 0 2px 2px rgba(255,255,255,.22), inset 0 -5px 12px rgba(0,0,0,.45);
+  display:flex; flex-direction:column; padding:10px 16px; overflow:hidden; transition:background .6s; }
+.console::before { content:''; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.015) 2px,rgba(255,255,255,.015) 3px); }
+.screw { position:absolute; width:8px; height:8px; border-radius:50%; background:radial-gradient(circle at 35% 30%, var(--screw), var(--cabinet-3) 70%); box-shadow:inset 0 1px 2px rgba(255,255,255,.35), 0 1px 3px rgba(0,0,0,.6); }
+.screw::after { content:''; position:absolute; inset:2.5px 1px; background:var(--cabinet-3); border-radius:1px; }
+.screw.tl{top:7px;left:7px} .screw.tr{top:7px;right:7px} .screw.bl{bottom:7px;left:7px} .screw.br{bottom:7px;right:7px}
+
+/* ═══ ВЕРХНЯЯ ПАНЕЛЬ + POWER СВЕРХУ ═══ */
+.console-top { display:flex; justify-content:space-between; align-items:center; padding:0 14px 8px; z-index:2; }
+.brand { font-family:'Orbitron',sans-serif; font-weight:900; font-size:clamp(14px,2.6vw,19px); letter-spacing:3px; color:var(--brand-color); text-shadow:0 1px 0 rgba(255,255,255,.35), 0 -1px 1px rgba(0,0,0,.5); }
+.brand-sub { font-family:'VT323',monospace; font-size:clamp(9px,1.8vw,13px); letter-spacing:1.5px; color:var(--label-color); }
+.top-right { display:flex; align-items:center; gap:12px; }
+.power-led { width:10px; height:10px; border-radius:50%; background:#4a1414; box-shadow:inset 0 1px 2px rgba(0,0,0,.8); transition:all .4s; }
+body.on .power-led { background:var(--power-led); box-shadow:0 0 12px var(--power-led), 0 0 26px rgba(255,59,48,.6); animation:ledPulse 2s infinite; }
+@keyframes ledPulse { 50%{opacity:.7} }
+
+.pwr-btn { width:clamp(44px,10vw,56px); height:clamp(44px,10vw,56px); border-radius:50%;
+  background:var(--btn-bg); border:1px solid rgba(0,0,0,.5); cursor:pointer;
+  color:var(--btn-color); font-size:clamp(19px,4.5vw,25px);
+  display:flex; align-items:center; justify-content:center; position:relative; flex-shrink:0;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.22), inset 0 -4px 7px rgba(0,0,0,.5), 0 4px 10px rgba(0,0,0,.45);
+  transition:transform .1s, color .3s; }
+.pwr-btn::before { content:''; position:absolute; inset:-5px; border-radius:50%; border:2px solid rgba(255,59,48,.2); transition:all .35s; pointer-events:none; }
+body.on .pwr-btn { color:#ff9a90; }
+body.on .pwr-btn::before { border-color:rgba(255,59,48,.85); box-shadow:0 0 16px rgba(255,59,48,.55), inset 0 0 8px rgba(255,59,48,.2); }
+.pwr-btn:active { transform:translateY(2px); box-shadow:inset 0 3px 8px rgba(0,0,0,.7); }
+
+/* ═══ СРЕДНЯЯ СЕКЦИЯ: ЭКРАН + ФЕЙДЕР ═══ */
+.mid-section { z-index:2; flex:1; min-height:0; display:flex; gap:12px; }
+
+.screen-frame { flex:1; min-width:0; border-radius:10px; padding:4px;
+  background:linear-gradient(180deg,var(--cabinet-3),var(--cabinet-1));
+  box-shadow:inset 0 3px 8px rgba(0,0,0,.75), 0 1px 0 rgba(255,255,255,.15); display:flex; }
+.screen { position:relative; border-radius:7px; overflow:hidden; flex:1; background:var(--screen-bg);
+  display:flex; flex-direction:column; padding:10px 14px; gap:5px; transition:all .5s; }
+body:not(.on) .screen { opacity:.4; }
+body:not(.on) .screen-content { opacity:.1; filter:blur(1px); }
+body.on .screen { box-shadow:inset 0 0 40px var(--screen-glow), inset 0 0 100px rgba(0,0,0,.3); }
+.screen::before { content:''; position:absolute; inset:0; z-index:20; pointer-events:none; background:linear-gradient(165deg, rgba(255,255,255,.06) 0%, transparent 30%, transparent 70%, rgba(255,255,255,.03) 100%); }
+.screen::after { content:''; position:absolute; inset:0; z-index:19; pointer-events:none; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px); }
+.screen-content { display:flex; flex-direction:column; gap:4px; flex:1; min-height:0; transition:opacity .6s; position:relative; z-index:2; }
+.scr-status-row { display:flex; justify-content:space-between; align-items:center; font-family:'VT323',monospace; font-size:clamp(12px,2.2vw,16px); letter-spacing:1.2px; color:var(--screen-dim); text-shadow:0 0 6px var(--screen-glow); opacity:.9; }
+.scr-status-row .live { color:#ff5a5a; text-shadow:0 0 8px rgba(255,90,90,.7); display:flex; align-items:center; gap:4px; }
+[data-theme="light"] .scr-status-row .live { color:#ff6a4a; }
+.live-dot { width:6px; height:6px; border-radius:50%; background:#ff5a5a; box-shadow:0 0 8px #ff5a5a; animation:blink 1s infinite; }
+@keyframes blink { 50%{opacity:.2} }
+.scr-station { font-family:'Orbitron',sans-serif; font-weight:900; font-size:clamp(17px,3.4vh,32px); letter-spacing:1.5px; color:var(--screen-text); text-shadow:0 0 14px var(--screen-glow); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.1; }
+.scr-marquee-wrap { overflow:hidden; white-space:nowrap; height:19px; border-top:1px solid var(--screen-glow); border-bottom:1px solid var(--screen-glow); display:flex; align-items:center; }
+.scr-marquee { font-family:'VT323',monospace; font-size:clamp(14px,2.6vh,18px); letter-spacing:1.2px; color:var(--screen-dim); text-shadow:0 0 8px var(--screen-glow); display:inline-block; padding-left:100%; animation:marquee 26s linear infinite; }
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-100%)} }
+.scr-mid { display:flex; gap:14px; align-items:stretch; flex:1; min-height:0; }
+.eq { display:flex; gap:2px; align-items:flex-end; flex:1.5; padding:2px 0; }
+.eq-bar { flex:1; min-height:2px; position:relative; border-radius:1px; background:var(--eq-bar); box-shadow:0 0 5px var(--screen-glow); transition:height .07s ease-out; }
+.eq-bar::after { content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 3px, var(--screen-bg) 3px, var(--screen-bg) 5px); }
+.scr-right { flex:1; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end; gap:6px; }
+.scr-time { font-family:'VT323',monospace; font-size:clamp(34px,6.5vh,60px); line-height:.9; color:var(--screen-text); letter-spacing:2px; text-shadow:0 0 16px var(--screen-glow); }
+.vol-display { display:flex; flex-direction:column; align-items:flex-end; gap:2px; width:100%; }
+.vol-label { font-family:'VT323',monospace; font-size:clamp(11px,2vh,14px); color:var(--screen-dim); letter-spacing:1.2px; text-shadow:0 0 6px var(--screen-glow); }
+.vol-segments { display:flex; gap:2px; }
+.vol-seg { width:5px; height:10px; background:var(--vol-off); border-radius:1px; transition:all .15s; }
+.vol-seg.lit { background:var(--vol-lit); box-shadow:0 0 5px var(--vol-lit); }
+.vol-seg.lit.max { background:var(--vol-lit-max); box-shadow:0 0 6px var(--vol-lit-max); }
+.power-hint { position:absolute; inset:0; z-index:25; display:flex; align-items:center; justify-content:center; font-family:'VT323',monospace; font-size:clamp(17px,3.2vh,24px); letter-spacing:3px; color:var(--screen-dim); opacity:.6; animation:blink 2s infinite; pointer-events:none; }
+body.on .power-hint { display:none; }
+
+/* ═══════════════════════════════════════
+   DJ-ФЕЙДЕР ГРОМКОСТИ (справа)
+   ═══════════════════════════════════════ */
+.fader-col { flex:0 0 66px; display:flex; flex-direction:column; align-items:center; gap:5px;
+  background:linear-gradient(180deg,var(--cabinet-2),var(--cabinet-3));
+  border-radius:10px; padding:8px 4px;
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.12); }
+.fader-top-label { font-family:'VT323',monospace; font-size:13px; letter-spacing:2px; color:var(--label-color); }
+.fader { position:relative; flex:1; width:100%; display:flex; touch-action:none; cursor:pointer; min-height:60px; }
+.fader-scale { width:18px; position:relative; flex-shrink:0; }
+.tick { position:absolute; left:2px; height:1.5px; width:6px; background:var(--label-color); opacity:.65; transform:translateY(50%); }
+.tick.major { width:13px; opacity:1; height:2px; }
+.fader-track-wrap { flex:1; position:relative; display:flex; justify-content:center; }
+.fader-track { position:relative; width:13px; height:100%; border-radius:7px;
+  background:linear-gradient(90deg,#000 0%,#1c1c22 45%,#08080c 100%);
+  box-shadow:inset 0 3px 7px rgba(0,0,0,.95), 0 1px 0 rgba(255,255,255,.15);
+  border:1px solid rgba(0,0,0,.65); }
+[data-theme="light"] .fader-track { background:linear-gradient(90deg,#1a1206 0%,#2e2210 45%,#120c04 100%); }
+.fader-fill { position:absolute; bottom:0; left:1.5px; right:1.5px; height:80%; border-radius:6px;
+  background:linear-gradient(to top, var(--blue-deep), var(--blue));
+  box-shadow:0 0 10px var(--ring-color); transition:height .06s; }
+.fader-cap { position:absolute; left:50%; bottom:80%; width:44px; height:26px;
+  transform:translate(-50%,50%);
+  background:var(--fader-cap);
+  border-radius:5px; border:1px solid rgba(0,0,0,.6);
+  box-shadow:0 4px 10px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.65), inset 0 -2px 3px rgba(0,0,0,.35);
+  pointer-events:none; transition:bottom .06s; }
+.fader-cap::after { content:''; position:absolute; left:14%; right:14%; top:50%; height:2.5px; transform:translateY(-50%);
+  background:var(--blue); box-shadow:0 0 8px var(--blue); border-radius:2px; }
+.fader-val { font-family:'VT323',monospace; font-size:17px; color:var(--screen-dim); letter-spacing:1px; }
+body.on .fader-val { color:var(--blue); text-shadow:0 0 8px var(--ring-color); }
+
+/* ═══════════════════════════════════════
+   КРУГЛЫЕ КНОПКИ — ОДИН РЯД, БЕЗ НАДПИСЕЙ
+   ═══════════════════════════════════════ */
+.controls { z-index:2; display:flex; justify-content:center; align-items:center;
+  gap:clamp(6px,1.8vw,20px); padding:clamp(8px,1.6vh,14px) 4px clamp(3px,.6vh,5px); }
+.btn {
+  width:clamp(42px,10.5vw,66px); height:clamp(42px,10.5vw,66px); border-radius:50%;
+  background:var(--btn-bg); border:1px solid rgba(0,0,0,.45); cursor:pointer; position:relative;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--btn-color); font-size:clamp(20px,5.2vw,30px); flex-shrink:0;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.22), inset 0 -4px 7px rgba(0,0,0,.5), 0 5px 12px rgba(0,0,0,.45);
+  transition:transform .1s, box-shadow .1s, color .3s; }
+.btn::before { content:''; position:absolute; inset:-5px; border-radius:50%; border:2px solid rgba(120,120,120,.12); transition:all .35s; pointer-events:none; }
+body.on .btn { color:var(--btn-active-color); }
+body.on .btn::before { border-color:var(--ring-color); box-shadow:0 0 12px var(--ring-color), inset 0 0 7px var(--ring-color); }
+.btn:active { transform:translateY(2px); box-shadow:inset 0 3px 8px rgba(0,0,0,.7), 0 1px 3px rgba(0,0,0,.4); }
+.btn:active::before { box-shadow:0 0 22px var(--ring-color); }
+
+.btn.play { width:clamp(56px,14vw,88px); height:clamp(56px,14vw,88px); font-size:clamp(27px,7vw,40px); }
+body.playing .btn.play { color:var(--screen-text); }
+body.playing .btn.play::before { animation:ringBreath 1.6s ease-in-out infinite; }
+@keyframes ringBreath {
+  0%,100% { box-shadow:0 0 12px var(--ring-color); border-color:var(--ring-color); }
+  50% { box-shadow:0 0 30px var(--ring-color); border-color:var(--screen-text); }
+}
+
+/* ═══ LED + НИЗ ═══ */
+.led-strip { z-index:2; height:3px; margin:clamp(5px,1vh,9px) 18px 2px; border-radius:2px; background:rgba(0,0,0,.4); box-shadow:inset 0 1px 2px rgba(0,0,0,.7); position:relative; overflow:hidden; }
+.led-strip::after { content:''; position:absolute; inset:0; opacity:0; transition:opacity .5s; background:linear-gradient(90deg,transparent,var(--blue),var(--blue-bright),var(--blue),transparent); background-size:50% 100%; background-repeat:no-repeat; }
+body.on .led-strip::after { opacity:.9; animation:stripRun 3s linear infinite; }
+@keyframes stripRun { 0%{background-position:-60% 0} 100%{background-position:160% 0} }
+.console-bottom-row { z-index:2; display:flex; justify-content:space-between; align-items:center; padding:0 14px 2px; }
+.console-bottom-label { font-family:'VT323',monospace; font-size:clamp(10px,2vw,13px); letter-spacing:2.5px; color:var(--label-color); }
+.theme-switch { display:flex; align-items:center; gap:5px; font-family:'VT323',monospace; font-size:clamp(10px,2vw,13px); letter-spacing:1.5px; color:var(--label-color); cursor:pointer; padding:2px 6px; border-radius:4px; transition:all .3s; border:1px solid transparent; }
+.theme-switch:hover { color:var(--brand-color); border-color:var(--label-color); }
+.theme-icon { font-size:clamp(12px,2.4vw,15px); }
+
+/* ═══ СПИСОК КАНАЛОВ (КРУПНЫЙ) ═══ */
+.stations-overlay { position:absolute; inset:0; z-index:100; background:var(--overlay-bg); backdrop-filter:blur(12px); display:none; flex-direction:column; padding:16px; }
+.stations-overlay.show { display:flex; }
+.stations-header { display:flex; justify-content:space-between; align-items:center; padding-bottom:10px; border-bottom:2px solid var(--screen-glow); margin-bottom:10px; gap:10px; }
+.stations-title { font-family:'Orbitron',sans-serif; font-weight:900; font-size:clamp(16px,4vw,24px); letter-spacing:2px; color:var(--screen-text); text-shadow:0 0 12px var(--screen-glow); }
+.stations-close { width:clamp(40px,9vw,50px); height:clamp(40px,9vw,50px); border-radius:12px; background:var(--btn-bg); color:var(--btn-active-color); border:1px solid rgba(0,0,0,.4); cursor:pointer; font-size:clamp(20px,5vw,26px); flex-shrink:0; box-shadow:inset 0 2px 3px rgba(255,255,255,.2), 0 3px 8px rgba(0,0,0,.4); }
+.stations-grid { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:8px; padding-right:4px; }
+.station-item { padding:13px 15px; border-radius:10px; cursor:pointer; background:rgba(255,255,255,.05); border:1.5px solid var(--screen-glow); display:flex; align-items:center; gap:11px; transition:all .15s; }
+.station-item:hover { background:rgba(255,255,255,.1); transform:translateX(2px); }
+.station-item.active { background:var(--screen-glow); border-color:var(--screen-text); box-shadow:inset 0 0 14px var(--screen-glow), 0 0 12px var(--screen-glow); }
+.station-num { font-family:'VT323',monospace; font-size:clamp(21px,5vw,27px); color:var(--screen-dim); min-width:36px; text-shadow:0 0 6px var(--screen-glow); }
+.station-item.active .station-num { color:var(--screen-text); }
+.station-name-small { font-family:'Orbitron',sans-serif; font-weight:700; font-size:clamp(13px,3.2vw,16px); color:var(--screen-text); letter-spacing:.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.station-genre-small { font-family:'VT323',monospace; font-size:clamp(12px,3vw,15px); color:var(--screen-dim); letter-spacing:1px; margin-top:2px; }
+
+/* ═══ ПОРТРЕТ ═══ */
+@media (orientation:portrait), (max-width:640px) {
+  .speaker { display:none; }
+  .system { flex-direction:column; max-height:none; height:100%; }
+  .console { flex:1; height:100%; padding:8px 10px; border-radius:12px; }
+  .screen { padding:8px 10px; }
+  .scr-mid { flex-direction:column; gap:6px; }
+  .eq { min-height:40px; }
+  .scr-right { flex-direction:row; align-items:center; justify-content:space-between; }
+  .stations-grid { grid-template-columns:1fr; }
+  .fader-col { flex:0 0 56px; }
+  .fader-cap { width:38px; height:22px; }
+  .controls { gap:clamp(4px,1.6vw,10px); }
+  .btn { width:clamp(40px,11.2vw,52px); height:clamp(40px,11.2vw,52px); font-size:clamp(18px,5vw,24px); }
+  .btn.play { width:clamp(52px,14vw,66px); height:clamp(52px,14vw,66px); font-size:clamp(24px,6.5vw,32px); }
+}
+@media (orientation:landscape) and (max-height:430px) {
+  .console-top { padding:0 12px 4px; }
+  .led-strip { margin:5px 16px 2px; }
+  .speaker { flex:0 0 130px; }
+  .woofer { width:96px; height:96px; } .woofer-cone { width:70px; height:70px; }
+  .dust-cap { width:26px; height:26px; }
+  .mid-driver { width:56px; height:56px; } .mid-cone { width:44px; height:44px; }
+  .mid-cone .cap { width:16px; height:16px; } .tweeter { width:32px; height:32px; }
+  .btn { width:clamp(38px,8.5vh,54px); height:clamp(38px,8.5vh,54px); font-size:clamp(17px,4.2vh,25px); }
+  .btn.play { width:clamp(50px,11vh,70px); height:clamp(50px,11vh,70px); font-size:clamp(22px,5.5vh,32px); }
+  .pwr-btn { width:clamp(36px,8vh,46px); height:clamp(36px,8vh,46px); }
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="system">
+  <div class="speaker left"><div class="cabinet">
+    <div class="tweeter"></div>
+    <div class="mid-driver"><div class="mid-cone"><div class="cap"></div></div></div>
+    <div class="woofer"><div class="woofer-cone"><div class="dust-cap"></div></div></div>
+    <div class="bass-port"></div><div class="spk-badge">BOSE · 100W</div>
+  </div></div>
+
+  <div class="console">
+    <div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>
+
+    <!-- ВЕРХ: бренд + POWER -->
+    <div class="console-top">
+      <div>
+        <div class="brand">HONGQI HS5</div>
+        <div class="brand-sub">BOSE SOUND SYSTEM · PREMIUM AUDIO · 12 CH</div>
+      </div>
+      <div class="top-right">
+        <div class="power-led"></div>
+        <button class="pwr-btn" id="powerBtn" onclick="togglePower()">⏻</button>
+      </div>
+    </div>
+
+    <!-- СЕРЕДИНА: экран + DJ-фейдер -->
+    <div class="mid-section">
+      <div class="screen-frame">
+        <div class="screen">
+          <div class="power-hint">— НАЖМИТЕ ⏻ СВЕРХУ —</div>
+          <div class="screen-content">
+            <div class="scr-status-row">
+              <span id="statusText">STANDBY</span>
+              <span>STEREO · <span id="bitrateDisplay">128</span>kbps</span>
+              <span class="live"><span class="live-dot"></span>LIVE</span>
+            </div>
+            <div class="scr-station" id="stationName">HONGQI RADIO</div>
+            <div class="scr-marquee-wrap">
+              <span class="scr-marquee" id="marqueeText">*** HONGQI HS5 BOSE SOUND *** 125 CHANNELS *** PRESS POWER ***</span>
+            </div>
+            <div class="scr-mid">
+              <div class="eq" id="eq"></div>
+              <div class="scr-right">
+                <div class="scr-time" id="timeDisplay">00:00</div>
+                <div class="vol-display">
+                  <div class="vol-label">VOL <span id="volNum">13</span></div>
+                  <div class="vol-segments" id="volSegments"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="stations-overlay" id="stationsOverlay">
+            <div class="stations-header">
+              <div class="stations-title">◆ КАНАЛЫ · 125</div>
+              <button class="stations-close" onclick="closeStations()">×</button>
+            </div>
+            <div class="stations-grid" id="stationsGrid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DJ-ФЕЙДЕР ГРОМКОСТИ -->
+      <div class="fader-col">
+        <div class="fader-top-label">VOL</div>
+        <div class="fader" id="fader">
+          <div class="fader-scale" id="faderScale"></div>
+          <div class="fader-track-wrap">
+            <div class="fader-track">
+              <div class="fader-fill" id="faderFill"></div>
+              <div class="fader-cap" id="faderCap"></div>
+            </div>
+          </div>
+        </div>
+        <div class="fader-val" id="faderValue">80</div>
+      </div>
+    </div>
+
+    <!-- КНОПКИ: один ряд, крупные значки, без надписей -->
+    <div class="controls">
+      <button class="btn" onclick="prevStation()">⏮</button>
+      <button class="btn play" id="playBtn" onclick="togglePlay()"><span id="playIco">▶</span></button>
+      <button class="btn" onclick="stopPlay()">■</button>
+      <button class="btn" onclick="nextStation()">⏭</button>
+      <button class="btn" onclick="openStations()">☰</button>
+      <button class="btn" id="thmBtn" onclick="toggleTheme()">☀</button>
+      <button class="btn" onclick="toggleFullscreen()">⛶</button>
+    </div>
+
+    <div class="led-strip"></div>
+    <div class="console-bottom-row">
+      <div class="console-bottom-label">· PRECISION AUDIO · 125 CHANNELS ·</div>
+      <div class="theme-switch" onclick="toggleTheme()">
+        <span class="theme-icon" id="themeIcon">☾</span><span id="themeLabel">DARK</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="speaker right"><div class="cabinet">
+    <div class="tweeter"></div>
+    <div class="mid-driver"><div class="mid-cone"><div class="cap"></div></div></div>
+    <div class="woofer"><div class="woofer-cone"><div class="dust-cap"></div></div></div>
+    <div class="bass-port"></div><div class="spk-badge">BOSE · 100W</div>
+  </div></div>
+</div>
+
+<script>
+document.addEventListener('touchmove', e => {
+  if (!e.target.closest('.stations-grid') && !e.target.closest('.fader')) e.preventDefault();
+}, { passive:false });
+document.addEventListener('gesturestart', e => e.preventDefault());
+
+function toggleFullscreen() {
+  const el = document.documentElement;
+  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+    (el.requestFullscreen||el.webkitRequestFullscreen).call(el);
+  } else { (document.exitFullscreen||document.webkitExitFullscreen).call(document); }
+}
+
+// ═══ 125 КАНАЛОВ ═══
+const SM = id => `https://ice1.somafm.com/${id}-128-mp3`;
+const RR = id => `https://radiorecord.hostingradio.ru/${id}96.aacp`;
+
+const stations = [
+  { s:SM("groovesalad"),  n:"Groove Salad",     g:"AMBIENT" },
+  { s:SM("dronezone"),    n:"Drone Zone",       g:"ATMOSPHERIC" },
+  { s:SM("deepspaceone"), n:"Deep Space One",   g:"DEEP AMBIENT" },
+  { s:SM("defcon"),       n:"DEF CON Radio",    g:"ELECTRONIC" },
+  { s:SM("beatblender"),  n:"Beat Blender",     g:"DEEP HOUSE" },
+  { s:SM("dubstep"),      n:"Dub Step Beyond",  g:"DUBSTEP" },
+  { s:SM("cliqhop"),      n:"Cliqhop",          g:"IDM" },
+  { s:SM("fluid"),        n:"Fluid",            g:"LIQUID DNB" },
+  { s:SM("thetrip"),      n:"The Trip",         g:"PROGRESSIVE" },
+  { s:SM("poptron"),      n:"PopTron",          g:"ELECTRO POP" },
+  { s:SM("indiepop"),     n:"Indie Pop Rocks",  g:"INDIE POP" },
+  { s:SM("digitalis"),    n:"Digitalis",        g:"ROCK" },
+  { s:SM("u80s"),         n:"Underground 80s",  g:"SYNTH POP" },
+  { s:SM("vaporwaves"),   n:"Vaporwaves",       g:"VAPORWAVE" },
+  { s:SM("covers"),       n:"Covers",           g:"POP COVERS" },
+  { s:SM("metal"),        n:"Metal Detector",   g:"METAL" },
+  { s:SM("lush"),         n:"Lush",             g:"VOCALS" },
+  { s:SM("secretagent"),  n:"Secret Agent",     g:"LOUNGE" },
+  { s:SM("illstreet"),    n:"Illinois Street",  g:"LOUNGE" },
+  { s:SM("sonicuniverse"),n:"Sonic Universe",   g:"AVANT JAZZ" },
+  { s:SM("bootliquor"),   n:"Boot Liquor",      g:"AMERICANA" },
+  { s:SM("folkfwd"),      n:"Folk Forward",     g:"INDIE FOLK" },
+  { s:SM("reggae"),       n:"Heavyweight Reggae",g:"REGGAE" },
+  { s:SM("tags"),         n:"The Trip Hop",     g:"TRIP HOP" },
+  { s:SM("thistle"),      n:"ThistleRadio",     g:"CELTIC" },
+  { s:SM("missioncontrol"),n:"Mission Control", g:"SPACE" },
+  { s:SM("spacestation"), n:"Space Station",    g:"SPACE AMBIENT" },
+  { s:SM("sf1033"),       n:"SF 10-33",         g:"AMBIENT" },
+  { s:SM("bagel"),        n:"Bagel Radio",      g:"ECLECTIC" },
+  { s:SM("leftcoast"),    n:"Left Coast",       g:"WEST COAST" },
+  { s:SM("n5md"),         n:"n5MD Radio",       g:"POST ROCK" },
+  { s:SM("underground"),  n:"Underground",      g:"DRUM & BASS" },
+  { s:SM("gsclassic"),    n:"Groove Salad Classic",g:"CHILL OUT" },
+  { s:SM("brfm"),         n:"Bossa Beyond",     g:"BOSSA NOVA" },
+  { s:SM("7soul"),        n:"Seven Inch Soul",  g:"SOUL" },
+  { s:SM("suburbsf"),     n:"Suburbs of SF",    g:"INDIE POP" },
+  { s:SM("synthetica"),   n:"Synthetica",       g:"SYNTHWAVE" },
+  { s:SM("torville"),     n:"Torville",         g:"FOLK" },
+  { s:SM("xmasinvasion"), n:"Xmas Invasion",    g:"HOLIDAY" },
+  { s:SM("xmasrocks"),    n:"Xmas Rocks",       g:"HOLIDAY" },
+
+  { s:RR("rr"),        n:"Record",            g:"RU DANCE" },
+  { s:RR("deep"),      n:"Record Deep",       g:"DEEP HOUSE" },
+  { s:RR("techno"),    n:"Record Techno",     g:"TECHNO" },
+  { s:RR("trance"),    n:"Record Trance",     g:"TRANCE" },
+  { s:RR("house"),     n:"Record House",      g:"HOUSE" },
+  { s:RR("dnb"),       n:"Record DNB",        g:"DRUM & BASS" },
+  { s:RR("dubstep"),   n:"Record Dubstep",    g:"DUBSTEP" },
+  { s:RR("electro"),   n:"Record Electro",    g:"ELECTRO" },
+  { s:RR("disco"),     n:"Record Disco",      g:"DISCO" },
+  { s:RR("funk"),      n:"Record Funk",       g:"FUNK" },
+  { s:RR("synth"),     n:"Record Synth",      g:"SYNTHWAVE" },
+  { s:RR("ambient"),   n:"Record Ambient",    g:"AMBIENT" },
+  { s:RR("chill"),     n:"Record Chill",      g:"CHILLOUT" },
+  { s:RR("hardstyle"), n:"Record Hardstyle",  g:"HARDSTYLE" },
+  { s:RR("trap"),      n:"Record Trap",       g:"TRAP" },
+  { s:RR("phonk"),     n:"Record Phonk",      g:"PHONK" },
+  { s:RR("garage"),    n:"Record Garage",     g:"GARAGE" },
+  { s:RR("breakbeat"), n:"Record Breakbeat",  g:"BREAKBEAT" },
+  { s:RR("downtempo"), n:"Record Downtempo",  g:"DOWNTEMPO" },
+  { s:RR("jackin"),    n:"Record Jackin",     g:"JACKIN" },
+  { s:RR("minimal"),   n:"Record Minimal",    g:"MINIMAL" },
+  { s:RR("progressive"),n:"Record Progressive",g:"PROGRESSIVE" },
+  { s:RR("russian"),   n:"Record Russian",    g:"RUSSIAN" },
+  { s:RR("gold"),      n:"Record Gold",       g:"GOLD" },
+  { s:RR("hits"),      n:"Record Hits",       g:"POP HITS" },
+  { s:RR("dance"),     n:"Record Dance",      g:"DANCE" },
+  { s:RR("bass"),      n:"Record Bass",       g:"BASS" },
+  { s:RR("club"),      n:"Record Club",       g:"CLUB" },
+  { s:RR("eurodance"), n:"Record Eurodance",  g:"EURODANCE" },
+  { s:RR("hardbass"),  n:"Record Hardbass",   g:"HARDBASS" },
+  { s:RR("hardcore"),  n:"Record Hardcore",   g:"HARDCORE" },
+  { s:RR("melodic"),   n:"Record Melodic",    g:"MELODIC" },
+  { s:RR("organic"),   n:"Record Organic",    g:"ORGANIC" },
+  { s:RR("afro"),      n:"Record Afro",       g:"AFRO HOUSE" },
+  { s:RR("latin"),     n:"Record Latin",      g:"LATIN" },
+  { s:RR("vocal"),     n:"Record Vocal",      g:"VOCAL" },
+  { s:RR("oldschool"), n:"Record Oldschool",  g:"OLDSCHOOL" },
+  { s:RR("remixes"),   n:"Record Remixes",    g:"REMIXES" },
+  { s:RR("energy"),    n:"Record Energy",     g:"ENERGY" },
+  { s:RR("relax"),     n:"Record Relax",      g:"RELAX" },
+
+  { s:"https://ep256.hostingradio.ru:8052/europaplus256.mp3", n:"Europa Plus",   g:"RU POP" },
+  { s:"https://rusradio.hostingradio.ru/rusradio96.aacp",     n:"Русское Радио", g:"RU POP" },
+  { s:"https://avtoradio.hostingradio.ru/avtoradio96.aacp",   n:"Авторадио",     g:"RU POP" },
+  { s:"https://dfm.hostingradio.ru/dfm96.aacp",               n:"DFM",           g:"RU DANCE" },
+  { s:"https://retro.hostingradio.ru/retro96.aacp",           n:"Ретро FM",      g:"RETRO" },
+  { s:"https://hitfm.hostingradio.ru/hitfm96.aacp",           n:"Hit FM",        g:"RU HITS" },
+  { s:"https://energy.hostingradio.ru/energy96.aacp",         n:"Energy",        g:"RU POP" },
+  { s:"https://loveradio.hostingradio.ru/loveradio96.aacp",   n:"Love Radio",    g:"RU POP" },
+  { s:"https://radiodacha.hostingradio.ru/radiodacha96.aacp", n:"Радио Дача",    g:"RU POP" },
+  { s:"https://shanson.hostingradio.ru/shanson96.aacp",       n:"Радио Шансон",  g:"CHANSON" },
+  { s:"https://yunost.hostingradio.ru/yunost96.aacp",         n:"Радио Юность",  g:"RU VOICE" },
+  { s:"https://mayak.hostingradio.ru/mayak96.aacp",           n:"Радио Маяк",    g:"RU VOICE" },
+  { s:"https://comedy.hostingradio.ru/comedy96.aacp",         n:"Comedy Radio",  g:"HUMOR" },
+  { s:"https://likefm.hostingradio.ru/likefm96.aacp",         n:"Like FM",       g:"RU POP" },
+  { s:"https://detifm.hostingradio.ru/detifm96.aacp",         n:"Детское Радио", g:"KIDS" },
+  { s:"https://vestifm.hostingradio.ru/vestifm96.aacp",       n:"Вести FM",      g:"NEWS" },
+  { s:"https://bfm.hostingradio.ru/bfm96.aacp",               n:"Business FM",   g:"NEWS" },
+  { s:"https://golosangary.hostingradio.ru/golosangary96.aacp",n:"Голос Ангары", g:"REGIONAL" },
+  { s:"https://radiomayak.hostingradio.ru/radiomayak96.aacp", n:"Маяк Голос",    g:"RU VOICE" },
+  { s:"https://humor.hostingradio.ru/humor96.aacp",           n:"Юмор FM",       g:"HUMOR" },
+  { s:"https://pilot.hostingradio.ru/pilot96.aacp",           n:"Пилот FM",      g:"RU ROCK" },
+  { s:"https://maximum.hostingradio.ru/maximum96.aacp",       n:"Maximum",       g:"RU ROCK" },
+  { s:"https://montecarlo.hostingradio.ru/montecarlo96.aacp", n:"Monte Carlo",   g:"LOUNGE" },
+  { s:"https://karnaval.hostingradio.ru/karnaval96.aacp",     n:"Карнавал",      g:"RU POP" },
+  { s:"https://megapop.hostingradio.ru/megapop96.aacp",       n:"Мега Поп",      g:"RU POP" },
+
+  { s:"https://stream.radioparadise.com/mp3-192",   n:"Radio Paradise",  g:"ECLECTIC" },
+  { s:"https://stream.radioparadise.com/rock-192",  n:"RP Rock Mix",     g:"ROCK" },
+  { s:"https://stream.radioparadise.com/mellow-192",n:"RP Mellow Mix",   g:"MELLOW" },
+  { s:"https://stream.radioparadise.com/global-192",n:"RP Global Mix",   g:"GLOBAL" },
+  { s:"https://jazz24.streamguys1.com/jazz24-mp3",  n:"Jazz24",          g:"JAZZ" },
+  { s:"https://kexp-mp3-128.streamguys1.com/kexp128.mp3", n:"KEXP Seattle", g:"INDIE" },
+  { s:"https://ice2.somafm.com/groovesalad-128-mp3",n:"Groove Salad Alt",g:"AMBIENT" },
+  { s:"https://ice2.somafm.com/dronezone-128-mp3",  n:"Drone Zone Alt",  g:"ATMOSPHERIC" },
+  { s:"https://ice2.somafm.com/beatblender-128-mp3",n:"Beat Blender Alt",g:"DEEP HOUSE" },
+  { s:"https://ice2.somafm.com/defcon-128-mp3",     n:"DEF CON Alt",     g:"ELECTRONIC" },
+  { s:"https://ice2.somafm.com/thetrip-128-mp3",    n:"The Trip Alt",    g:"PROGRESSIVE" },
+  { s:"https://ice2.somafm.com/fluid-128-mp3",      n:"Fluid Alt",       g:"LIQUID DNB" },
+  { s:"https://ice2.somafm.com/dubstep-128-mp3",    n:"Dub Step Alt",    g:"DUBSTEP" },
+  { s:"https://ice2.somafm.com/synthetica-128-mp3", n:"Synthetica Alt",  g:"SYNTHWAVE" },
+  { s:"https://ice2.somafm.com/u80s-128-mp3",       n:"Underground 80s Alt",g:"SYNTH POP" },
+  { s:"https://ice2.somafm.com/vaporwaves-128-mp3", n:"Vaporwaves Alt",  g:"VAPORWAVE" },
+  { s:"https://ice2.somafm.com/indiepop-128-mp3",   n:"Indie Pop Alt",   g:"INDIE POP" },
+  { s:"https://ice2.somafm.com/lush-128-mp3",       n:"Lush Alt",        g:"VOCALS" },
+  { s:"https://ice2.somafm.com/poptron-128-mp3",    n:"PopTron Alt",     g:"ELECTRO POP" },
+  { s:"https://ice2.somafm.com/covers-128-mp3",     n:"Covers Alt",      g:"POP COVERS" }
+].map((x,i) => ({ ...x, num:i+1 }));
+
+let powerOn=false, audio=null, isPlaying=false, currentIndex=0;
+let startTime=0, timeInterval=null, volume=0.8;
+let currentTheme = localStorage.getItem('theme')||'dark';
+document.body.setAttribute('data-theme', currentTheme);
+updateThemeUI();
+
+// ═══ ЭКВАЛАЙЗЕР ═══
+const EQ_BARS=32, eq=document.getElementById('eq');
+let eqH=new Array(EQ_BARS).fill(0), eqT=new Array(EQ_BARS).fill(0);
+for(let i=0;i<EQ_BARS;i++){const b=document.createElement('div');b.className='eq-bar';b.style.height='2px';eq.appendChild(b);}
+function animateEQ(){
+  const bars=document.querySelectorAll('.eq-bar');
+  if(Math.random()<0.38){
+    for(let i=0;i<EQ_BARS;i++){
+      if(isPlaying&&powerOn){
+        const wave=Math.sin(Date.now()/400+i*0.5)*18+22;
+        const bassBias=1-(i/EQ_BARS)*0.35;
+        eqT[i]=Math.min(100,(Math.random()*55+wave)*bassBias+15);
+      } else eqT[i]=0;
+    }
+  }
+  bars.forEach((b,i)=>{eqH[i]+=(eqT[i]-eqH[i])*0.25;b.style.height=Math.max(2,eqH[i])+'%';});
+  requestAnimationFrame(animateEQ);
+}
+animateEQ();
+
+// ═══ ШКАЛА ФЕЙДЕРА ═══
+const faderScale=document.getElementById('faderScale');
+for(let i=0;i<=10;i++){
+  const t=document.createElement('div');
+  t.className='tick'+(i%5===0?' major':'');
+  t.style.bottom=(i*10)+'%';
+  faderScale.appendChild(t);
+}
+
+// ═══ ГРОМКОСТЬ: сегменты на экране + фейдер ═══
+const VOL_SEGS=16, volWrap=document.getElementById('volSegments');
+for(let i=0;i<VOL_SEGS;i++){const s=document.createElement('div');s.className='vol-seg'+(i>=VOL_SEGS-2?' max':'');volWrap.appendChild(s);}
+
+function renderVolume(){
+  const lit=Math.round(volume*VOL_SEGS);
+  document.querySelectorAll('.vol-seg').forEach((s,i)=>s.classList.toggle('lit',i<lit));
+  document.getElementById('volNum').textContent=lit;
+  document.getElementById('faderFill').style.height=(volume*100)+'%';
+  document.getElementById('faderCap').style.bottom=(volume*100)+'%';
+  document.getElementById('faderValue').textContent=Math.round(volume*100);
+  if(audio)audio.volume=volume;
+}
+renderVolume();
+
+// ═══ DJ-ФЕЙДЕР: управление перетаскиванием ═══
+const faderEl=document.getElementById('fader');
+const faderTrack=document.querySelector('.fader-track');
+let faderDragging=false;
+
+function setVolumeFromPointer(e){
+  const rect=faderTrack.getBoundingClientRect();
+  let pct=1-(e.clientY-rect.top)/rect.height;
+  pct=Math.max(0,Math.min(1,pct));
+  volume=Math.round(pct*32)/32; // шаг как у сегментов
+  renderVolume();
+}
+faderEl.addEventListener('pointerdown',e=>{
+  faderDragging=true;
+  faderEl.setPointerCapture(e.pointerId);
+  setVolumeFromPointer(e);
+});
+faderEl.addEventListener('pointermove',e=>{ if(faderDragging) setVolumeFromPointer(e); });
+faderEl.addEventListener('pointerup',()=>{ faderDragging=false; });
+faderEl.addEventListener('pointercancel',()=>{ faderDragging=false; });
+
+function volUp(){volume=Math.min(1,volume+0.0625);renderVolume();}
+function volDown(){volume=Math.max(0,volume-0.0625);renderVolume();}
+
+// ═══ ТАЙМЕР ═══
+function updateTimer(){
+  if(!isPlaying)return;
+  const e=Math.floor((Date.now()-startTime)/1000);
+  document.getElementById('timeDisplay').textContent=String(Math.floor(e/60)).padStart(2,'0')+':'+String(e%60).padStart(2,'0');
+}
+
+// ═══ ТЕМА ═══
+function toggleTheme(){
+  currentTheme=currentTheme==='dark'?'light':'dark';
+  document.body.setAttribute('data-theme',currentTheme);
+  localStorage.setItem('theme',currentTheme);
+  updateThemeUI();
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta)meta.setAttribute('content',getComputedStyle(document.body).getPropertyValue('--theme-color').trim());
+}
+function updateThemeUI(){
+  const dark=currentTheme==='dark';
+  document.getElementById('themeIcon').textContent=dark?'☾':'☀';
+  document.getElementById('themeLabel').textContent=dark?'DARK':'GOLD';
+  document.getElementById('thmBtn').textContent=dark?'☀':'☾';
+}
+
+// ═══ POWER ═══
+function togglePower(){
+  if(!powerOn){
+    powerOn=true; document.body.classList.add('on');
+    if(!audio)initAudio();
+    document.getElementById('statusText').textContent='HELLO';
+    document.getElementById('stationName').textContent='HONGQI HS5';
+    setTimeout(()=>{loadStation(currentIndex);audio.play().catch(()=>{document.getElementById('statusText').textContent='PRESS PLAY';});},700);
+  } else {
+    powerOn=false; isPlaying=false;
+    if(audio)audio.pause();
+    document.body.classList.remove('on','playing');
+    document.getElementById('statusText').textContent='STANDBY';
+    setPlayBtn(false);
+    document.getElementById('timeDisplay').textContent='00:00';
+  }
+}
+
+function setPlayBtn(playing){
+  document.getElementById('playIco').textContent = playing?'⏸':'▶';
+}
+
+function initAudio(){
+  audio=new Audio(); audio.preload='auto'; audio.volume=volume;
+  audio.addEventListener('playing',()=>{
+    isPlaying=true; startTime=Date.now();
+    document.body.classList.add('playing');
+    setPlayBtn(true);
+    document.getElementById('statusText').textContent='PLAY';
+    if(timeInterval)clearInterval(timeInterval);
+    timeInterval=setInterval(updateTimer,1000);
+  });
+  audio.addEventListener('pause',()=>{
+    isPlaying=false; document.body.classList.remove('playing');
+    setPlayBtn(false);
+    document.getElementById('statusText').textContent='PAUSE';
+  });
+  audio.addEventListener('waiting',()=>{document.getElementById('statusText').textContent='BUFFER';});
+  audio.addEventListener('error',()=>{
+    document.getElementById('statusText').textContent='NO SIGNAL';
+    setTimeout(()=>{ if(powerOn) nextStation(); },2000);
+  });
+}
+
+// ═══ СТАНЦИИ ═══
+function loadStation(index){
+  if(index<0||index>=stations.length)return;
+  currentIndex=index; const s=stations[index];
+  if(!audio)return;
+  document.getElementById('stationName').textContent=s.n.toUpperCase();
+  document.getElementById('marqueeText').textContent=`*** КАНАЛ ${s.num} · ${s.n.toUpperCase()} *** ${s.g} *** HONGQI HS5 BOSE SOUND *** `;
+  startTime=Date.now();
+  document.getElementById('timeDisplay').textContent='00:00';
+  audio.src=s.s; audio.load();
+  if(powerOn&&isPlaying)audio.play().catch(e=>console.log(e));
+  document.querySelectorAll('.station-item').forEach((el,i)=>el.classList.toggle('active',i===currentIndex));
+}
+
+function togglePlay(){ if(!powerOn){togglePower();return;} if(isPlaying)audio.pause(); else audio.play().catch(e=>console.log(e)); }
+function stopPlay(){ if(!audio||!powerOn)return; audio.pause(); startTime=Date.now(); document.getElementById('timeDisplay').textContent='00:00'; }
+function nextStation(){ if(!powerOn)return; loadStation((currentIndex+1)%stations.length); }
+function prevStation(){ if(!powerOn)return; loadStation((currentIndex-1+stations.length)%stations.length); }
+
+function buildStationsList(){
+  const grid=document.getElementById('stationsGrid'); grid.innerHTML='';
+  stations.forEach((s,i)=>{
+    const item=document.createElement('div');
+    item.className='station-item'+(i===currentIndex?' active':'');
+    item.innerHTML=`<div class="station-num">${String(s.num).padStart(3,'0')}</div>
+      <div style="flex:1;min-width:0;overflow:hidden;">
+        <div class="station-name-small">${s.n}</div>
+        <div class="station-genre-small">${s.g}</div>
+      </div>`;
+    item.onclick=()=>{loadStation(i);closeStations();if(powerOn&&!isPlaying)audio.play().catch(e=>console.log(e));};
+    grid.appendChild(item);
+  });
+}
+buildStationsList();
+function openStations(){ if(!powerOn)return; document.getElementById('stationsOverlay').classList.add('show'); buildStationsList(); }
+function closeStations(){ document.getElementById('stationsOverlay').classList.remove('show'); }
+
+// ═══ СВАЙПЫ ═══
+let touchX=0; const screenEl=document.querySelector('.screen-frame');
+screenEl.addEventListener('touchstart',e=>touchX=e.changedTouches[0].screenX,{passive:true});
+screenEl.addEventListener('touchend',e=>{const d=e.changedTouches[0].screenX-touchX;if(Math.abs(d)>50){d>0?prevStation():nextStation();}},{passive:true});
+
+// ═══ КЛАВИАТУРА ═══
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space'){e.preventDefault();togglePlay();}
+  if(e.code==='ArrowLeft')prevStation();
+  if(e.code==='ArrowRight')nextStation();
+  if(e.code==='ArrowUp'){e.preventDefault();volUp();}
+  if(e.code==='ArrowDown'){e.preventDefault();volDown();}
+  if(e.code==='KeyP')togglePower();
+  if(e.code==='KeyT')toggleTheme();
+  if(e.code==='KeyF')toggleFullscreen();
+  if(e.code==='KeyL'){const ov=document.getElementById('stationsOverlay');ov.classList.contains('show')?closeStations():openStations();}
+});
+</script>
+</body>
+</html>
