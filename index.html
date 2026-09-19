@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="HongQi HS5">
 <meta name="theme-color" content="#0b0c0e">
 <title>HongQi HS5 · BOSE Sound</title>
-<link rel="manifest" href="manifest.json?v=10">
+<link rel="manifest" href="manifest.json?v=11">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -31,8 +31,6 @@ body.playing .cabinet{animation:cabVib .38s ease-in-out infinite}
 body:not(.on) .tube{opacity:.16;box-shadow:none;animation:none}
 body.playing .tube{animation-duration:2.4s}
 @keyframes tubeFlicker{0%,100%{opacity:.82;filter:brightness(.95)}18%{opacity:1;filter:brightness(1.18)}33%{opacity:.74}52%{opacity:1}69%{opacity:.86}84%{opacity:.98}}
-
-/* ═══ КНОПКИ-ДИНАМИКИ НА КОЛОНКАХ ═══ */
 .drv-btn{width:46px;height:46px;border-radius:50%;position:relative;border:none;cursor:pointer;flex-shrink:0;
   background:radial-gradient(circle at 38% 32%,var(--tweeter) 0%,var(--tweeter-dark) 100%);
   box-shadow:inset 0 3px 6px rgba(0,0,0,.75),inset 0 -1px 2px rgba(255,255,255,.15),0 3px 8px rgba(0,0,0,.4);
@@ -40,13 +38,9 @@ body.playing .tube{animation-duration:2.4s}
 .drv-btn:before{content:'';position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(255,255,255,.07);pointer-events:none}
 .drv-btn:after{content:'';position:absolute;top:12%;left:16%;width:36%;height:26%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.3),transparent 70%);filter:blur(1px);pointer-events:none}
 .drv-btn svg{width:21px;height:21px;position:relative;z-index:2;filter:drop-shadow(0 0 3px rgba(0,0,0,.8))}
-.drv-btn:active{transform:scale(.92);box-shadow:inset 0 4px 10px rgba(0,0,0,.9)}
+.drv-btn:active{transform:scale(.92);box-shadow:inset 0 4px 10px rgba(0,0,0,.9),0 0 14px var(--ring-color)}
 body.playing .drv-btn{animation:tweeterPulse .19s ease-in-out infinite}
 @keyframes tweeterPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
-.drv-btn.bt-on{color:#5cc8ff;box-shadow:inset 0 3px 6px rgba(0,0,0,.75),0 0 14px rgba(92,200,255,.75),0 0 32px rgba(92,200,255,.35)}
-.drv-btn.bt-on svg{filter:drop-shadow(0 0 5px #5cc8ff)}
-.drv-btn.collapse:active{box-shadow:inset 0 4px 10px rgba(0,0,0,.9),0 0 14px var(--ring-color)}
-
 .mid-driver{width:66px;height:66px;border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--cabinet-2) 0%,var(--cabinet-3) 100%);box-shadow:inset 0 4px 10px rgba(0,0,0,.75),0 2px 6px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
 .mid-cone{width:48px;height:48px;border-radius:50%;background:radial-gradient(circle at 38% 32%,var(--speaker-cone) 0%,var(--speaker-cone-dark) 100%);box-shadow:inset 0 2px 6px rgba(0,0,0,.65),inset 0 -2px 4px rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
 .mid-cone .cap{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 36% 30%,var(--speaker-cap) 0%,var(--speaker-cap-dark) 100%);box-shadow:inset 0 1px 3px rgba(255,255,255,.4),0 2px 5px rgba(0,0,0,.5)}
@@ -175,14 +169,11 @@ body.on .led-strip:after{opacity:.9;animation:stripRun 3s linear infinite}
 @keyframes stripRun{0%{background-position:-60% 0}100%{background-position:160% 0}}
 .console-bottom-row{z-index:2;display:flex;justify-content:center;align-items:center;padding:0 10px 2px;flex-shrink:0}
 .console-bottom-label{font-family:'VT323',monospace;font-size:clamp(9px,1.8vw,12px);letter-spacing:2.5px;color:var(--label-color)}
-
-/* ═══ MINI MODE ═══ */
 body.mini .speaker,body.mini .features-col,body.mini .fader-col,body.mini .seek-row,body.mini .led-strip,body.mini .console-bottom-row,body.mini .theme-dots,body.mini .brand-sub{display:none}
 body.mini .system{width:min(520px,96%);height:min(330px,80vh);max-height:none}
 body.mini .console{padding:8px 10px;border-radius:14px}
 body.mini .mid-section{min-height:110px}
 body.mini .controls{padding:6px 2px 4px}
-
 .overlay{position:absolute;inset:0;z-index:100;background:var(--overlay-bg);backdrop-filter:blur(12px);display:none;flex-direction:column;padding:10px 12px;border-radius:14px}
 .overlay.show{display:flex}
 .overlay-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:6px;margin-bottom:6px;gap:8px;flex-shrink:0}
@@ -282,7 +273,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
 <div class="system">
   <div class="speaker left"><div class="cabinet">
     <div class="tube-lamps"><div class="tube"></div><div class="tube"></div><div class="tube"></div></div>
-    <button class="drv-btn bt" id="btBtn" onclick="toggleBluetooth()" title="Bluetooth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10-5 4V3l5 4L7 17"/></svg></button>
+    <button class="drv-btn" onclick="collapsePlayer()" title="Свернуть плеер"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button>
     <div class="mid-driver"><div class="mid-cone"><div class="cap"></div></div></div>
     <div class="woofer"><div class="woofer-cone"><div class="dust-cap"></div></div></div>
     <div class="bass-port"></div><div class="spk-badge">BOSE · 100W</div>
@@ -305,8 +296,8 @@ body.mini .system{width:100%;height:min(300px,55vh)}
     </div>
     <div class="mid-section">
       <div class="features-col">
-        <button class="fbtn ponly" id="btBtnP" onclick="toggleBluetooth()"><span class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10-5 4V3l5 4L7 17"/></svg></span><span class="ftxt">BT</span></button>
         <button class="fbtn ponly" onclick="collapsePlayer()"><span class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></span><span class="ftxt">MINI</span></button>
+        <button class="fbtn ponly" onclick="openNavigator()"><span class="fico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4.5 20.3a.6.6 0 0 0 .8.76L12 17l6.7 4.06a.6.6 0 0 0 .8-.76L12 2z"/></svg></span><span class="ftxt">НАВИ</span></button>
         <button class="fbtn" onclick="setFilter('fav');openOverlay('stationsOverlay')"><span class="fico">★</span><span class="ftxt">FAV</span></button>
         <button class="fbtn" id="wakeLockBtn" onclick="toggleWakeLock()"><span class="fico">☀</span><span class="ftxt">WAKE</span></button>
         <button class="fbtn" onclick="openOverlay('eqOverlay')"><span class="fico">♨</span><span class="ftxt">TUBE</span></button>
@@ -330,7 +321,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
     <div class="seek-row"><div class="seek-time" id="seekCurrent">--:--</div><div class="seek-track disabled" id="seekTrack"><div class="seek-fill" id="seekFill"></div><div class="seek-knob" id="seekKnob"></div></div><div class="seek-time" id="seekDuration">LIVE</div></div>
     <div class="controls"><button class="btn" onclick="prevStation()">⏮</button><button class="btn play" id="playBtn" onclick="togglePlay()"><span id="playIco">▶</span></button><button class="btn" onclick="stopPlay()">■</button><button class="btn" onclick="nextStation()">⏭</button><button class="btn" onclick="setFilter('radio');openOverlay('stationsOverlay')">☰</button><button class="btn" onclick="toggleFullscreen()">⛶</button></div>
     <div class="led-strip"></div>
-    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v3.1</div></div>
+    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v3.2</div></div>
     <div class="overlay" id="stationsOverlay">
       <div class="overlay-header"><div class="overlay-title">CHANNELS · <span id="stationCount">0</span></div><button class="overlay-close" onclick="closeOverlay('stationsOverlay')">×</button></div>
       <div class="seg-row"><button class="seg active" data-filter="radio" onclick="setFilter('radio')">RADIO</button><button class="seg" data-filter="local" onclick="setFilter('local')">FILES</button><button class="seg" data-filter="fav" onclick="setFilter('fav')">★ FAV</button></div>
@@ -346,7 +337,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
   </div>
   <div class="speaker right"><div class="cabinet">
     <div class="tube-lamps"><div class="tube"></div><div class="tube"></div><div class="tube"></div></div>
-    <button class="drv-btn collapse" onclick="collapsePlayer()" title="Свернуть плеер"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button>
+    <button class="drv-btn" onclick="openNavigator()" title="Яндекс Навигатор"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4.5 20.3a.6.6 0 0 0 .8.76L12 17l6.7 4.06a.6.6 0 0 0 .8-.76L12 2z"/></svg></button>
     <div class="mid-driver"><div class="mid-cone"><div class="cap"></div></div></div>
     <div class="woofer"><div class="woofer-cone"><div class="dust-cap"></div></div></div>
     <div class="bass-port"></div><div class="spk-badge">BOSE · 100W</div>
@@ -449,42 +440,49 @@ function buildStationsList(){const grid=document.getElementById('stationsGrid');
 function openOverlay(id){if(id!=='stationsOverlay'&&!powerOn)return;document.getElementById(id).classList.add('show');if(id==='stationsOverlay')buildStationsList();if(id==='eqOverlay')updateWarmUI()}
 function closeOverlay(id){document.getElementById(id).classList.remove('show')}
 async function toggleWakeLock(){const b=document.getElementById('wakeLockBtn');if(wakeLockActive){if(wakeLock)try{wakeLock.release()}catch(e){}wakeLock=null;wakeLockActive=false;b.classList.remove('active');return}if('wakeLock'in navigator){try{wakeLock=await navigator.wakeLock.request('screen');wakeLockActive=true;b.classList.add('active');wakeLock.addEventListener('release',()=>{wakeLockActive=false;b.classList.remove('active')})}catch(e){console.warn('WakeLock:',e)}}else alert('Wake Lock not supported')}
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&wakeLockActive&&!wakeLock)toggleWakeLock();if(document.visibilityState==='visible'&&audioCtx&&audioCtx.state==='suspended'&&isPlaying)audioCtx.resume().catch(()=>{})});
+function note(t){document.getElementById('marqueeText').textContent='*** '+t+' ***'}
+/* ── Сворачивание / разворачивание ── */
+function collapsePlayer(){document.body.classList.add('mini');localStorage.setItem('mini','1');setTimeout(resizeAnalyzer,120)}
+function expandPlayer(){document.body.classList.remove('mini');localStorage.setItem('mini','0');setTimeout(resizeAnalyzer,120)}
+function toggleMini(){document.body.classList.contains('mini')?expandPlayer():collapsePlayer()}
+/* ── Яндекс Навигатор ── */
+function openNavigator(){
+  note('ЗАПУСК НАВИГАТОРА · ПЛЕЕР ОСТАНЕТСЯ В ФОНЕ');
+  const start=Date.now();
+  const f=document.createElement('iframe');
+  f.style.cssText='position:absolute;width:0;height:0;border:0;opacity:0';
+  f.src='yandexnavi://';
+  document.body.appendChild(f);
+  setTimeout(()=>{
+    f.remove();
+    if(Date.now()-start<2500&&!document.hidden){
+      window.open('https://yandex.ru/maps/','_blank');
+    }
+  },800);
+}
+/* ── Возврат из фона: возобновить музыку ── */
+let resumeOnVisible=false;
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){
+    resumeOnVisible=isPlaying&&powerOn;
+  }else{
+    if(wakeLockActive&&!wakeLock)toggleWakeLock();
+    if(audioCtx&&audioCtx.state==='suspended'&&isPlaying)audioCtx.resume().catch(()=>{});
+    if(resumeOnVisible&&activePlayer&&!isPlaying){
+      const p=activePlayer.play();if(p&&p.catch)p.catch(()=>{});
+    }
+    resumeOnVisible=false;
+  }
+});
 const AUDIO_EXT=/\.(mp3|wav|flac|ogg|oga|opus|aac|m4a)$/i,VIDEO_EXT=/\.(mp4|mov|avi|mkv|webm|3gp|m4v|wmv|flv)$/i,IMAGE_EXT=/\.(jpg|jpeg|png|gif|webp|bmp|heic|heif)$/i,BAD_NAME=/(голосовое|voice[-_ ]?memo|диктофон|видео|фото|image|video|screenshot|скриншот)/i;function isAudioFile(f){if(!f||!f.size)return false;const n=f.name||'',t=f.type||'';if(VIDEO_EXT.test(n)||IMAGE_EXT.test(n)||t.startsWith('video/')||t.startsWith('image/'))return false;if(BAD_NAME.test(n))return false;return AUDIO_EXT.test(n)||t.startsWith('audio/')}function addAudioFiles(list){const files=Array.from(list||[]).filter(isAudioFile).sort((a,b)=>(a.name||'').localeCompare(b.name||'','ru')).slice(0,300);if(!files.length){document.getElementById('marqueeText').textContent='*** NO AUDIO FILES *** USE MP3 WAV FLAC OGG M4A AAC ***';return}files.forEach((f,i)=>{localFiles.push({id:'local_'+Date.now()+'_'+i+'_'+Math.random().toString(36).slice(2,7),s:URL.createObjectURL(f),n:(f.name||'Audio file').replace(/\.[^/.]+$/,''),g:'MY FILE',tags:['LOCAL'],fav:false,local:true})});buildStationsList();setFilter('local');openOverlay('stationsOverlay')}
 document.getElementById('fileInput').addEventListener('change',e=>{addAudioFiles(e.target.files);e.target.value=''});
 document.getElementById('folderInput').addEventListener('change',e=>{addAudioFiles(e.target.files);e.target.value=''});
 window.addEventListener('online',()=>setNetLed('online'));window.addEventListener('offline',()=>setNetLed('offline'));setNetLed(navigator.onLine?'online':'offline');
 let touchX=0;const screenEl=document.querySelector('.screen-frame');screenEl.addEventListener('touchstart',e=>{if(document.querySelector('.overlay.show'))return;touchX=e.changedTouches[0].screenX},{passive:true});screenEl.addEventListener('touchend',e=>{if(document.querySelector('.overlay.show'))return;const d=e.changedTouches[0].screenX-touchX;if(Math.abs(d)>50)d>0?prevStation():nextStation()},{passive:true});
-document.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();togglePlay()}if(e.code==='ArrowLeft')prevStation();if(e.code==='ArrowRight')nextStation();if(e.code==='ArrowUp'){e.preventDefault();targetVolume=Math.min(1,targetVolume+.0625);renderVolume()}if(e.code==='ArrowDown'){e.preventDefault();targetVolume=Math.max(0,targetVolume-.0625);renderVolume()}if(e.code==='KeyP')togglePower();if(e.code==='KeyF')toggleFullscreen();if(e.code==='KeyM')toggleMini();if(e.code==='KeyL'){const o=document.getElementById('stationsOverlay');o.classList.contains('show')?closeOverlay('stationsOverlay'):openOverlay('stationsOverlay')}});
-
-/* ═══ BLUETOOTH КНОПКА-ДИНАМИК ═══ */
-let btAvail=false;
-function note(t){document.getElementById('marqueeText').textContent='*** '+t+' ***'}
-function updateBTUI(){document.querySelectorAll('.drv-btn.bt').forEach(b=>b.classList.toggle('bt-on',btAvail));const p=document.getElementById('btBtnP');if(p)p.classList.toggle('active',btAvail)}
-async function refreshBT(){if(!navigator.bluetooth||!navigator.bluetooth.getAvailability)return;try{btAvail=await navigator.bluetooth.getAvailability();updateBTUI()}catch(e){}}
-if(navigator.bluetooth&&navigator.bluetooth.addEventListener)navigator.bluetooth.addEventListener('availabilitychanged',refreshBT);
-refreshBT();setInterval(refreshBT,6000);
-async function toggleBluetooth(){
-  if(!navigator.bluetooth){note('BLUETOOTH API НЕДОСТУПЕН В ЭТОМ БРАУЗЕРЕ · ВКЛЮЧИТЕ BT В НАСТРОЙКАХ ТЕЛЕФОНА · ЗВУК ПОЙДЁТ АВТОМАТИЧЕСКИ');return}
-  try{
-    const avail=await navigator.bluetooth.getAvailability();
-    if(avail){btAvail=true;updateBTUI();note('BLUETOOTH ВКЛЮЧЁН · ПОДКЛЮЧИТЕ МАГНИТОЛУ В НАСТРОЙКАХ · ЗВУК ПОЙДЁТ ЧЕРЕЗ A2DP АВТОМАТИЧЕСКИ');return}
-    note('ОТКРЫВАЮ СИСТЕМНОЕ ОКНО BLUETOOTH...');
-    await navigator.bluetooth.requestDevice({acceptAllDevices:true});
-    note('BLUETOOTH ГОТОВ · ВЫБЕРИТЕ МАГНИТОЛУ В СПИСКЕ УСТРОЙСТВ');
-  }catch(e){
-    note('ВКЛЮЧИТЕ BLUETOOTH В ШТОРКЕ ИЛИ НАСТРОЙКАХ ТЕЛЕФОНА · ПРИ ПОДКЛЮЧЕНИИ МАГНИТОЛЫ ЗВУК ПОЙДЁТ АВТОМАТИЧЕСКИ');
-  }
-  refreshBT();
-}
-
-/* ═══ СВЕРНУТЬ / РАЗВЕРНУТЬ ═══ */
-function collapsePlayer(){document.body.classList.add('mini');localStorage.setItem('mini','1');setTimeout(resizeAnalyzer,120)}
-function expandPlayer(){document.body.classList.remove('mini');localStorage.setItem('mini','0');setTimeout(resizeAnalyzer,120)}
-function toggleMini(){document.body.classList.contains('mini')?expandPlayer():collapsePlayer()}
+document.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();togglePlay()}if(e.code==='ArrowLeft')prevStation();if(e.code==='ArrowRight')nextStation();if(e.code==='ArrowUp'){e.preventDefault();targetVolume=Math.min(1,targetVolume+.0625);renderVolume()}if(e.code==='ArrowDown'){e.preventDefault();targetVolume=Math.max(0,targetVolume-.0625);renderVolume()}if(e.code==='KeyP')togglePower();if(e.code==='KeyF')toggleFullscreen();if(e.code==='KeyM')toggleMini();if(e.code==='KeyN')openNavigator();if(e.code==='KeyL'){const o=document.getElementById('stationsOverlay');o.classList.contains('show')?closeOverlay('stationsOverlay'):openOverlay('stationsOverlay')}});
 
 /* ═══════════════════════════════════════════
-   ANALYZER: 8 режимов, METERS — по умолчанию
+   ANALYZER: 8 режимов, METERS (2×2) по умолчанию
    ═══════════════════════════════════════════ */
 const analyzerCanvas=document.getElementById('analyzerCanvas'),canvasCtx=analyzerCanvas.getContext('2d');
 const MODES=['meters','sphere','bars','aurora','nebula','kaleidoscope','terrain','plasma'];
@@ -508,8 +506,6 @@ function generateSynthetic(dt){const energy=isPlaying?(.55+targetVolume*.45):.07
 function mapRealToBands(dt){if(!realFreq)return;const bins=realFreq.length;for(let i=0;i<BANDS;i++){const t=i/(BANDS-1),st=Math.floor(Math.pow(t,2)*(bins-1)),en=Math.min(bins,Math.max(st+1,Math.floor(Math.pow(t+1/(BANDS-1),2)*(bins-1))));let sum=0,cnt=0;for(let j=st;j<en;j++){sum+=realFreq[j];cnt++}const v=cnt?sum/cnt:0;smooth[i]+=(v-smooth[i])*.34;peaks[i]=Math.max(peaks[i]-dt*72,smooth[i])}}
 function updateAnalyzerData(dt){syntheticPhase+=dt*(isPlaying?1.45:.25);const useReal=activeIsLocal&&warmMode&&fxReady&&analyser&&isPlaying&&realFreq;if(useReal){analyser.getByteFrequencyData(realFreq);mapRealToBands(dt)}else generateSynthetic(dt)}
 function bandAvg(a,b){let s=0,n=0;for(let i=a;i<b&&i<BANDS;i++){s+=smooth[i];n++}return n?s/n/255:0}
-
-/* ── Приборы: состояние стрелок ── */
 const meterState=[{v:0,n:-50,led:false},{v:0,n:-50,led:false},{v:0,n:-50,led:false},{v:0,n:-50,led:false}];
 function updateMeters(dt){
   const playing=isPlaying&&powerOn;
@@ -528,86 +524,91 @@ function updateMeters(dt){
     st.led=db>0&&playing;
   }
 }
-
-/* ── Отрисовка приборов на канвасе ── */
 function dbAngle(db){return -50+(db+20)/23*100}
 function roundRectPath(c,x,y,w,h,r){r=Math.min(r,w/2,h/2);c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
 function meterArc(c,px,py,r,a1,a2){c.beginPath();const steps=28;for(let i=0;i<=steps;i++){const a=(a1+(a2-a1)*i/steps)*Math.PI/180;const X=px+Math.sin(a)*r,Y=py-Math.cos(a)*r;i===0?c.moveTo(X,Y):c.lineTo(X,Y)}c.stroke()}
-function drawOneMeter(x,y,s,label,st){
+/* ── один прибор, прямоугольный (ширина mw, высота mh) ── */
+function drawOneMeter(x,y,mw,mh,label,st){
   const c=canvasCtx;
+  const m=Math.min(mw,mh);
   c.save();c.translate(x,y);
-  const bz=c.createLinearGradient(0,0,0,s);
+  const bezR=Math.max(6,m*.14);
+  const bz=c.createLinearGradient(0,0,0,mh);
   bz.addColorStop(0,'#f4f4f8');bz.addColorStop(.18,'#c9c9d1');bz.addColorStop(.5,'#87878f');bz.addColorStop(.82,'#58585f');bz.addColorStop(1,'#b6b6be');
-  roundRectPath(c,0,0,s,s,s*.14);
+  roundRectPath(c,0,0,mw,mh,bezR);
   c.shadowColor='rgba(0,0,0,.6)';c.shadowBlur=7;c.shadowOffsetY=3;
   c.fillStyle=bz;c.fill();
   c.shadowColor='transparent';c.shadowBlur=0;c.shadowOffsetY=0;
   c.strokeStyle='rgba(0,0,0,.6)';c.lineWidth=1;c.stroke();
-  const rim=Math.max(2,s*.055);
-  roundRectPath(c,rim,rim,s-rim*2,s-rim*2,s*.11);c.fillStyle='#101014';c.fill();
-  const f=rim+Math.max(1.5,s*.025),fw=s-f*2;
-  roundRectPath(c,f,f,fw,fw,s*.09);
-  const fc=c.createRadialGradient(s/2,f+fw*.25,fw*.1,s/2,f+fw*.5,fw*.95);
+  const rim=Math.max(2,m*.055);
+  roundRectPath(c,rim,rim,mw-rim*2,mh-rim*2,bezR*.8);c.fillStyle='#101014';c.fill();
+  const f=rim+Math.max(1.5,m*.025);
+  const fw=mw-f*2,fh=mh-f*2;
+  roundRectPath(c,f,f,fw,fh,bezR*.7);
+  const fc=c.createRadialGradient(mw/2,f+fh*.25,m*.1,mw/2,f+fh*.5,Math.max(fw,fh)*.9);
   fc.addColorStop(0,'#fffdf5');fc.addColorStop(.55,'#f5edd6');fc.addColorStop(1,'#dacba6');
   c.fillStyle=fc;c.fill();
-  if(powerOn){c.save();roundRectPath(c,f,f,fw,fw,s*.09);c.fillStyle='rgba(255,178,80,.13)';c.fill();c.restore()}
-  const px=s/2,py=f+fw*.86,R=fw*.52;
+  if(powerOn){c.save();roundRectPath(c,f,f,fw,fh,bezR*.7);c.fillStyle='rgba(255,178,80,.13)';c.fill();c.restore()}
+  const px=mw/2,py=f+fh*.9;
+  const R=Math.min(fw*.42,fh*.74);
   c.lineCap='round';
-  c.strokeStyle='rgba(58,53,44,.85)';c.lineWidth=Math.max(1,s*.014);
+  c.strokeStyle='rgba(58,53,44,.85)';c.lineWidth=Math.max(1,m*.016);
   meterArc(c,px,py,R,-50,dbAngle(0));
-  c.strokeStyle='rgba(192,40,24,.92)';c.lineWidth=Math.max(1.4,s*.02);
+  c.strokeStyle='rgba(192,40,24,.92)';c.lineWidth=Math.max(1.4,m*.024);
   meterArc(c,px,py,R,dbAngle(0),50);
   const MAJ=[-20,-10,-3,0,3];
   for(let t=0;t<=24;t++){
     const db=-20+t*23/24;
     const major=MAJ.some(v=>Math.abs(v-db)<.6);
     const a=dbAngle(db)*Math.PI/180;
-    const r1=R-(major?fw*.11:fw*.065),r2=R;
+    const r1=R-(major?fh*.13:fh*.075),r2=R;
     c.strokeStyle=db>=0?'rgba(168,36,26,.95)':'rgba(58,53,44,.9)';
-    c.lineWidth=major?Math.max(1,s*.017):Math.max(.6,s*.008);
+    c.lineWidth=major?Math.max(1,m*.018):Math.max(.6,m*.009);
     c.beginPath();c.moveTo(px+Math.sin(a)*r1,py-Math.cos(a)*r1);c.lineTo(px+Math.sin(a)*r2,py-Math.cos(a)*r2);c.stroke();
   }
   c.textAlign='center';
-  if(s>66){
-    c.fillStyle='#3a352c';c.font=`900 ${s*.085}px Orbitron, sans-serif`;
-    c.fillText(label,px,f+fw*.17);
-    c.fillStyle='#7a6c50';c.font=`${s*.062}px VT323, monospace`;
-    c.fillText('VU',px,py-fw*.09);
-    c.font=`${s*.055}px VT323, monospace`;
+  c.fillStyle='#3a352c';
+  c.font=`900 ${Math.max(9,m*.13)}px Orbitron, sans-serif`;
+  c.fillText(label,mw/2,f+fh*.17);
+  c.fillStyle='#7a6c50';c.font=`${Math.max(8,m*.09)}px VT323, monospace`;
+  c.fillText('VU',mw/2,py-fh*.07);
+  if(m>52){
+    c.font=`${Math.max(7,m*.08)}px VT323, monospace`;
     [[-20,'20'],[-10,'10'],[0,'0'],[3,'+3']].forEach(([db,txt])=>{
-      const a=dbAngle(db)*Math.PI/180,rr=R-fw*.21;
+      const a=dbAngle(db)*Math.PI/180,rr=R-fh*.22;
       c.fillStyle=db>=0?'#a8241a':'#4a4438';
-      c.fillText(txt,px+Math.sin(a)*rr,py-Math.cos(a)*rr+s*.02);
+      c.fillText(txt,px+Math.sin(a)*rr,py-Math.cos(a)*rr+m*.03);
     });
-  }else{
-    c.fillStyle='#3a352c';c.font=`900 ${s*.1}px Orbitron, sans-serif`;
-    c.fillText(label,px,f+fw*.2);
   }
   c.save();c.translate(px,py);c.rotate(st.n*Math.PI/180);
-  c.strokeStyle='rgba(0,0,0,.22)';c.lineWidth=Math.max(1.4,s*.022);
-  c.beginPath();c.moveTo(s*.014,s*.05);c.lineTo(s*.014,-R*.94);c.stroke();
-  c.strokeStyle='#8a1a10';c.lineWidth=Math.max(1.2,s*.018);
-  c.beginPath();c.moveTo(0,s*.045);c.lineTo(0,-R*.94);c.stroke();
+  c.strokeStyle='rgba(0,0,0,.22)';c.lineWidth=Math.max(1.4,m*.024);
+  c.beginPath();c.moveTo(m*.016,m*.05);c.lineTo(m*.016,-R*.94);c.stroke();
+  c.strokeStyle='#8a1a10';c.lineWidth=Math.max(1.2,m*.02);
+  c.beginPath();c.moveTo(0,m*.05);c.lineTo(0,-R*.94);c.stroke();
   c.restore();
-  c.fillStyle='#26262c';c.beginPath();c.arc(px,py,s*.055,0,Math.PI*2);c.fill();
-  c.fillStyle='#7a7a82';c.beginPath();c.arc(px,py,s*.025,0,Math.PI*2);c.fill();
-  c.beginPath();c.arc(s*.865,f+fw*.08,Math.max(1.6,s*.03),0,Math.PI*2);
+  c.fillStyle='#26262c';c.beginPath();c.arc(px,py,m*.06,0,Math.PI*2);c.fill();
+  c.fillStyle='#7a7a82';c.beginPath();c.arc(px,py,m*.028,0,Math.PI*2);c.fill();
+  c.beginPath();c.arc(mw-m*.07,f+fh*.12,Math.max(1.6,m*.035),0,Math.PI*2);
   if(st.led){c.fillStyle='#ff3a20';c.shadowColor='#ff3a20';c.shadowBlur=8}else{c.fillStyle='#4a2018';c.shadowBlur=0}
   c.fill();c.shadowBlur=0;
-  roundRectPath(c,f,f,fw,fw*.48,Math.min(s*.09,fw*.2));
-  const gl=c.createLinearGradient(0,f,0,f+fw*.5);
-  gl.addColorStop(0,'rgba(255,255,255,.38)');gl.addColorStop(1,'rgba(255,255,255,0)');
+  roundRectPath(c,f,f,fw,fh*.42,Math.min(bezR*.7,fh*.2));
+  const gl=c.createLinearGradient(0,f,0,f+fh*.5);
+  gl.addColorStop(0,'rgba(255,255,255,.34)');gl.addColorStop(1,'rgba(255,255,255,0)');
   c.fillStyle=gl;c.fill();
   c.restore();
 }
+/* ── сетка приборов 2×2 ── */
 function drawMeters(w,h){
-  const gap=Math.max(5,w*.02);
-  const size=Math.min((w-gap*3)/4,h-4);
-  if(size<24)return;
-  const totalW=size*4+gap*3;
-  const x0=(w-totalW)/2,y0=(h-size)/2;
+  const cols=2,rows=2;
+  const gap=Math.max(4,Math.min(w,h)*.05);
+  const cw=(w-gap*(cols+1))/cols;
+  const ch=(h-gap*(rows+1))/rows;
+  if(cw<30||ch<30)return;
   const labels=['L','R','BASS','TREB'];
-  for(let i=0;i<4;i++)drawOneMeter(x0+i*(size+gap),y0,size,labels[i],meterState[i]);
+  for(let i=0;i<4;i++){
+    const col=i%cols,row=Math.floor(i/cols);
+    drawOneMeter(gap+col*(cw+gap),gap+row*(ch+gap),cw,ch,labels[i],meterState[i]);
+  }
 }
 function roundedBarPath(c,x,y,w,h,r){r=Math.min(r,w/2,h/2);c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.quadraticCurveTo(x+w,y,x+w,y+r);c.lineTo(x+w,y+h-r);c.quadraticCurveTo(x+w,y+h,x+w-r,y+h);c.lineTo(x+r,y+h);c.quadraticCurveTo(x,y+h,x,y+h-r);c.lineTo(x,y+r);c.quadraticCurveTo(x,y,x+r,y);c.closePath()}
 function drawAnalyzer(){const w=analyzerCanvas.clientWidth,h=analyzerCanvas.clientHeight;if(w<2||h<2||!canvasCtx)return;canvasCtx.clearRect(0,0,w,h);if(analyzerMode!=='meters'){canvasCtx.save();canvasCtx.strokeStyle=withAlpha(colors.primary,.045);canvasCtx.lineWidth=1;for(let i=1;i<4;i++){const y=Math.round(h*i/4)+.5;canvasCtx.beginPath();canvasCtx.moveTo(0,y);canvasCtx.lineTo(w,y);canvasCtx.stroke()}canvasCtx.restore()}
@@ -623,7 +624,7 @@ function drawPlasma(w,h){const cx=w/2,cy=h/2,rings=5,baseR=Math.min(w,h)*.09,ste
 let lastT=performance.now(),lastDraw=0;
 function mainLoop(now){requestAnimationFrame(mainLoop);const dt=Math.min(.05,(now-lastT)/1000);lastT=now;updateAnalyzerData(dt);updateMeters(dt);if(now-lastDraw<25)return;lastDraw=now;drawAnalyzer()}
 updateThemeColors();buildNebSprite();resizeAnalyzer();setTimeout(resizeAnalyzer,140);requestAnimationFrame(mainLoop);
-setEQ(currentEQ);updateWarmUI();buildStationsList();updateSeekUI();updateBTUI();
+setEQ(currentEQ);updateWarmUI();buildStationsList();updateSeekUI();
 </script>
 </body>
 </html>
