@@ -8,307 +8,229 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="HongQi HS5">
 <meta name="theme-color" content="#0b0c0e">
-<title>HongQi HS5 · BOSE Sound</title><!-- PWA Manifest + иконки -->
-<link rel="manifest" href="manifest.json?v=2">
-<meta name="application-name" content="HongQi HS5">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="HongQi HS5">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23303038'/%3E%3Cstop offset='50%25' stop-color='%2322222a'/%3E%3Cstop offset='100%25' stop-color='%23121216'/%3E%3C/linearGradient%3E%3ClinearGradient id='s' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2302101d'/%3E%3Cstop offset='100%25' stop-color='%23010810'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='192' height='192' rx='30' fill='url(%23g)'/%3E%3Crect x='22' y='38' width='148' height='98' rx='8' fill='url(%23s)' stroke='%23000' stroke-width='2'/%3E%3Ctext x='96' y='80' font-family='Arial Black, sans-serif' font-size='26' font-weight='900' fill='%2335c8ff' text-anchor='middle' letter-spacing='2'%3EHONGQI%3C/text%3E%3Ctext x='96' y='106' font-family='Arial Black, sans-serif' font-size='20' font-weight='900' fill='%23aee9ff' text-anchor='middle' letter-spacing='1.5'%3EHS5%3C/text%3E%3Ccircle cx='45' cy='162' r='17' fill='%231a1a1e'/%3E%3Ccircle cx='96' cy='162' r='17' fill='%231a1a1e'/%3E%3Ccircle cx='147' cy='162' r='17' fill='%231a1a1e'/%3E%3C/svg%3E">
+<title>HongQi HS5 · BOSE Sound</title>
+<link rel="manifest" href="manifest.json?v=4">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-html, body { position:fixed; inset:0; width:100%; height:100%; overflow:hidden; overscroll-behavior:none; touch-action:manipulation; }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{position:fixed;inset:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none;touch-action:manipulation}
 
-/* ═══════ ТЁМНАЯ ТЕМА ═══════ */
-:root, [data-theme="dark"] {
-  --blue:#35c8ff; --blue-bright:#aee9ff; --blue-deep:#0a5a8a;
-  --screen-bg:#02101d; --screen-glow:rgba(53,200,255,.15);
-  --screen-text:var(--blue-bright); --screen-dim:var(--blue);
-  --cabinet-1:#2c2c32; --cabinet-2:#1c1c21; --cabinet-3:#111114;
-  --console-1:#303038; --console-2:#22222a; --console-3:#121216;
-  --speaker-cone:#5a5a64; --speaker-cone-dark:#19191e;
-  --speaker-cap:#8a8a95; --speaker-cap-dark:#141418;
-  --tweeter:#4a4a52; --tweeter-dark:#0c0c0f;
+:root,[data-theme="dark"]{
+  --blue:#35c8ff;--blue-bright:#aee9ff;--blue-deep:#0a5a8a;
+  --screen-bg:#02101d;--screen-glow:rgba(53,200,255,.15);
+  --screen-text:var(--blue-bright);--screen-dim:var(--blue);
+  --cabinet-1:#2c2c32;--cabinet-2:#1c1c21;--cabinet-3:#111114;
+  --console-1:#303038;--console-2:#22222a;--console-3:#121216;
+  --speaker-cone:#5a5a64;--speaker-cone-dark:#19191e;
+  --speaker-cap:#8a8a95;--speaker-cap-dark:#141418;
+  --tweeter:#4a4a52;--tweeter-dark:#0c0c0f;
   --btn-bg:linear-gradient(180deg,#43434c 0%,#26262d 45%,#15151a 100%);
-  --btn-color:#8a9aa6; --btn-active-color:#cdf0ff;
-  --ring-color:rgba(53,200,255,.55); --brand-color:#b9c3cc;
-  --label-color:#6a747c; --screw:#6a6a72; --badge-color:#5c5c66;
-  --eq-bar:linear-gradient(to top, var(--blue-deep) 0%, #1e90d8 40%, var(--blue) 75%, var(--blue-bright) 100%);
-  --vol-lit:var(--blue); --vol-lit-max:var(--blue-bright); --vol-off:rgba(10,90,138,.22);
+  --btn-color:#8a9aa6;--btn-active-color:#cdf0ff;
+  --ring-color:rgba(53,200,255,.55);--brand-color:#b9c3cc;
+  --label-color:#6a747c;--screw:#6a6a72;--badge-color:#5c5c66;
+  --vol-lit:var(--blue);--vol-lit-max:var(--blue-bright);--vol-off:rgba(10,90,138,.22);
   --power-led:#ff3b30;
   --bg-outer:linear-gradient(160deg,#17181c 0%,#0b0c0e 100%);
-  --bg-glow:rgba(53,200,255,.07); --overlay-bg:rgba(2,16,29,.98);
+  --bg-glow:rgba(53,200,255,.07);--overlay-bg:rgba(2,16,29,.98);
   --fader-cap:linear-gradient(180deg,#e8e8ec 0%,#b8b8c0 45%,#88888f 55%,#5a5a62 100%);
   --theme-color:#0b0c0e;
 }
-
-/* ═══════ ЗОЛОТАЯ ТЕМА (тёмная, контрастная, позолоченная) ═══════ */
-[data-theme="light"] {
-  --blue:#ffb02e; --blue-bright:#ffd880; --blue-deep:#8a5a10;
-  --screen-bg:#150d02; --screen-glow:rgba(255,176,46,.22);
-  --screen-text:#ffc550; --screen-dim:#e09828;
-  --cabinet-1:#b09458; --cabinet-2:#8a7040; --cabinet-3:#54401e;
-  --console-1:#c4a86c; --console-2:#9a7e48; --console-3:#6e582c;
-  --speaker-cone:#4a3c24; --speaker-cone-dark:#241a0c;
-  --speaker-cap:#6a5636; --speaker-cap-dark:#161006;
-  --tweeter:#5a4830; --tweeter-dark:#20180c;
+[data-theme="gold"]{
+  --blue:#ffb02e;--blue-bright:#ffd880;--blue-deep:#8a5a10;
+  --screen-bg:#150d02;--screen-glow:rgba(255,176,46,.22);
+  --screen-text:#ffc550;--screen-dim:#e09828;
+  --cabinet-1:#b09458;--cabinet-2:#8a7040;--cabinet-3:#54401e;
+  --console-1:#c4a86c;--console-2:#9a7e48;--console-3:#6e582c;
+  --speaker-cone:#4a3c24;--speaker-cone-dark:#241a0c;
+  --speaker-cap:#6a5636;--speaker-cap-dark:#161006;
+  --tweeter:#5a4830;--tweeter-dark:#20180c;
   --btn-bg:linear-gradient(180deg,#f0d898 0%,#c8a860 45%,#a08440 55%,#74592a 100%);
-  --btn-color:#4a3818; --btn-active-color:#241a08;
-  --ring-color:rgba(255,176,46,.7); --brand-color:#2e2210;
-  --label-color:#4a3a1c; --screw:#8a7444; --badge-color:#3a2e14;
-  --eq-bar:linear-gradient(to top, #8a5a10 0%, #d89020 40%, #ffb02e 75%, #ffe0a0 100%);
-  --vol-lit:#ffb02e; --vol-lit-max:#ffe0a0; --vol-off:rgba(255,176,46,.15);
+  --btn-color:#4a3818;--btn-active-color:#241a08;
+  --ring-color:rgba(255,176,46,.7);--brand-color:#2e2210;
+  --label-color:#4a3a1c;--screw:#8a7444;--badge-color:#3a2e14;
+  --vol-lit:#ffb02e;--vol-lit-max:#ffe0a0;--vol-off:rgba(255,176,46,.15);
   --power-led:#ff4020;
   --bg-outer:linear-gradient(160deg,#332b1c 0%,#14100a 100%);
-  --bg-glow:rgba(255,176,46,.1); --overlay-bg:rgba(21,13,2,.98);
+  --bg-glow:rgba(255,176,46,.1);--overlay-bg:rgba(21,13,2,.98);
   --fader-cap:linear-gradient(180deg,#ffe8b0 0%,#d8b870 45%,#b09048 55%,#806830 100%);
   --theme-color:#14100a;
 }
+[data-theme="neon"]{
+  --blue:#ff00ff;--blue-bright:#ff88ff;--blue-deep:#8a0088;
+  --screen-bg:#0a0018;--screen-glow:rgba(255,0,255,.25);
+  --screen-text:#ff88ff;--screen-dim:#ff00ff;
+  --cabinet-1:#2a1a3a;--cabinet-2:#1a0f28;--cabinet-3:#0a0518;
+  --console-1:#352248;--console-2:#221538;--console-3:#100820;
+  --speaker-cone:#5a4878;--speaker-cone-dark:#1e1428;
+  --speaker-cap:#8a6aa8;--speaker-cap-dark:#18101e;
+  --tweeter:#4a3858;--tweeter-dark:#0e0818;
+  --btn-bg:linear-gradient(180deg,#4a2878 0%,#2a1448 45%,#180838 100%);
+  --btn-color:#cc88ff;--btn-active-color:#ffccff;
+  --ring-color:rgba(255,0,255,.7);--brand-color:#e0aaff;
+  --label-color:#aa66cc;--screw:#6a4a88;--badge-color:#8866aa;
+  --vol-lit:#ff00ff;--vol-lit-max:#ff88ff;--vol-off:rgba(255,0,255,.15);
+  --power-led:#00ff88;
+  --bg-outer:linear-gradient(160deg,#1a0828 0%,#0a0018 100%);
+  --bg-glow:rgba(255,0,255,.15);--overlay-bg:rgba(10,0,24,.98);
+  --fader-cap:linear-gradient(180deg,#ff88ff 0%,#cc00cc 45%,#8800aa 55%,#550070 100%);
+  --theme-color:#0a0018;
+}
+[data-theme="carbon"]{
+  --blue:#ff4422;--blue-bright:#ff7755;--blue-deep:#882211;
+  --screen-bg:#0a0a0a;--screen-glow:rgba(255,68,34,.2);
+  --screen-text:#ff8866;--screen-dim:#ff4422;
+  --cabinet-1:#1a1a1a;--cabinet-2:#0f0f0f;--cabinet-3:#050505;
+  --console-1:#222;--console-2:#111;--console-3:#080808;
+  --speaker-cone:#3a3a3a;--speaker-cone-dark:#0a0a0a;
+  --speaker-cap:#666;--speaker-cap-dark:#111;
+  --tweeter:#2a2a2a;--tweeter-dark:#060606;
+  --btn-bg:linear-gradient(180deg,#333 0%,#1a1a1a 45%,#080808 100%);
+  --btn-color:#aaa;--btn-active-color:#fff;
+  --ring-color:rgba(255,68,34,.7);--brand-color:#ddd;
+  --label-color:#888;--screw:#555;--badge-color:#777;
+  --vol-lit:#ff4422;--vol-lit-max:#ff7755;--vol-off:rgba(255,68,34,.12);
+  --power-led:#00ff44;
+  --bg-outer:repeating-linear-gradient(45deg,#0a0a0a 0 2px,#121212 2px 4px),linear-gradient(160deg,#0a0a0a 0%,#000 100%);
+  --bg-glow:rgba(255,68,34,.08);--overlay-bg:rgba(10,10,10,.98);
+  --fader-cap:linear-gradient(180deg,#666 0%,#333 45%,#1a1a1a 100%);
+  --theme-color:#000;
+}
+[data-theme="retro"]{
+  --blue:#ff9500;--blue-bright:#ffcc66;--blue-deep:#884a00;
+  --screen-bg:#1a0f00;--screen-glow:rgba(255,149,0,.25);
+  --screen-text:#ffbb44;--screen-dim:#ff9500;
+  --cabinet-1:#5a4028;--cabinet-2:#3a2818;--cabinet-3:#1a1008;
+  --console-1:#6a4c30;--console-2:#4a3420;--console-3:#2a1a10;
+  --speaker-cone:#4a3420;--speaker-cone-dark:#1a0e04;
+  --speaker-cap:#7a5a38;--speaker-cap-dark:#181008;
+  --tweeter:#3a2818;--tweeter-dark:#0a0604;
+  --btn-bg:linear-gradient(180deg,#7a5a38 0%,#4a3420 45%,#2a1a10 100%);
+  --btn-color:#d4a468;--btn-active-color:#ffe8b0;
+  --ring-color:rgba(255,149,0,.6);--brand-color:#f0c880;
+  --label-color:#a08050;--screw:#8a6840;--badge-color:#c49860;
+  --vol-lit:#ff9500;--vol-lit-max:#ffcc66;--vol-off:rgba(255,149,0,.15);
+  --power-led:#ff2200;
+  --bg-outer:linear-gradient(160deg,#2a1a10 0%,#0a0604 100%);
+  --bg-glow:rgba(255,149,0,.1);--overlay-bg:rgba(26,15,0,.98);
+  --fader-cap:linear-gradient(180deg,#d4a468 0%,#8a6840 45%,#4a3420 100%);
+  --theme-color:#0a0604;
+}
 
-body {
+body{
   font-family:'Share Tech Mono','Courier New',monospace;
-  background:radial-gradient(ellipse at 50% 0%, var(--bg-glow) 0%, transparent 55%), var(--bg-outer);
-  color:#ccc; user-select:none; display:flex; align-items:center; justify-content:center; transition:background .6s;
+  background:radial-gradient(ellipse at 50% 0%,var(--bg-glow) 0%,transparent 55%),var(--bg-outer);
+  color:#ccc;user-select:none;display:flex;align-items:center;justify-content:center;transition:background .6s;
   padding:max(6px,env(safe-area-inset-top)) max(6px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left));
 }
+.system{display:flex;gap:14px;align-items:stretch;width:100%;max-width:1400px;height:100%;max-height:680px}
+.speaker{flex:0 0 180px;display:flex;flex-direction:column}
+.cabinet{flex:1;position:relative;border-radius:14px;background:linear-gradient(160deg,var(--cabinet-1) 0%,var(--cabinet-2) 40%,var(--cabinet-3) 100%);box-shadow:0 20px 50px rgba(0,0,0,.45),inset 0 2px 2px rgba(255,255,255,.18),inset 0 -4px 10px rgba(0,0,0,.45),inset 4px 0 8px rgba(0,0,0,.2),inset -4px 0 8px rgba(0,0,0,.2);display:flex;flex-direction:column;align-items:center;padding:12px 10px 16px;gap:10px;overflow:hidden;transition:background .6s}
+.cabinet::before{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.02) 3px,rgba(255,255,255,.02) 4px)}
+body.playing .cabinet{animation:cabVib .38s ease-in-out infinite}
+@keyframes cabVib{0%,100%{transform:translate(0,0)}25%{transform:translate(.4px,-.3px)}50%{transform:translate(-.3px,.4px)}75%{transform:translate(.3px,.3px)}}
 
-/* ═══ СИСТЕМА (ШИРЕ) ═══ */
-.system { display:flex; gap:14px; align-items:stretch; width:100%; max-width:1400px; height:100%; max-height:640px; }
+.tube-lamps{display:flex;gap:12px;justify-content:center;width:100%;height:28px;align-items:flex-end;margin-bottom:2px;z-index:2}
+.tube{width:10px;height:24px;border-radius:6px;background:radial-gradient(ellipse at 50% 28%,#fff4cf 0%,#ffc061 38%,#d87518 68%,#6b2d05 100%);box-shadow:0 0 10px rgba(255,170,60,.75),0 0 22px rgba(255,120,20,.35),inset 0 1px 2px rgba(255,255,255,.75);animation:tubeFlicker 4.2s infinite ease-in-out}
+.tube:nth-child(2){animation-delay:.8s}.tube:nth-child(3){animation-delay:1.5s}
+body:not(.on) .tube{opacity:.16;box-shadow:none;animation:none}
+body.playing .tube{animation-duration:2.4s}
+@keyframes tubeFlicker{0%,100%{opacity:.82;filter:brightness(.95)}18%{opacity:1;filter:brightness(1.18)}33%{opacity:.74}52%{opacity:1}69%{opacity:.86}84%{opacity:.98}}
 
-/* ═══ КОЛОНКИ ═══ */
-.speaker { flex:0 0 190px; display:flex; flex-direction:column; }
-.cabinet { flex:1; position:relative; border-radius:14px;
-  background:linear-gradient(160deg,var(--cabinet-1) 0%,var(--cabinet-2) 40%,var(--cabinet-3) 100%);
-  box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 2px 2px rgba(255,255,255,.18), inset 0 -4px 10px rgba(0,0,0,.45), inset 4px 0 8px rgba(0,0,0,.2), inset -4px 0 8px rgba(0,0,0,.2);
-  display:flex; flex-direction:column; align-items:center; padding:16px 10px; gap:12px; overflow:hidden; transition:background .6s; }
-.cabinet::before { content:''; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.02) 3px,rgba(255,255,255,.02) 4px); }
-body.playing .cabinet { animation:cabVib .38s ease-in-out infinite; }
-@keyframes cabVib { 0%,100%{transform:translate(0,0)} 25%{transform:translate(.4px,-.3px)} 50%{transform:translate(-.3px,.4px)} 75%{transform:translate(.3px,.3px)} }
-.tweeter { width:52px; height:52px; border-radius:50%; position:relative; margin-top:4px;
-  background:radial-gradient(circle at 38% 32%, var(--tweeter) 0%, var(--tweeter-dark) 100%);
-  box-shadow:inset 0 3px 6px rgba(0,0,0,.75), inset 0 -1px 2px rgba(255,255,255,.15), 0 3px 8px rgba(0,0,0,.4); }
-.tweeter::after { content:''; position:absolute; top:14%; left:18%; width:34%; height:26%; border-radius:50%; background:radial-gradient(ellipse,rgba(255,255,255,.35),transparent 70%); filter:blur(1px); }
-body.playing .tweeter { animation:tweeterPulse .19s ease-in-out infinite; }
-@keyframes tweeterPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.018)} }
-.mid-driver { width:84px; height:84px; border-radius:50%; position:relative;
-  background:radial-gradient(circle at 50% 50%, var(--cabinet-2) 0%, var(--cabinet-3) 100%);
-  box-shadow:inset 0 4px 10px rgba(0,0,0,.75), 0 2px 6px rgba(0,0,0,.4); display:flex; align-items:center; justify-content:center; }
-.mid-cone { width:64px; height:64px; border-radius:50%;
-  background:radial-gradient(circle at 38% 32%, var(--speaker-cone) 0%, var(--speaker-cone-dark) 100%);
-  box-shadow:inset 0 2px 6px rgba(0,0,0,.65), inset 0 -2px 4px rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; }
-.mid-cone .cap { width:24px; height:24px; border-radius:50%;
-  background:radial-gradient(circle at 36% 30%, var(--speaker-cap) 0%, var(--speaker-cap-dark) 100%);
-  box-shadow:inset 0 1px 3px rgba(255,255,255,.4), 0 2px 5px rgba(0,0,0,.5); }
-body.playing .mid-cone { animation:wooferPump .38s ease-in-out infinite .04s; }
-.woofer { width:138px; height:138px; border-radius:50%; position:relative; margin-top:auto;
-  background:radial-gradient(circle at 50% 50%, var(--cabinet-2) 0%, var(--cabinet-3) 100%);
-  box-shadow:inset 0 5px 14px rgba(0,0,0,.75), inset 0 -2px 5px rgba(255,255,255,.08), 0 4px 12px rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; }
-.woofer::before { content:''; position:absolute; inset:9px; border-radius:50%; background:radial-gradient(circle, transparent 62%, rgba(0,0,0,.5) 64%, rgba(100,100,110,.35) 72%, rgba(0,0,0,.55) 80%); }
-.woofer::after { content:''; position:absolute; inset:0; border-radius:50%;
-  background:radial-gradient(circle at 50% 4%, var(--screw) 0 2.5px, var(--cabinet-3) 2.5px 4px, transparent 4px),
-    radial-gradient(circle at 50% 96%, var(--screw) 0 2.5px, var(--cabinet-3) 2.5px 4px, transparent 4px),
-    radial-gradient(circle at 4% 50%, var(--screw) 0 2.5px, var(--cabinet-3) 2.5px 4px, transparent 4px),
-    radial-gradient(circle at 96% 50%, var(--screw) 0 2.5px, var(--cabinet-3) 2.5px 4px, transparent 4px); }
-.woofer-cone { width:100px; height:100px; border-radius:50%; position:relative; z-index:2;
-  background:radial-gradient(circle at 38% 32%, var(--speaker-cone) 0%, var(--speaker-cone-dark) 100%);
-  box-shadow:inset 0 3px 10px rgba(0,0,0,.75), inset 0 -3px 6px rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; }
-.woofer-cone::before { content:''; position:absolute; inset:8px; border-radius:50%; background:repeating-radial-gradient(circle at 50% 50%, transparent 0 5px, rgba(0,0,0,.18) 5px 6px); }
-.dust-cap { width:38px; height:38px; border-radius:50%; position:relative; z-index:3;
-  background:radial-gradient(circle at 35% 30%, var(--speaker-cap) 0%, var(--speaker-cap-dark) 100%);
-  box-shadow:inset 0 2px 4px rgba(255,255,255,.4), 0 3px 8px rgba(0,0,0,.6); }
-body.playing .woofer-cone { animation:wooferPump .38s ease-in-out infinite; }
-@keyframes wooferPump { 0%,100%{transform:scale(1)} 42%{transform:scale(1.075)} 70%{transform:scale(.985)} }
-.spk-badge { font-family:'Orbitron',sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; color:var(--badge-color); margin-top:8px; }
-.bass-port { width:28px; height:28px; border-radius:50%; position:absolute; bottom:50px; background:radial-gradient(circle, #000 55%, var(--cabinet-2) 75%, var(--cabinet-1) 100%); box-shadow:inset 0 3px 6px rgba(0,0,0,1); }
-.speaker.left .bass-port { right:12px; } .speaker.right .bass-port { left:12px; }
+.tweeter{width:50px;height:50px;border-radius:50%;position:relative;background:radial-gradient(circle at 38% 32%,var(--tweeter) 0%,var(--tweeter-dark) 100%);box-shadow:inset 0 3px 6px rgba(0,0,0,.75),inset 0 -1px 2px rgba(255,255,255,.15),0 3px 8px rgba(0,0,0,.4)}
+.tweeter::after{content:'';position:absolute;top:14%;left:18%;width:34%;height:26%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.35),transparent 70%);filter:blur(1px)}
+body.playing .tweeter{animation:tweeterPulse .19s ease-in-out infinite}
+@keyframes tweeterPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.018)}}
+.mid-driver{width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--cabinet-2) 0%,var(--cabinet-3) 100%);box-shadow:inset 0 4px 10px rgba(0,0,0,.75),0 2px 6px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
+.mid-cone{width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 38% 32%,var(--speaker-cone) 0%,var(--speaker-cone-dark) 100%);box-shadow:inset 0 2px 6px rgba(0,0,0,.65),inset 0 -2px 4px rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+.mid-cone .cap{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 36% 30%,var(--speaker-cap) 0%,var(--speaker-cap-dark) 100%);box-shadow:inset 0 1px 3px rgba(255,255,255,.4),0 2px 5px rgba(0,0,0,.5)}
+body.playing .mid-cone{animation:wooferPump .38s ease-in-out infinite .04s}
+.woofer{width:132px;height:132px;border-radius:50%;position:relative;margin-top:auto;background:radial-gradient(circle at 50% 50%,var(--cabinet-2) 0%,var(--cabinet-3) 100%);box-shadow:inset 0 5px 14px rgba(0,0,0,.75),inset 0 -2px 5px rgba(255,255,255,.08),0 4px 12px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center}
+.woofer::before{content:'';position:absolute;inset:9px;border-radius:50%;background:radial-gradient(circle,transparent 62%,rgba(0,0,0,.5) 64%,rgba(100,100,110,.35) 72%,rgba(0,0,0,.55) 80%)}
+.woofer::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 4%,var(--screw) 0 2.5px,var(--cabinet-3) 2.5px 4px,transparent 4px),radial-gradient(circle at 50% 96%,var(--screw) 0 2.5px,var(--cabinet-3) 2.5px 4px,transparent 4px),radial-gradient(circle at 4% 50%,var(--screw) 0 2.5px,var(--cabinet-3) 2.5px 4px,transparent 4px),radial-gradient(circle at 96% 50%,var(--screw) 0 2.5px,var(--cabinet-3) 2.5px 4px,transparent 4px)}
+.woofer-cone{width:96px;height:96px;border-radius:50%;position:relative;z-index:2;background:radial-gradient(circle at 38% 32%,var(--speaker-cone) 0%,var(--speaker-cone-dark) 100%);box-shadow:inset 0 3px 10px rgba(0,0,0,.75),inset 0 -3px 6px rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+.woofer-cone::before{content:'';position:absolute;inset:8px;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%,transparent 0 5px,rgba(0,0,0,.18) 5px 6px)}
+.dust-cap{width:36px;height:36px;border-radius:50%;position:relative;z-index:3;background:radial-gradient(circle at 35% 30%,var(--speaker-cap) 0%,var(--speaker-cap-dark) 100%);box-shadow:inset 0 2px 4px rgba(255,255,255,.4),0 3px 8px rgba(0,0,0,.6)}
+body.playing .woofer-cone{animation:wooferPump .38s ease-in-out infinite}
+@keyframes wooferPump{0%,100%{transform:scale(1)}42%{transform:scale(1.075)}70%{transform:scale(.985)}}
+.spk-badge{font-family:'Orbitron',sans-serif;font-weight:700;font-size:10px;letter-spacing:2px;color:var(--badge-color);margin-top:6px}
+.bass-port{width:28px;height:28px;border-radius:50%;position:absolute;bottom:48px;background:radial-gradient(circle,#000 55%,var(--cabinet-2) 75%,var(--cabinet-1) 100%);box-shadow:inset 0 3px 6px rgba(0,0,0,1)}
+.speaker.left .bass-port{right:12px}.speaker.right .bass-port{left:12px}
 
-/* ═══ КОНСОЛЬ ═══ */
-.console { flex:1; position:relative; border-radius:16px; min-width:0;
-  background:linear-gradient(180deg,var(--console-1) 0%,var(--console-2) 12%,var(--console-3) 100%);
-  box-shadow:0 25px 60px rgba(0,0,0,.55), inset 0 2px 2px rgba(255,255,255,.22), inset 0 -5px 12px rgba(0,0,0,.45);
-  display:flex; flex-direction:column; padding:10px 16px; overflow:hidden; transition:background .6s; }
-.console::before { content:''; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.015) 2px,rgba(255,255,255,.015) 3px); }
-.screw { position:absolute; width:8px; height:8px; border-radius:50%; background:radial-gradient(circle at 35% 30%, var(--screw), var(--cabinet-3) 70%); box-shadow:inset 0 1px 2px rgba(255,255,255,.35), 0 1px 3px rgba(0,0,0,.6); }
-.screw::after { content:''; position:absolute; inset:2.5px 1px; background:var(--cabinet-3); border-radius:1px; }
-.screw.tl{top:7px;left:7px} .screw.tr{top:7px;right:7px} .screw.bl{bottom:7px;left:7px} .screw.br{bottom:7px;right:7px}
+.console{flex:1;position:relative;border-radius:16px;min-width:0;background:linear-gradient(180deg,var(--console-1) 0%,var(--console-2) 12%,var(--console-3) 100%);box-shadow:0 25px 60px rgba(0,0,0,.55),inset 0 2px 2px rgba(255,255,255,.22),inset 0 -5px 12px rgba(0,0,0,.45);display:flex;flex-direction:column;padding:10px 14px;overflow:hidden;transition:background .6s}
+.console::before{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.015) 2px,rgba(255,255,255,.015) 3px)}
+.screw{position:absolute;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--screw),var(--cabinet-3) 70%);box-shadow:inset 0 1px 2px rgba(255,255,255,.35),0 1px 3px rgba(0,0,0,.6)}
+.screw::after{content:'';position:absolute;inset:2.5px 1px;background:var(--cabinet-3);border-radius:1px}
+.screw.tl{top:7px;left:7px}.screw.tr{top:7px;right:7px}.screw.bl{bottom:7px;left:7px}.screw.br{bottom:7px;right:7px}
 
-/* ═══ ВЕРХНЯЯ ПАНЕЛЬ + POWER СВЕРХУ ═══ */
-.console-top { display:flex; justify-content:space-between; align-items:center; padding:0 14px 8px; z-index:2; }
-.brand { font-family:'Orbitron',sans-serif; font-weight:900; font-size:clamp(14px,2.6vw,19px); letter-spacing:3px; color:var(--brand-color); text-shadow:0 1px 0 rgba(255,255,255,.35), 0 -1px 1px rgba(0,0,0,.5); }
-.brand-sub { font-family:'VT323',monospace; font-size:clamp(9px,1.8vw,13px); letter-spacing:1.5px; color:var(--label-color); }
-.top-right { display:flex; align-items:center; gap:12px; }
-.power-led { width:10px; height:10px; border-radius:50%; background:#4a1414; box-shadow:inset 0 1px 2px rgba(0,0,0,.8); transition:all .4s; }
-body.on .power-led { background:var(--power-led); box-shadow:0 0 12px var(--power-led), 0 0 26px rgba(255,59,48,.6); animation:ledPulse 2s infinite; }
-@keyframes ledPulse { 50%{opacity:.7} }
+.console-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:0 10px 8px;z-index:2;flex-wrap:wrap}
+.brand-wrap{min-width:0}.brand{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(13px,2.6vw,18px);letter-spacing:3px;color:var(--brand-color);text-shadow:0 1px 0 rgba(255,255,255,.35),0 -1px 1px rgba(0,0,0,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-sub{font-family:'VT323',monospace;font-size:clamp(9px,1.8vw,12px);letter-spacing:1.5px;color:var(--label-color);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-right{display:flex;align-items:center;gap:clamp(8px,2vw,14px);flex-wrap:wrap;justify-content:flex-end}
+.theme-dots{display:flex;align-items:center;gap:clamp(8px,1.8vw,12px)}
+.theme-dot{width:clamp(24px,5.8vw,30px);height:clamp(24px,5.8vw,30px);border-radius:50%;cursor:pointer;border:2px solid rgba(255,255,255,.18);transition:all .25s;box-shadow:inset 0 1px 2px rgba(255,255,255,.35),0 2px 6px rgba(0,0,0,.35)}
+.theme-dot:hover{transform:scale(1.08)}.theme-dot.active{border-color:var(--screen-text);box-shadow:0 0 12px var(--ring-color),inset 0 0 8px rgba(255,255,255,.18);transform:scale(1.1)}
+.td-dark{background:linear-gradient(135deg,#303038,#121216)}.td-gold{background:linear-gradient(135deg,#c4a86c,#6e582c)}.td-neon{background:linear-gradient(135deg,#ff00ff,#550070)}.td-carbon{background:linear-gradient(135deg,#333,#000)}.td-retro{background:linear-gradient(135deg,#7a5a38,#1a1008)}
+.led-row{display:flex;gap:7px;align-items:center}.status-led{width:9px;height:9px;border-radius:50%;box-shadow:inset 0 1px 2px rgba(0,0,0,.8);transition:all .4s}.power-led-mini{background:#4a1414}body.on .power-led-mini{background:var(--power-led);box-shadow:0 0 9px var(--power-led);animation:ledPulse 2s infinite}.network-led{background:#2a4a1a}.network-led.online{background:#00ff44;box-shadow:0 0 9px #00ff44}.network-led.offline{background:#ff4400;box-shadow:0 0 9px #ff4400;animation:ledPulse 1s infinite}.network-led.buffering{background:#ffaa00;box-shadow:0 0 9px #ffaa00;animation:ledPulse .5s infinite}
+@keyframes ledPulse{50%{opacity:.45}}
 
-.pwr-btn { width:clamp(44px,10vw,56px); height:clamp(44px,10vw,56px); border-radius:50%;
-  background:var(--btn-bg); border:1px solid rgba(0,0,0,.5); cursor:pointer;
-  color:var(--btn-color); font-size:clamp(19px,4.5vw,25px);
-  display:flex; align-items:center; justify-content:center; position:relative; flex-shrink:0;
-  box-shadow:inset 0 2px 3px rgba(255,255,255,.22), inset 0 -4px 7px rgba(0,0,0,.5), 0 4px 10px rgba(0,0,0,.45);
-  transition:transform .1s, color .3s; }
-.pwr-btn::before { content:''; position:absolute; inset:-5px; border-radius:50%; border:2px solid rgba(255,59,48,.2); transition:all .35s; pointer-events:none; }
-body.on .pwr-btn { color:#ff9a90; }
-body.on .pwr-btn::before { border-color:rgba(255,59,48,.85); box-shadow:0 0 16px rgba(255,59,48,.55), inset 0 0 8px rgba(255,59,48,.2); }
-.pwr-btn:active { transform:translateY(2px); box-shadow:inset 0 3px 8px rgba(0,0,0,.7); }
+.pwr-btn{width:clamp(50px,11vw,64px);height:clamp(50px,11vw,64px);border-radius:50%;background:var(--btn-bg);border:2px solid rgba(0,0,0,.5);cursor:pointer;color:var(--btn-color);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;box-shadow:inset 0 2px 3px rgba(255,255,255,.25),inset 0 -4px 7px rgba(0,0,0,.5),0 4px 10px rgba(0,0,0,.5);transition:transform .1s,color .3s;z-index:10}
+.pwr-btn svg{width:clamp(24px,5.5vw,31px);height:clamp(24px,5.5vw,31px);pointer-events:none}
+.pwr-btn::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(255,59,48,.2);transition:all .35s;pointer-events:none}
+body.on .pwr-btn{color:#ff9a90}body.on .pwr-btn::before{border-color:rgba(255,59,48,.85);box-shadow:0 0 18px rgba(255,59,48,.6),inset 0 0 10px rgba(255,59,48,.25)}
+.pwr-btn:active{transform:translateY(2px);box-shadow:inset 0 3px 8px rgba(0,0,0,.7)}
 
-/* ═══ СРЕДНЯЯ СЕКЦИЯ: ЭКРАН + ФЕЙДЕР ═══ */
-.mid-section { z-index:2; flex:1; min-height:0; display:flex; gap:12px; }
+.mid-section{z-index:2;flex:1;min-height:0;display:flex;gap:10px}
+.screen-frame{flex:1;min-width:0;border-radius:10px;padding:4px;background:linear-gradient(180deg,var(--cabinet-3),var(--cabinet-1));box-shadow:inset 0 3px 8px rgba(0,0,0,.75),0 1px 0 rgba(255,255,255,.15);display:flex}
+.screen{position:relative;border-radius:7px;overflow:hidden;flex:1;background:var(--screen-bg);display:flex;flex-direction:column;padding:8px 12px;gap:4px;transition:all .5s}
+body:not(.on) .screen{opacity:.4}body:not(.on) .screen-content{opacity:.1;filter:blur(1px)}
+body.on .screen{box-shadow:inset 0 0 40px var(--screen-glow),inset 0 0 100px rgba(0,0,0,.3)}
+.screen::before{content:'';position:absolute;inset:0;z-index:20;pointer-events:none;background:linear-gradient(165deg,rgba(255,255,255,.06) 0%,transparent 30%,transparent 70%,rgba(255,255,255,.03) 100%)}
+.screen::after{content:'';position:absolute;inset:0;z-index:19;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px)}
+.screen-content{display:flex;flex-direction:column;gap:3px;flex:1;min-height:0;transition:opacity .6s;position:relative;z-index:2}
+.scr-status-row{display:flex;justify-content:space-between;align-items:center;font-family:'VT323',monospace;font-size:clamp(11px,2vw,14px);letter-spacing:1px;color:var(--screen-dim);text-shadow:0 0 6px var(--screen-glow);opacity:.9;gap:8px}.scr-status-row span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.scr-status-row .live{color:#ff5a5a;text-shadow:0 0 8px rgba(255,90,90,.7);display:flex;align-items:center;gap:4px;flex:0 0 auto}.live-dot{width:6px;height:6px;border-radius:50%;background:#ff5a5a;box-shadow:0 0 8px #ff5a5a;animation:blink 1s infinite}@keyframes blink{50%{opacity:.2}}
+.scr-station{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(15px,3vh,28px);letter-spacing:1.5px;color:var(--screen-text);text-shadow:0 0 14px var(--screen-glow);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1}
+.scr-marquee-wrap{overflow:hidden;white-space:nowrap;height:18px;border-top:1px solid var(--screen-glow);border-bottom:1px solid var(--screen-glow);display:flex;align-items:center}.scr-marquee{font-family:'VT323',monospace;font-size:clamp(13px,2.4vh,17px);letter-spacing:1px;color:var(--screen-dim);text-shadow:0 0 8px var(--screen-glow);display:inline-block;padding-left:100%;animation:marquee 26s linear infinite}@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+.scr-mid{display:flex;gap:10px;align-items:stretch;flex:1;min-height:0}
+.eq{position:relative;flex:1.4;min-height:56px;overflow:hidden;border-radius:5px;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.05));box-shadow:inset 0 1px 4px rgba(0,0,0,.45),0 0 10px var(--screen-glow)}
+.eq canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer;touch-action:manipulation}
+.scr-right{flex:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:4px}.scr-time{font-family:'VT323',monospace;font-size:clamp(28px,5.5vh,52px);line-height:.9;color:var(--screen-text);letter-spacing:2px;text-shadow:0 0 14px var(--screen-glow)}.sleep-info{font-family:'VT323',monospace;font-size:clamp(10px,1.6vh,13px);color:var(--blue);letter-spacing:1px;text-shadow:0 0 6px var(--screen-glow);min-height:14px}.vol-display{display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:100%}.vol-label{font-family:'VT323',monospace;font-size:clamp(10px,1.8vh,13px);color:var(--screen-dim);letter-spacing:1px;text-shadow:0 0 6px var(--screen-glow)}.vol-segments{display:flex;gap:2px}.vol-seg{width:4px;height:9px;background:var(--vol-off);border-radius:1px;transition:all .15s}.vol-seg.lit{background:var(--vol-lit);box-shadow:0 0 4px var(--vol-lit)}.vol-seg.lit.max{background:var(--vol-lit-max);box-shadow:0 0 5px var(--vol-lit-max)}
+.power-hint{position:absolute;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;font-family:'VT323',monospace;font-size:clamp(16px,3vh,22px);letter-spacing:3px;color:var(--screen-dim);opacity:.7;animation:blink 2s infinite;pointer-events:none}body.on .power-hint{display:none}
 
-.screen-frame { flex:1; min-width:0; border-radius:10px; padding:4px;
-  background:linear-gradient(180deg,var(--cabinet-3),var(--cabinet-1));
-  box-shadow:inset 0 3px 8px rgba(0,0,0,.75), 0 1px 0 rgba(255,255,255,.15); display:flex; }
-.screen { position:relative; border-radius:7px; overflow:hidden; flex:1; background:var(--screen-bg);
-  display:flex; flex-direction:column; padding:10px 14px; gap:5px; transition:all .5s; }
-body:not(.on) .screen { opacity:.4; }
-body:not(.on) .screen-content { opacity:.1; filter:blur(1px); }
-body.on .screen { box-shadow:inset 0 0 40px var(--screen-glow), inset 0 0 100px rgba(0,0,0,.3); }
-.screen::before { content:''; position:absolute; inset:0; z-index:20; pointer-events:none; background:linear-gradient(165deg, rgba(255,255,255,.06) 0%, transparent 30%, transparent 70%, rgba(255,255,255,.03) 100%); }
-.screen::after { content:''; position:absolute; inset:0; z-index:19; pointer-events:none; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px); }
-.screen-content { display:flex; flex-direction:column; gap:4px; flex:1; min-height:0; transition:opacity .6s; position:relative; z-index:2; }
-.scr-status-row { display:flex; justify-content:space-between; align-items:center; font-family:'VT323',monospace; font-size:clamp(12px,2.2vw,16px); letter-spacing:1.2px; color:var(--screen-dim); text-shadow:0 0 6px var(--screen-glow); opacity:.9; }
-.scr-status-row .live { color:#ff5a5a; text-shadow:0 0 8px rgba(255,90,90,.7); display:flex; align-items:center; gap:4px; }
-[data-theme="light"] .scr-status-row .live { color:#ff6a4a; }
-.live-dot { width:6px; height:6px; border-radius:50%; background:#ff5a5a; box-shadow:0 0 8px #ff5a5a; animation:blink 1s infinite; }
-@keyframes blink { 50%{opacity:.2} }
-.scr-station { font-family:'Orbitron',sans-serif; font-weight:900; font-size:clamp(17px,3.4vh,32px); letter-spacing:1.5px; color:var(--screen-text); text-shadow:0 0 14px var(--screen-glow); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.1; }
-.scr-marquee-wrap { overflow:hidden; white-space:nowrap; height:19px; border-top:1px solid var(--screen-glow); border-bottom:1px solid var(--screen-glow); display:flex; align-items:center; }
-.scr-marquee { font-family:'VT323',monospace; font-size:clamp(14px,2.6vh,18px); letter-spacing:1.2px; color:var(--screen-dim); text-shadow:0 0 8px var(--screen-glow); display:inline-block; padding-left:100%; animation:marquee 26s linear infinite; }
-@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-100%)} }
-.scr-mid { display:flex; gap:14px; align-items:stretch; flex:1; min-height:0; }
-.eq { display:flex; gap:2px; align-items:flex-end; flex:1.5; padding:2px 0; }
-.eq-bar { flex:1; min-height:2px; position:relative; border-radius:1px; background:var(--eq-bar); box-shadow:0 0 5px var(--screen-glow); transition:height .07s ease-out; }
-.eq-bar::after { content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 3px, var(--screen-bg) 3px, var(--screen-bg) 5px); }
-.scr-right { flex:1; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end; gap:6px; }
-.scr-time { font-family:'VT323',monospace; font-size:clamp(34px,6.5vh,60px); line-height:.9; color:var(--screen-text); letter-spacing:2px; text-shadow:0 0 16px var(--screen-glow); }
-.vol-display { display:flex; flex-direction:column; align-items:flex-end; gap:2px; width:100%; }
-.vol-label { font-family:'VT323',monospace; font-size:clamp(11px,2vh,14px); color:var(--screen-dim); letter-spacing:1.2px; text-shadow:0 0 6px var(--screen-glow); }
-.vol-segments { display:flex; gap:2px; }
-.vol-seg { width:5px; height:10px; background:var(--vol-off); border-radius:1px; transition:all .15s; }
-.vol-seg.lit { background:var(--vol-lit); box-shadow:0 0 5px var(--vol-lit); }
-.vol-seg.lit.max { background:var(--vol-lit-max); box-shadow:0 0 6px var(--vol-lit-max); }
-.power-hint { position:absolute; inset:0; z-index:25; display:flex; align-items:center; justify-content:center; font-family:'VT323',monospace; font-size:clamp(17px,3.2vh,24px); letter-spacing:3px; color:var(--screen-dim); opacity:.6; animation:blink 2s infinite; pointer-events:none; }
-body.on .power-hint { display:none; }
+.fader-col{flex:0 0 60px;display:flex;flex-direction:column;align-items:center;gap:4px;background:linear-gradient(180deg,var(--cabinet-2),var(--cabinet-3));border-radius:10px;padding:8px 4px;box-shadow:inset 0 2px 6px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.12)}
+.fader-top-label{font-family:'VT323',monospace;font-size:12px;letter-spacing:2px;color:var(--label-color)}
+.fader{position:relative;flex:1;width:100%;display:flex;touch-action:none;cursor:pointer;min-height:60px}.fader-scale{width:14px;position:relative;flex-shrink:0}.tick{position:absolute;left:1px;height:1.5px;width:5px;background:var(--label-color);opacity:.65;transform:translateY(50%)}.tick.major{width:10px;opacity:1;height:2px}.fader-track-wrap{flex:1;position:relative;display:flex;justify-content:center}.fader-track{position:relative;width:11px;height:100%;border-radius:6px;background:linear-gradient(90deg,#000 0%,#1c1c22 45%,#08080c 100%);box-shadow:inset 0 3px 7px rgba(0,0,0,.95),0 1px 0 rgba(255,255,255,.15);border:1px solid rgba(0,0,0,.65)}.fader-fill{position:absolute;bottom:0;left:1.5px;right:1.5px;height:80%;border-radius:5px;background:linear-gradient(to top,var(--blue-deep),var(--blue));box-shadow:0 0 10px var(--ring-color);transition:height .06s}.fader-cap{position:absolute;left:50%;bottom:80%;width:40px;height:22px;transform:translate(-50%,50%);background:var(--fader-cap);border-radius:4px;border:1px solid rgba(0,0,0,.6);box-shadow:0 4px 10px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 3px rgba(0,0,0,.35);pointer-events:none;transition:bottom .06s}.fader-cap::after{content:'';position:absolute;left:15%;right:15%;top:50%;height:2.5px;transform:translateY(-50%);background:var(--blue);box-shadow:0 0 8px var(--blue);border-radius:2px}.fader-val{font-family:'VT323',monospace;font-size:15px;color:var(--screen-dim);letter-spacing:1px}body.on .fader-val{color:var(--blue);text-shadow:0 0 6px var(--ring-color)}
 
-/* ═══════════════════════════════════════
-   DJ-ФЕЙДЕР ГРОМКОСТИ (справа)
-   ═══════════════════════════════════════ */
-.fader-col { flex:0 0 66px; display:flex; flex-direction:column; align-items:center; gap:5px;
-  background:linear-gradient(180deg,var(--cabinet-2),var(--cabinet-3));
-  border-radius:10px; padding:8px 4px;
-  box-shadow:inset 0 2px 6px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.12); }
-.fader-top-label { font-family:'VT323',monospace; font-size:13px; letter-spacing:2px; color:var(--label-color); }
-.fader { position:relative; flex:1; width:100%; display:flex; touch-action:none; cursor:pointer; min-height:60px; }
-.fader-scale { width:18px; position:relative; flex-shrink:0; }
-.tick { position:absolute; left:2px; height:1.5px; width:6px; background:var(--label-color); opacity:.65; transform:translateY(50%); }
-.tick.major { width:13px; opacity:1; height:2px; }
-.fader-track-wrap { flex:1; position:relative; display:flex; justify-content:center; }
-.fader-track { position:relative; width:13px; height:100%; border-radius:7px;
-  background:linear-gradient(90deg,#000 0%,#1c1c22 45%,#08080c 100%);
-  box-shadow:inset 0 3px 7px rgba(0,0,0,.95), 0 1px 0 rgba(255,255,255,.15);
-  border:1px solid rgba(0,0,0,.65); }
-[data-theme="light"] .fader-track { background:linear-gradient(90deg,#1a1206 0%,#2e2210 45%,#120c04 100%); }
-.fader-fill { position:absolute; bottom:0; left:1.5px; right:1.5px; height:80%; border-radius:6px;
-  background:linear-gradient(to top, var(--blue-deep), var(--blue));
-  box-shadow:0 0 10px var(--ring-color); transition:height .06s; }
-.fader-cap { position:absolute; left:50%; bottom:80%; width:44px; height:26px;
-  transform:translate(-50%,50%);
-  background:var(--fader-cap);
-  border-radius:5px; border:1px solid rgba(0,0,0,.6);
-  box-shadow:0 4px 10px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.65), inset 0 -2px 3px rgba(0,0,0,.35);
-  pointer-events:none; transition:bottom .06s; }
-.fader-cap::after { content:''; position:absolute; left:14%; right:14%; top:50%; height:2.5px; transform:translateY(-50%);
-  background:var(--blue); box-shadow:0 0 8px var(--blue); border-radius:2px; }
-.fader-val { font-family:'VT323',monospace; font-size:17px; color:var(--screen-dim); letter-spacing:1px; }
-body.on .fader-val { color:var(--blue); text-shadow:0 0 8px var(--ring-color); }
+.seek-row{z-index:2;display:flex;align-items:center;gap:10px;padding:7px 10px 3px;font-family:'VT323',monospace;font-size:clamp(14px,2.8vh,18px);color:var(--screen-dim);letter-spacing:1px}.seek-time{min-width:48px;text-align:center;text-shadow:0 0 6px var(--screen-glow)}.seek-track{flex:1;height:14px;border-radius:7px;background:linear-gradient(180deg,#050508,#1a1a22);box-shadow:inset 0 2px 6px rgba(0,0,0,.9),0 1px 0 rgba(255,255,255,.12);position:relative;touch-action:none;cursor:pointer;border:1px solid rgba(0,0,0,.6)}.seek-track.disabled{opacity:.45;cursor:default}.seek-fill{height:100%;width:0;border-radius:7px;background:linear-gradient(90deg,var(--blue-deep),var(--blue));box-shadow:0 0 10px var(--ring-color)}.seek-knob{position:absolute;top:50%;left:0;width:24px;height:24px;border-radius:50%;transform:translate(-50%,-50%);background:var(--fader-cap);border:1px solid rgba(0,0,0,.55);box-shadow:0 3px 8px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.75);pointer-events:none}.seek-track.disabled .seek-knob{display:none}
 
-/* ═══════════════════════════════════════
-   КРУГЛЫЕ КНОПКИ — ОДИН РЯД, БЕЗ НАДПИСЕЙ
-   ═══════════════════════════════════════ */
-.controls { z-index:2; display:flex; justify-content:center; align-items:center;
-  gap:clamp(6px,1.8vw,20px); padding:clamp(8px,1.6vh,14px) 4px clamp(3px,.6vh,5px); }
-.btn {
-  width:clamp(42px,10.5vw,66px); height:clamp(42px,10.5vw,66px); border-radius:50%;
-  background:var(--btn-bg); border:1px solid rgba(0,0,0,.45); cursor:pointer; position:relative;
-  display:flex; align-items:center; justify-content:center;
-  color:var(--btn-color); font-size:clamp(20px,5.2vw,30px); flex-shrink:0;
-  box-shadow:inset 0 2px 3px rgba(255,255,255,.22), inset 0 -4px 7px rgba(0,0,0,.5), 0 5px 12px rgba(0,0,0,.45);
-  transition:transform .1s, box-shadow .1s, color .3s; }
-.btn::before { content:''; position:absolute; inset:-5px; border-radius:50%; border:2px solid rgba(120,120,120,.12); transition:all .35s; pointer-events:none; }
-body.on .btn { color:var(--btn-active-color); }
-body.on .btn::before { border-color:var(--ring-color); box-shadow:0 0 12px var(--ring-color), inset 0 0 7px var(--ring-color); }
-.btn:active { transform:translateY(2px); box-shadow:inset 0 3px 8px rgba(0,0,0,.7), 0 1px 3px rgba(0,0,0,.4); }
-.btn:active::before { box-shadow:0 0 22px var(--ring-color); }
+.controls{z-index:2;display:flex;justify-content:center;align-items:center;gap:clamp(6px,1.6vw,16px);padding:clamp(6px,1.2vh,10px) 2px clamp(2px,.4vh,4px)}
+.btn{width:clamp(44px,10vw,64px);height:clamp(44px,10vw,64px);border-radius:50%;background:var(--btn-bg);border:1px solid rgba(0,0,0,.45);cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;color:var(--btn-color);font-size:clamp(19px,4.8vw,27px);flex-shrink:0;box-shadow:inset 0 2px 3px rgba(255,255,255,.22),inset 0 -4px 7px rgba(0,0,0,.5),0 4px 10px rgba(0,0,0,.45);transition:transform .1s,box-shadow .1s,color .3s}.btn::before{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(120,120,120,.12);transition:all .35s;pointer-events:none}body.on .btn{color:var(--btn-active-color)}body.on .btn::before{border-color:var(--ring-color);box-shadow:0 0 10px var(--ring-color),inset 0 0 5px var(--ring-color)}.btn:active{transform:translateY(2px);box-shadow:inset 0 3px 8px rgba(0,0,0,.7),0 1px 3px rgba(0,0,0,.4)}.btn.play{width:clamp(58px,13.5vw,84px);height:clamp(58px,13.5vw,84px);font-size:clamp(25px,6.2vw,37px)}body.playing .btn.play{color:var(--screen-text)}body.playing .btn.play::before{animation:ringBreath 1.6s ease-in-out infinite}@keyframes ringBreath{0%,100%{box-shadow:0 0 10px var(--ring-color);border-color:var(--ring-color)}50%{box-shadow:0 0 26px var(--ring-color);border-color:var(--screen-text)}}
 
-.btn.play { width:clamp(56px,14vw,88px); height:clamp(56px,14vw,88px); font-size:clamp(27px,7vw,40px); }
-body.playing .btn.play { color:var(--screen-text); }
-body.playing .btn.play::before { animation:ringBreath 1.6s ease-in-out infinite; }
-@keyframes ringBreath {
-  0%,100% { box-shadow:0 0 12px var(--ring-color); border-color:var(--ring-color); }
-  50% { box-shadow:0 0 30px var(--ring-color); border-color:var(--screen-text); }
+.features-bar{z-index:2;display:flex;justify-content:center;align-items:center;gap:clamp(5px,1.2vw,10px);padding:5px 4px;flex-wrap:wrap}.fbtn{min-width:clamp(54px,13vw,72px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:var(--btn-bg);border:1px solid rgba(0,0,0,.35);border-radius:10px;padding:7px 8px;cursor:pointer;color:var(--btn-color);font-family:'VT323',monospace;font-size:clamp(10px,2.3vw,12px);letter-spacing:.5px;transition:all .15s;box-shadow:inset 0 1px 2px rgba(255,255,255,.15),0 2px 5px rgba(0,0,0,.35)}.fbtn .fico{font-size:clamp(16px,3.8vw,20px);line-height:1}body.on .fbtn{color:var(--btn-active-color)}.fbtn:active{transform:translateY(1px)}.fbtn.active{background:linear-gradient(180deg,var(--ring-color),var(--blue-deep));color:var(--screen-text);box-shadow:0 0 12px var(--ring-color)}
+
+.led-strip{z-index:2;height:3px;margin:5px 16px 2px;border-radius:2px;background:rgba(0,0,0,.4);box-shadow:inset 0 1px 2px rgba(0,0,0,.7);position:relative;overflow:hidden}.led-strip::after{content:'';position:absolute;inset:0;opacity:0;transition:opacity .5s;background:linear-gradient(90deg,transparent,var(--blue),var(--blue-bright),var(--blue),transparent);background-size:50% 100%;background-repeat:no-repeat}body.on .led-strip::after{opacity:.9;animation:stripRun 3s linear infinite}@keyframes stripRun{0%{background-position:-60% 0}100%{background-position:160% 0}}
+.console-bottom-row{z-index:2;display:flex;justify-content:center;align-items:center;padding:0 10px 2px}.console-bottom-label{font-family:'VT323',monospace;font-size:clamp(9px,1.8vw,12px);letter-spacing:2.5px;color:var(--label-color)}
+
+.overlay{position:absolute;inset:0;z-index:100;background:var(--overlay-bg);backdrop-filter:blur(12px);display:none;flex-direction:column;padding:14px}.overlay.show{display:flex}.overlay-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:2px solid var(--screen-glow);margin-bottom:8px;gap:8px}.overlay-title{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(14px,3.6vw,22px);letter-spacing:2px;color:var(--screen-text);text-shadow:0 0 10px var(--screen-glow)}.overlay-close{width:clamp(40px,9vw,48px);height:clamp(40px,9vw,48px);border-radius:12px;background:var(--btn-bg);color:var(--btn-active-color);border:1px solid rgba(0,0,0,.4);cursor:pointer;font-size:clamp(20px,5vw,26px);flex-shrink:0}
+.search-box{width:100%;padding:10px 12px;border-radius:8px;border:1.5px solid var(--screen-glow);background:rgba(0,0,0,.4);color:var(--screen-text);font-family:'Share Tech Mono',monospace;font-size:14px;outline:none;margin-bottom:8px}.search-box:focus{border-color:var(--screen-text);box-shadow:0 0 10px var(--screen-glow)}.search-box::placeholder{color:var(--screen-dim);opacity:.6}
+.filter-row{display:flex;gap:7px;margin-bottom:8px;flex-wrap:wrap}.fchip{padding:7px 12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--screen-glow);cursor:pointer;font-family:'VT323',monospace;font-size:13px;letter-spacing:1px;color:var(--screen-dim)}.fchip.active{background:var(--screen-glow);color:var(--screen-text)}
+.stations-grid{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:7px;padding-right:4px}.station-item{padding:11px 12px;border-radius:9px;cursor:pointer;background:rgba(255,255,255,.05);border:1.5px solid var(--screen-glow);display:flex;align-items:center;gap:8px;transition:all .15s}.station-item:hover{background:rgba(255,255,255,.1)}.station-item.active{background:var(--screen-glow);border-color:var(--screen-text);box-shadow:inset 0 0 12px var(--screen-glow)}.station-num{font-family:'VT323',monospace;font-size:clamp(18px,4.5vw,24px);color:var(--screen-dim);min-width:34px}.station-item.active .station-num{color:var(--screen-text)}.station-info{flex:1;min-width:0;overflow:hidden}.station-name-small{font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(12px,3vw,15px);color:var(--screen-text);letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.station-genre-small{font-family:'VT323',monospace;font-size:clamp(11px,2.6vw,14px);color:var(--screen-dim);letter-spacing:1px;margin-top:2px}.fav-star{font-size:20px;padding:4px;cursor:pointer;color:var(--screen-dim);flex-shrink:0}.fav-star.on{color:#ffcc00;text-shadow:0 0 8px #ffcc00}
+.sleep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;padding:10px;overflow:auto}.sleep-btn{padding:18px;border-radius:12px;background:var(--btn-bg);border:1.5px solid var(--ring-color);color:var(--btn-active-color);cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:700;font-size:17px;display:flex;flex-direction:column;align-items:center;gap:5px;transition:all .2s}.sleep-btn:hover{background:var(--ring-color);color:var(--screen-bg)}.sleep-btn.active{background:var(--screen-text);color:var(--screen-bg);box-shadow:0 0 16px var(--screen-text)}
+.eq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:10px;overflow:auto}.eq-btn{min-height:64px;padding:14px;border-radius:12px;background:var(--btn-bg);border:1.5px solid var(--ring-color);color:var(--btn-active-color);cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.2px;display:flex;align-items:center;justify-content:center;text-align:center;transition:all .2s}.eq-btn:hover{background:var(--ring-color);color:var(--screen-bg)}.eq-btn.active{background:var(--screen-text);color:var(--screen-bg);box-shadow:0 0 16px var(--screen-text)}
+.file-input{display:none}
+
+@media (orientation:portrait),(max-width:640px){
+  .speaker{display:none}.system{flex-direction:column;max-height:none;height:100%}.console{flex:1;height:100%;padding:6px 8px;border-radius:12px}.screen{padding:6px 8px}.scr-mid{flex-direction:column;gap:4px}.eq{min-height:42px}.scr-right{flex-direction:row;align-items:center;justify-content:space-between}.stations-grid{grid-template-columns:1fr}.fader-col{flex:0 0 52px}.fader-cap{width:34px;height:20px}.controls{gap:5px;padding:4px 2px 2px}.btn{width:clamp(40px,11.2vw,52px);height:clamp(40px,11.2vw,52px);font-size:clamp(17px,4.8vw,24px)}.btn.play{width:clamp(54px,15vw,68px);height:clamp(54px,15vw,68px);font-size:clamp(24px,7vw,32px)}.fbtn{min-width:50px;padding:6px}.fbtn .fico{font-size:16px}.theme-dot{width:26px;height:26px}.top-right{gap:8px}.seek-knob{width:28px;height:28px}
 }
-
-/* ═══ LED + НИЗ ═══ */
-.led-strip { z-index:2; height:3px; margin:clamp(5px,1vh,9px) 18px 2px; border-radius:2px; background:rgba(0,0,0,.4); box-shadow:inset 0 1px 2px rgba(0,0,0,.7); position:relative; overflow:hidden; }
-.led-strip::after { content:''; position:absolute; inset:0; opacity:0; transition:opacity .5s; background:linear-gradient(90deg,transparent,var(--blue),var(--blue-bright),var(--blue),transparent); background-size:50% 100%; background-repeat:no-repeat; }
-body.on .led-strip::after { opacity:.9; animation:stripRun 3s linear infinite; }
-@keyframes stripRun { 0%{background-position:-60% 0} 100%{background-position:160% 0} }
-.console-bottom-row { z-index:2; display:flex; justify-content:space-between; align-items:center; padding:0 14px 2px; }
-.console-bottom-label { font-family:'VT323',monospace; font-size:clamp(10px,2vw,13px); letter-spacing:2.5px; color:var(--label-color); }
-.theme-switch { display:flex; align-items:center; gap:5px; font-family:'VT323',monospace; font-size:clamp(10px,2vw,13px); letter-spacing:1.5px; color:var(--label-color); cursor:pointer; padding:2px 6px; border-radius:4px; transition:all .3s; border:1px solid transparent; }
-.theme-switch:hover { color:var(--brand-color); border-color:var(--label-color); }
-.theme-icon { font-size:clamp(12px,2.4vw,15px); }
-
-/* ═══ СПИСОК КАНАЛОВ (КРУПНЫЙ) ═══ */
-.stations-overlay { position:absolute; inset:0; z-index:100; background:var(--overlay-bg); backdrop-filter:blur(12px); display:none; flex-direction:column; padding:16px; }
-.stations-overlay.show { display:flex; }
-.stations-header { display:flex; justify-content:space-between; align-items:center; padding-bottom:10px; border-bottom:2px solid var(--screen-glow); margin-bottom:10px; gap:10px; }
-.stations-title { font-family:'Orbitron',sans-serif; font-weight:900; font-size:clamp(16px,4vw,24px); letter-spacing:2px; color:var(--screen-text); text-shadow:0 0 12px var(--screen-glow); }
-.stations-close { width:clamp(40px,9vw,50px); height:clamp(40px,9vw,50px); border-radius:12px; background:var(--btn-bg); color:var(--btn-active-color); border:1px solid rgba(0,0,0,.4); cursor:pointer; font-size:clamp(20px,5vw,26px); flex-shrink:0; box-shadow:inset 0 2px 3px rgba(255,255,255,.2), 0 3px 8px rgba(0,0,0,.4); }
-.stations-grid { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:8px; padding-right:4px; }
-.station-item { padding:13px 15px; border-radius:10px; cursor:pointer; background:rgba(255,255,255,.05); border:1.5px solid var(--screen-glow); display:flex; align-items:center; gap:11px; transition:all .15s; }
-.station-item:hover { background:rgba(255,255,255,.1); transform:translateX(2px); }
-.station-item.active { background:var(--screen-glow); border-color:var(--screen-text); box-shadow:inset 0 0 14px var(--screen-glow), 0 0 12px var(--screen-glow); }
-.station-num { font-family:'VT323',monospace; font-size:clamp(21px,5vw,27px); color:var(--screen-dim); min-width:36px; text-shadow:0 0 6px var(--screen-glow); }
-.station-item.active .station-num { color:var(--screen-text); }
-.station-name-small { font-family:'Orbitron',sans-serif; font-weight:700; font-size:clamp(13px,3.2vw,16px); color:var(--screen-text); letter-spacing:.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.station-genre-small { font-family:'VT323',monospace; font-size:clamp(12px,3vw,15px); color:var(--screen-dim); letter-spacing:1px; margin-top:2px; }
-
-/* ═══ ПОРТРЕТ ═══ */
-@media (orientation:portrait), (max-width:640px) {
-  .speaker { display:none; }
-  .system { flex-direction:column; max-height:none; height:100%; }
-  .console { flex:1; height:100%; padding:8px 10px; border-radius:12px; }
-  .screen { padding:8px 10px; }
-  .scr-mid { flex-direction:column; gap:6px; }
-  .eq { min-height:40px; }
-  .scr-right { flex-direction:row; align-items:center; justify-content:space-between; }
-  .stations-grid { grid-template-columns:1fr; }
-  .fader-col { flex:0 0 56px; }
-  .fader-cap { width:38px; height:22px; }
-  .controls { gap:clamp(4px,1.6vw,10px); }
-  .btn { width:clamp(40px,11.2vw,52px); height:clamp(40px,11.2vw,52px); font-size:clamp(18px,5vw,24px); }
-  .btn.play { width:clamp(52px,14vw,66px); height:clamp(52px,14vw,66px); font-size:clamp(24px,6.5vw,32px); }
-}
-@media (orientation:landscape) and (max-height:430px) {
-  .console-top { padding:0 12px 4px; }
-  .led-strip { margin:5px 16px 2px; }
-  .speaker { flex:0 0 130px; }
-  .woofer { width:96px; height:96px; } .woofer-cone { width:70px; height:70px; }
-  .dust-cap { width:26px; height:26px; }
-  .mid-driver { width:56px; height:56px; } .mid-cone { width:44px; height:44px; }
-  .mid-cone .cap { width:16px; height:16px; } .tweeter { width:32px; height:32px; }
-  .btn { width:clamp(38px,8.5vh,54px); height:clamp(38px,8.5vh,54px); font-size:clamp(17px,4.2vh,25px); }
-  .btn.play { width:clamp(50px,11vh,70px); height:clamp(50px,11vh,70px); font-size:clamp(22px,5.5vh,32px); }
-  .pwr-btn { width:clamp(36px,8vh,46px); height:clamp(36px,8vh,46px); }
+@media (orientation:landscape) and (max-height:430px){
+  .console-top{padding:0 10px 4px}.led-strip{margin:4px 14px 2px}.speaker{flex:0 0 130px}.woofer{width:96px;height:96px}.woofer-cone{width:70px;height:70px}.dust-cap{width:26px;height:26px}.mid-driver{width:56px;height:56px}.mid-cone{width:44px;height:44px}.mid-cone .cap{width:16px;height:16px}.tweeter{width:32px;height:32px}.tube{width:8px;height:18px}.btn{width:clamp(38px,8.5vh,54px);height:clamp(38px,8.5vh,54px);font-size:clamp(17px,4.2vh,25px)}.btn.play{width:clamp(50px,11vh,70px);height:clamp(50px,11vh,70px);font-size:clamp(22px,5.5vh,32px)}.pwr-btn{width:clamp(42px,9vh,54px);height:clamp(42px,9vh,54px)}.theme-dot{width:22px;height:22px}
 }
 </style>
 </head>
 <body data-theme="dark">
+<input type="file" id="fileInput" class="file-input" accept="audio/*" multiple>
 
 <div class="system">
   <div class="speaker left"><div class="cabinet">
+    <div class="tube-lamps"><div class="tube"></div><div class="tube"></div><div class="tube"></div></div>
     <div class="tweeter"></div>
     <div class="mid-driver"><div class="mid-cone"><div class="cap"></div></div></div>
     <div class="woofer"><div class="woofer-cone"><div class="dust-cap"></div></div></div>
@@ -318,37 +240,53 @@ body.on .led-strip::after { opacity:.9; animation:stripRun 3s linear infinite; }
   <div class="console">
     <div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>
 
-    <!-- ВЕРХ: бренд + POWER -->
     <div class="console-top">
-      <div>
+      <div class="brand-wrap">
         <div class="brand">HONGQI HS5</div>
-        <div class="brand-sub">BOSE SOUND SYSTEM · PREMIUM AUDIO · 12 CH</div>
+        <div class="brand-sub">BOSE SOUND SYSTEM · PREMIUM · 12 CH</div>
       </div>
       <div class="top-right">
-        <div class="power-led"></div>
-        <button class="pwr-btn" id="powerBtn" onclick="togglePower()">⏻</button>
+        <div class="theme-dots" id="themeDotsTop">
+          <div class="theme-dot td-dark active" data-theme="dark" title="Dark" onclick="setTheme('dark')"></div>
+          <div class="theme-dot td-gold" data-theme="gold" title="Gold" onclick="setTheme('gold')"></div>
+          <div class="theme-dot td-neon" data-theme="neon" title="Neon" onclick="setTheme('neon')"></div>
+          <div class="theme-dot td-carbon" data-theme="carbon" title="Carbon" onclick="setTheme('carbon')"></div>
+          <div class="theme-dot td-retro" data-theme="retro" title="Retro" onclick="setTheme('retro')"></div>
+        </div>
+        <div class="led-row">
+          <div class="status-led network-led online" id="netLed" title="Сеть"></div>
+          <div class="status-led power-led-mini" title="Power"></div>
+        </div>
+        <button class="pwr-btn" id="powerBtn" onclick="togglePower()" aria-label="Power">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v8"></path>
+            <path d="M6.3 6.3a8 8 0 1 0 11.4 0"></path>
+          </svg>
+        </button>
       </div>
     </div>
 
-    <!-- СЕРЕДИНА: экран + DJ-фейдер -->
     <div class="mid-section">
       <div class="screen-frame">
         <div class="screen">
-          <div class="power-hint">— НАЖМИТЕ ⏻ СВЕРХУ —</div>
+          <div class="power-hint">— НАЖМИТЕ POWER СВЕРХУ —</div>
           <div class="screen-content">
             <div class="scr-status-row">
               <span id="statusText">STANDBY</span>
-              <span>STEREO · <span id="bitrateDisplay">128</span>kbps</span>
+              <span id="modeText">STEREO · 128kbps</span>
               <span class="live"><span class="live-dot"></span>LIVE</span>
             </div>
             <div class="scr-station" id="stationName">HONGQI RADIO</div>
             <div class="scr-marquee-wrap">
-              <span class="scr-marquee" id="marqueeText">*** HONGQI HS5 BOSE SOUND *** 125 CHANNELS *** PRESS POWER ***</span>
+              <span class="scr-marquee" id="marqueeText">*** HONGQI HS5 BOSE SOUND *** 100 CHANNELS *** PRESS POWER ***</span>
             </div>
             <div class="scr-mid">
-              <div class="eq" id="eq"></div>
+              <div class="eq">
+                <canvas id="analyzerCanvas"></canvas>
+              </div>
               <div class="scr-right">
                 <div class="scr-time" id="timeDisplay">00:00</div>
+                <div class="sleep-info" id="sleepInfo"></div>
                 <div class="vol-display">
                   <div class="vol-label">VOL <span id="volNum">13</span></div>
                   <div class="vol-segments" id="volSegments"></div>
@@ -356,17 +294,63 @@ body.on .led-strip::after { opacity:.9; animation:stripRun 3s linear infinite; }
               </div>
             </div>
           </div>
-          <div class="stations-overlay" id="stationsOverlay">
-            <div class="stations-header">
-              <div class="stations-title">◆ КАНАЛЫ · 125</div>
-              <button class="stations-close" onclick="closeStations()">×</button>
+
+          <div class="overlay" id="stationsOverlay">
+            <div class="overlay-header">
+              <div class="overlay-title">◆ КАНАЛЫ · <span id="stationCount">0</span></div>
+              <button class="overlay-close" onclick="closeOverlay('stationsOverlay')">×</button>
+            </div>
+            <input type="text" class="search-box" id="searchBox" placeholder="Поиск по названию или жанру...">
+            <div class="filter-row">
+              <div class="fchip active" data-filter="all">ALL</div>
+              <div class="fchip" data-filter="fav">FAV</div>
+              <div class="fchip" data-filter="RU">RU</div>
+              <div class="fchip" data-filter="HOUSE">HOUSE</div>
+              <div class="fchip" data-filter="TECHNO">TECHNO</div>
+              <div class="fchip" data-filter="TRANCE">TRANCE</div>
+              <div class="fchip" data-filter="DEEP">DEEP</div>
+              <div class="fchip" data-filter="AMBIENT">AMBIENT</div>
+              <div class="fchip" data-filter="POP">POP</div>
+              <div class="fchip" data-filter="local">FILES</div>
             </div>
             <div class="stations-grid" id="stationsGrid"></div>
+          </div>
+
+          <div class="overlay" id="sleepOverlay">
+            <div class="overlay-header">
+              <div class="overlay-title">SLEEP TIMER</div>
+              <button class="overlay-close" onclick="closeOverlay('sleepOverlay')">×</button>
+            </div>
+            <div class="sleep-grid">
+              <button class="sleep-btn" onclick="setSleep(0,this)">OFF</button>
+              <button class="sleep-btn" onclick="setSleep(15,this)">15 MIN</button>
+              <button class="sleep-btn" onclick="setSleep(30,this)">30 MIN</button>
+              <button class="sleep-btn" onclick="setSleep(45,this)">45 MIN</button>
+              <button class="sleep-btn" onclick="setSleep(60,this)">60 MIN</button>
+              <button class="sleep-btn" onclick="setSleep(90,this)">90 MIN</button>
+              <button class="sleep-btn" onclick="setSleep(120,this)">120 MIN</button>
+            </div>
+          </div>
+
+          <div class="overlay" id="eqOverlay">
+            <div class="overlay-header">
+              <div class="overlay-title">EQUALIZER</div>
+              <button class="overlay-close" onclick="closeOverlay('eqOverlay')">×</button>
+            </div>
+            <div class="eq-grid">
+              <button class="eq-btn" data-eq="flat" onclick="setEQ('flat',this)">FLAT</button>
+              <button class="eq-btn active" data-eq="bass" onclick="setEQ('bass',this)">BASS BOOST</button>
+              <button class="eq-btn" data-eq="treble" onclick="setEQ('treble',this)">TREBLE</button>
+              <button class="eq-btn" data-eq="vocal" onclick="setEQ('vocal',this)">VOCAL</button>
+              <button class="eq-btn" data-eq="car" onclick="setEQ('car',this)">CAR</button>
+              <button class="eq-btn" data-eq="club" onclick="setEQ('club',this)">CLUB</button>
+              <button class="eq-btn" data-eq="loudness" onclick="setEQ('loudness',this)">LOUDNESS</button>
+              <button class="eq-btn" data-eq="deep" onclick="setEQ('deep',this)">DEEP</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- DJ-ФЕЙДЕР ГРОМКОСТИ -->
       <div class="fader-col">
         <div class="fader-top-label">VOL</div>
         <div class="fader" id="fader">
@@ -382,27 +366,41 @@ body.on .led-strip::after { opacity:.9; animation:stripRun 3s linear infinite; }
       </div>
     </div>
 
-    <!-- КНОПКИ: один ряд, крупные значки, без надписей -->
+    <div class="seek-row">
+      <div class="seek-time" id="seekCurrent">--:--</div>
+      <div class="seek-track disabled" id="seekTrack">
+        <div class="seek-fill" id="seekFill"></div>
+        <div class="seek-knob" id="seekKnob"></div>
+      </div>
+      <div class="seek-time" id="seekDuration">LIVE</div>
+    </div>
+
     <div class="controls">
       <button class="btn" onclick="prevStation()">⏮</button>
       <button class="btn play" id="playBtn" onclick="togglePlay()"><span id="playIco">▶</span></button>
       <button class="btn" onclick="stopPlay()">■</button>
       <button class="btn" onclick="nextStation()">⏭</button>
-      <button class="btn" onclick="openStations()">☰</button>
-      <button class="btn" id="thmBtn" onclick="toggleTheme()">☀</button>
+      <button class="btn" onclick="openOverlay('stationsOverlay')">☰</button>
       <button class="btn" onclick="toggleFullscreen()">⛶</button>
+    </div>
+
+    <div class="features-bar">
+      <button class="fbtn" onclick="setFilter('fav');openOverlay('stationsOverlay')"><span class="fico">★</span>FAV</button>
+      <button class="fbtn" onclick="openOverlay('sleepOverlay')"><span class="fico">◷</span>SLEEP</button>
+      <button class="fbtn" id="wakeLockBtn" onclick="toggleWakeLock()"><span class="fico">☀</span>WAKE</button>
+      <button class="fbtn" onclick="openOverlay('eqOverlay')"><span class="fico">≋</span>EQ</button>
+      <button class="fbtn" onclick="document.getElementById('fileInput').click()"><span class="fico">▤</span>FILES</button>
+      <button class="fbtn" onclick="setFilter('local');openOverlay('stationsOverlay')"><span class="fico">♫</span>MINE</button>
     </div>
 
     <div class="led-strip"></div>
     <div class="console-bottom-row">
-      <div class="console-bottom-label">· PRECISION AUDIO · 125 CHANNELS ·</div>
-      <div class="theme-switch" onclick="toggleTheme()">
-        <span class="theme-icon" id="themeIcon">☾</span><span id="themeLabel">DARK</span>
-      </div>
+      <div class="console-bottom-label">PRECISION AUDIO · HS5 · v2.2</div>
     </div>
   </div>
 
   <div class="speaker right"><div class="cabinet">
+    <div class="tube-lamps"><div class="tube"></div><div class="tube"></div><div class="tube"></div></div>
     <div class="tweeter"></div>
     <div class="mid-driver"><div class="mid-cone"><div class="cap"></div></div></div>
     <div class="woofer"><div class="woofer-cone"><div class="dust-cap"></div></div></div>
@@ -412,190 +410,329 @@ body.on .led-strip::after { opacity:.9; animation:stripRun 3s linear infinite; }
 
 <script>
 document.addEventListener('touchmove', e => {
-  if (!e.target.closest('.stations-grid') && !e.target.closest('.fader')) e.preventDefault();
+  if (!e.target.closest('.stations-grid,.sleep-grid,.eq-grid,.search-box,.fader,.seek-track,.eq')) e.preventDefault();
 }, { passive:false });
 document.addEventListener('gesturestart', e => e.preventDefault());
 
-function toggleFullscreen() {
-  const el = document.documentElement;
-  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+function toggleFullscreen(){
+  const el=document.documentElement;
+  if(!document.fullscreenElement && !document.webkitFullscreenElement){
     (el.requestFullscreen||el.webkitRequestFullscreen).call(el);
-  } else { (document.exitFullscreen||document.webkitExitFullscreen).call(document); }
-}
-
-// ═══ 125 КАНАЛОВ ═══
-const SM = id => `https://ice1.somafm.com/${id}-128-mp3`;
-const RR = id => `https://radiorecord.hostingradio.ru/${id}96.aacp`;
-
-const stations = [
-  { s:SM("groovesalad"),  n:"Groove Salad",     g:"AMBIENT" },
-  { s:SM("dronezone"),    n:"Drone Zone",       g:"ATMOSPHERIC" },
-  { s:SM("deepspaceone"), n:"Deep Space One",   g:"DEEP AMBIENT" },
-  { s:SM("defcon"),       n:"DEF CON Radio",    g:"ELECTRONIC" },
-  { s:SM("beatblender"),  n:"Beat Blender",     g:"DEEP HOUSE" },
-  { s:SM("dubstep"),      n:"Dub Step Beyond",  g:"DUBSTEP" },
-  { s:SM("cliqhop"),      n:"Cliqhop",          g:"IDM" },
-  { s:SM("fluid"),        n:"Fluid",            g:"LIQUID DNB" },
-  { s:SM("thetrip"),      n:"The Trip",         g:"PROGRESSIVE" },
-  { s:SM("poptron"),      n:"PopTron",          g:"ELECTRO POP" },
-  { s:SM("indiepop"),     n:"Indie Pop Rocks",  g:"INDIE POP" },
-  { s:SM("digitalis"),    n:"Digitalis",        g:"ROCK" },
-  { s:SM("u80s"),         n:"Underground 80s",  g:"SYNTH POP" },
-  { s:SM("vaporwaves"),   n:"Vaporwaves",       g:"VAPORWAVE" },
-  { s:SM("covers"),       n:"Covers",           g:"POP COVERS" },
-  { s:SM("metal"),        n:"Metal Detector",   g:"METAL" },
-  { s:SM("lush"),         n:"Lush",             g:"VOCALS" },
-  { s:SM("secretagent"),  n:"Secret Agent",     g:"LOUNGE" },
-  { s:SM("illstreet"),    n:"Illinois Street",  g:"LOUNGE" },
-  { s:SM("sonicuniverse"),n:"Sonic Universe",   g:"AVANT JAZZ" },
-  { s:SM("bootliquor"),   n:"Boot Liquor",      g:"AMERICANA" },
-  { s:SM("folkfwd"),      n:"Folk Forward",     g:"INDIE FOLK" },
-  { s:SM("reggae"),       n:"Heavyweight Reggae",g:"REGGAE" },
-  { s:SM("tags"),         n:"The Trip Hop",     g:"TRIP HOP" },
-  { s:SM("thistle"),      n:"ThistleRadio",     g:"CELTIC" },
-  { s:SM("missioncontrol"),n:"Mission Control", g:"SPACE" },
-  { s:SM("spacestation"), n:"Space Station",    g:"SPACE AMBIENT" },
-  { s:SM("sf1033"),       n:"SF 10-33",         g:"AMBIENT" },
-  { s:SM("bagel"),        n:"Bagel Radio",      g:"ECLECTIC" },
-  { s:SM("leftcoast"),    n:"Left Coast",       g:"WEST COAST" },
-  { s:SM("n5md"),         n:"n5MD Radio",       g:"POST ROCK" },
-  { s:SM("underground"),  n:"Underground",      g:"DRUM & BASS" },
-  { s:SM("gsclassic"),    n:"Groove Salad Classic",g:"CHILL OUT" },
-  { s:SM("brfm"),         n:"Bossa Beyond",     g:"BOSSA NOVA" },
-  { s:SM("7soul"),        n:"Seven Inch Soul",  g:"SOUL" },
-  { s:SM("suburbsf"),     n:"Suburbs of SF",    g:"INDIE POP" },
-  { s:SM("synthetica"),   n:"Synthetica",       g:"SYNTHWAVE" },
-  { s:SM("torville"),     n:"Torville",         g:"FOLK" },
-  { s:SM("xmasinvasion"), n:"Xmas Invasion",    g:"HOLIDAY" },
-  { s:SM("xmasrocks"),    n:"Xmas Rocks",       g:"HOLIDAY" },
-
-  { s:RR("rr"),        n:"Record",            g:"RU DANCE" },
-  { s:RR("deep"),      n:"Record Deep",       g:"DEEP HOUSE" },
-  { s:RR("techno"),    n:"Record Techno",     g:"TECHNO" },
-  { s:RR("trance"),    n:"Record Trance",     g:"TRANCE" },
-  { s:RR("house"),     n:"Record House",      g:"HOUSE" },
-  { s:RR("dnb"),       n:"Record DNB",        g:"DRUM & BASS" },
-  { s:RR("dubstep"),   n:"Record Dubstep",    g:"DUBSTEP" },
-  { s:RR("electro"),   n:"Record Electro",    g:"ELECTRO" },
-  { s:RR("disco"),     n:"Record Disco",      g:"DISCO" },
-  { s:RR("funk"),      n:"Record Funk",       g:"FUNK" },
-  { s:RR("synth"),     n:"Record Synth",      g:"SYNTHWAVE" },
-  { s:RR("ambient"),   n:"Record Ambient",    g:"AMBIENT" },
-  { s:RR("chill"),     n:"Record Chill",      g:"CHILLOUT" },
-  { s:RR("hardstyle"), n:"Record Hardstyle",  g:"HARDSTYLE" },
-  { s:RR("trap"),      n:"Record Trap",       g:"TRAP" },
-  { s:RR("phonk"),     n:"Record Phonk",      g:"PHONK" },
-  { s:RR("garage"),    n:"Record Garage",     g:"GARAGE" },
-  { s:RR("breakbeat"), n:"Record Breakbeat",  g:"BREAKBEAT" },
-  { s:RR("downtempo"), n:"Record Downtempo",  g:"DOWNTEMPO" },
-  { s:RR("jackin"),    n:"Record Jackin",     g:"JACKIN" },
-  { s:RR("minimal"),   n:"Record Minimal",    g:"MINIMAL" },
-  { s:RR("progressive"),n:"Record Progressive",g:"PROGRESSIVE" },
-  { s:RR("russian"),   n:"Record Russian",    g:"RUSSIAN" },
-  { s:RR("gold"),      n:"Record Gold",       g:"GOLD" },
-  { s:RR("hits"),      n:"Record Hits",       g:"POP HITS" },
-  { s:RR("dance"),     n:"Record Dance",      g:"DANCE" },
-  { s:RR("bass"),      n:"Record Bass",       g:"BASS" },
-  { s:RR("club"),      n:"Record Club",       g:"CLUB" },
-  { s:RR("eurodance"), n:"Record Eurodance",  g:"EURODANCE" },
-  { s:RR("hardbass"),  n:"Record Hardbass",   g:"HARDBASS" },
-  { s:RR("hardcore"),  n:"Record Hardcore",   g:"HARDCORE" },
-  { s:RR("melodic"),   n:"Record Melodic",    g:"MELODIC" },
-  { s:RR("organic"),   n:"Record Organic",    g:"ORGANIC" },
-  { s:RR("afro"),      n:"Record Afro",       g:"AFRO HOUSE" },
-  { s:RR("latin"),     n:"Record Latin",      g:"LATIN" },
-  { s:RR("vocal"),     n:"Record Vocal",      g:"VOCAL" },
-  { s:RR("oldschool"), n:"Record Oldschool",  g:"OLDSCHOOL" },
-  { s:RR("remixes"),   n:"Record Remixes",    g:"REMIXES" },
-  { s:RR("energy"),    n:"Record Energy",     g:"ENERGY" },
-  { s:RR("relax"),     n:"Record Relax",      g:"RELAX" },
-
-  { s:"https://ep256.hostingradio.ru:8052/europaplus256.mp3", n:"Europa Plus",   g:"RU POP" },
-  { s:"https://rusradio.hostingradio.ru/rusradio96.aacp",     n:"Русское Радио", g:"RU POP" },
-  { s:"https://avtoradio.hostingradio.ru/avtoradio96.aacp",   n:"Авторадио",     g:"RU POP" },
-  { s:"https://dfm.hostingradio.ru/dfm96.aacp",               n:"DFM",           g:"RU DANCE" },
-  { s:"https://retro.hostingradio.ru/retro96.aacp",           n:"Ретро FM",      g:"RETRO" },
-  { s:"https://hitfm.hostingradio.ru/hitfm96.aacp",           n:"Hit FM",        g:"RU HITS" },
-  { s:"https://energy.hostingradio.ru/energy96.aacp",         n:"Energy",        g:"RU POP" },
-  { s:"https://loveradio.hostingradio.ru/loveradio96.aacp",   n:"Love Radio",    g:"RU POP" },
-  { s:"https://radiodacha.hostingradio.ru/radiodacha96.aacp", n:"Радио Дача",    g:"RU POP" },
-  { s:"https://shanson.hostingradio.ru/shanson96.aacp",       n:"Радио Шансон",  g:"CHANSON" },
-  { s:"https://yunost.hostingradio.ru/yunost96.aacp",         n:"Радио Юность",  g:"RU VOICE" },
-  { s:"https://mayak.hostingradio.ru/mayak96.aacp",           n:"Радио Маяк",    g:"RU VOICE" },
-  { s:"https://comedy.hostingradio.ru/comedy96.aacp",         n:"Comedy Radio",  g:"HUMOR" },
-  { s:"https://likefm.hostingradio.ru/likefm96.aacp",         n:"Like FM",       g:"RU POP" },
-  { s:"https://detifm.hostingradio.ru/detifm96.aacp",         n:"Детское Радио", g:"KIDS" },
-  { s:"https://vestifm.hostingradio.ru/vestifm96.aacp",       n:"Вести FM",      g:"NEWS" },
-  { s:"https://bfm.hostingradio.ru/bfm96.aacp",               n:"Business FM",   g:"NEWS" },
-  { s:"https://golosangary.hostingradio.ru/golosangary96.aacp",n:"Голос Ангары", g:"REGIONAL" },
-  { s:"https://radiomayak.hostingradio.ru/radiomayak96.aacp", n:"Маяк Голос",    g:"RU VOICE" },
-  { s:"https://humor.hostingradio.ru/humor96.aacp",           n:"Юмор FM",       g:"HUMOR" },
-  { s:"https://pilot.hostingradio.ru/pilot96.aacp",           n:"Пилот FM",      g:"RU ROCK" },
-  { s:"https://maximum.hostingradio.ru/maximum96.aacp",       n:"Maximum",       g:"RU ROCK" },
-  { s:"https://montecarlo.hostingradio.ru/montecarlo96.aacp", n:"Monte Carlo",   g:"LOUNGE" },
-  { s:"https://karnaval.hostingradio.ru/karnaval96.aacp",     n:"Карнавал",      g:"RU POP" },
-  { s:"https://megapop.hostingradio.ru/megapop96.aacp",       n:"Мега Поп",      g:"RU POP" },
-
-  { s:"https://stream.radioparadise.com/mp3-192",   n:"Radio Paradise",  g:"ECLECTIC" },
-  { s:"https://stream.radioparadise.com/rock-192",  n:"RP Rock Mix",     g:"ROCK" },
-  { s:"https://stream.radioparadise.com/mellow-192",n:"RP Mellow Mix",   g:"MELLOW" },
-  { s:"https://stream.radioparadise.com/global-192",n:"RP Global Mix",   g:"GLOBAL" },
-  { s:"https://jazz24.streamguys1.com/jazz24-mp3",  n:"Jazz24",          g:"JAZZ" },
-  { s:"https://kexp-mp3-128.streamguys1.com/kexp128.mp3", n:"KEXP Seattle", g:"INDIE" },
-  { s:"https://ice2.somafm.com/groovesalad-128-mp3",n:"Groove Salad Alt",g:"AMBIENT" },
-  { s:"https://ice2.somafm.com/dronezone-128-mp3",  n:"Drone Zone Alt",  g:"ATMOSPHERIC" },
-  { s:"https://ice2.somafm.com/beatblender-128-mp3",n:"Beat Blender Alt",g:"DEEP HOUSE" },
-  { s:"https://ice2.somafm.com/defcon-128-mp3",     n:"DEF CON Alt",     g:"ELECTRONIC" },
-  { s:"https://ice2.somafm.com/thetrip-128-mp3",    n:"The Trip Alt",    g:"PROGRESSIVE" },
-  { s:"https://ice2.somafm.com/fluid-128-mp3",      n:"Fluid Alt",       g:"LIQUID DNB" },
-  { s:"https://ice2.somafm.com/dubstep-128-mp3",    n:"Dub Step Alt",    g:"DUBSTEP" },
-  { s:"https://ice2.somafm.com/synthetica-128-mp3", n:"Synthetica Alt",  g:"SYNTHWAVE" },
-  { s:"https://ice2.somafm.com/u80s-128-mp3",       n:"Underground 80s Alt",g:"SYNTH POP" },
-  { s:"https://ice2.somafm.com/vaporwaves-128-mp3", n:"Vaporwaves Alt",  g:"VAPORWAVE" },
-  { s:"https://ice2.somafm.com/indiepop-128-mp3",   n:"Indie Pop Alt",   g:"INDIE POP" },
-  { s:"https://ice2.somafm.com/lush-128-mp3",       n:"Lush Alt",        g:"VOCALS" },
-  { s:"https://ice2.somafm.com/poptron-128-mp3",    n:"PopTron Alt",     g:"ELECTRO POP" },
-  { s:"https://ice2.somafm.com/covers-128-mp3",     n:"Covers Alt",      g:"POP COVERS" }
-].map((x,i) => ({ ...x, num:i+1 }));
-
-let powerOn=false, audio=null, isPlaying=false, currentIndex=0;
-let startTime=0, timeInterval=null, volume=0.8;
-let currentTheme = localStorage.getItem('theme')||'dark';
-document.body.setAttribute('data-theme', currentTheme);
-updateThemeUI();
-
-// ═══ ЭКВАЛАЙЗЕР ═══
-const EQ_BARS=32, eq=document.getElementById('eq');
-let eqH=new Array(EQ_BARS).fill(0), eqT=new Array(EQ_BARS).fill(0);
-for(let i=0;i<EQ_BARS;i++){const b=document.createElement('div');b.className='eq-bar';b.style.height='2px';eq.appendChild(b);}
-function animateEQ(){
-  const bars=document.querySelectorAll('.eq-bar');
-  if(Math.random()<0.38){
-    for(let i=0;i<EQ_BARS;i++){
-      if(isPlaying&&powerOn){
-        const wave=Math.sin(Date.now()/400+i*0.5)*18+22;
-        const bassBias=1-(i/EQ_BARS)*0.35;
-        eqT[i]=Math.min(100,(Math.random()*55+wave)*bassBias+15);
-      } else eqT[i]=0;
-    }
+  }else{
+    (document.exitFullscreen||document.webkitExitFullscreen).call(document);
   }
-  bars.forEach((b,i)=>{eqH[i]+=(eqT[i]-eqH[i])*0.25;b.style.height=Math.max(2,eqH[i])+'%';});
-  requestAnimationFrame(animateEQ);
 }
-animateEQ();
 
-// ═══ ШКАЛА ФЕЙДЕРА ═══
+const favorites=JSON.parse(localStorage.getItem('favs')||'[]');
+const SM=id=>`https://ice1.somafm.com/${id}-128-mp3`;
+const RR=id=>`https://radiorecord.hostingradio.ru/${id}96.aacp`;
+const st=(s,n,g,tags=[])=>({s,n,g,tags});
+
+const raw=[
+  st(SM('groovesalad'),'Groove Salad','AMBIENT',['AMBIENT','CHILL']),
+  st(SM('dronezone'),'Drone Zone','ATMOSPHERIC',['AMBIENT']),
+  st(SM('deepspaceone'),'Deep Space One','DEEP AMBIENT',['AMBIENT','DEEP']),
+  st(SM('defcon'),'DEF CON Radio','ELECTRONIC',['TECHNO','ELECTRONIC']),
+  st(SM('beatblender'),'Beat Blender','DEEP HOUSE',['DEEP','HOUSE']),
+  st(SM('dubstep'),'Dub Step Beyond','DUBSTEP',['POP','BASS']),
+  st(SM('cliqhop'),'Cliqhop','IDM',['TECHNO','ELECTRONIC']),
+  st(SM('fluid'),'Fluid','LIQUID DNB',['POP','ELECTRONIC']),
+  st(SM('thetrip'),'The Trip','PROGRESSIVE',['TRANCE','HOUSE']),
+  st(SM('poptron'),'PopTron','ELECTRO POP',['POP','ELECTRONIC']),
+  st(SM('indiepop'),'Indie Pop Rocks','INDIE POP',['POP']),
+  st(SM('digitalis'),'Digitalis','ROCK',['POP']),
+  st(SM('u80s'),'Underground 80s','SYNTH POP',['POP','RETRO']),
+  st(SM('vaporwaves'),'Vaporwaves','VAPORWAVE',['AMBIENT','RETRO']),
+  st(SM('covers'),'Covers','POP COVERS',['POP']),
+  st(SM('metal'),'Metal Detector','METAL',['POP']),
+  st(SM('lush'),'Lush','VOCALS',['POP','AMBIENT']),
+  st(SM('secretagent'),'Secret Agent','LOUNGE',['POP','AMBIENT']),
+  st(SM('illstreet'),'Illinois Street','LOUNGE',['POP','AMBIENT']),
+  st(SM('sonicuniverse'),'Sonic Universe','AVANT JAZZ',['AMBIENT']),
+  st(SM('bootliquor'),'Boot Liquor','AMERICANA',['POP']),
+  st(SM('folkfwd'),'Folk Forward','INDIE FOLK',['POP']),
+  st(SM('reggae'),'Heavyweight Reggae','REGGAE',['POP']),
+  st(SM('thistle'),'ThistleRadio','CELTIC',['POP']),
+  st(SM('missioncontrol'),'Mission Control','SPACE',['AMBIENT']),
+  st(SM('spacestation'),'Space Station','SPACE AMBIENT',['AMBIENT']),
+  st(SM('sf1033'),'SF 10-33','AMBIENT',['AMBIENT']),
+  st(SM('bagel'),'Bagel Radio','ECLECTIC',['POP']),
+  st(SM('leftcoast'),'Left Coast','WEST COAST',['POP']),
+  st(SM('n5md'),'n5MD Radio','POST ROCK',['AMBIENT','POP']),
+
+  st(RR('rr'),'Record Main','RU DANCE',['RU','HOUSE','POP']),
+  st(RR('deep'),'Record Deep','DEEP HOUSE',['RU','DEEP','HOUSE']),
+  st(RR('techno'),'Record Techno','TECHNO',['RU','TECHNO']),
+  st(RR('trance'),'Record Trance','TRANCE',['RU','TRANCE']),
+  st(RR('house'),'Record House','HOUSE',['RU','HOUSE']),
+  st(RR('dnb'),'Record DNB','DRUM & BASS',['RU','POP']),
+  st(RR('dubstep'),'Record Dubstep','DUBSTEP',['RU','POP']),
+  st(RR('electro'),'Record Electro','ELECTRO',['RU','TECHNO']),
+  st(RR('disco'),'Record Disco','DISCO',['RU','POP']),
+  st(RR('funk'),'Record Funk','FUNK',['RU','POP']),
+  st(RR('synth'),'Record Synth','SYNTHWAVE',['RU','POP']),
+  st(RR('ambient'),'Record Ambient','AMBIENT',['RU','AMBIENT']),
+  st(RR('chill'),'Record Chill','CHILLOUT',['RU','AMBIENT']),
+  st(RR('hardstyle'),'Record Hardstyle','HARDSTYLE',['RU','TECHNO']),
+  st(RR('trap'),'Record Trap','TRAP',['RU','POP']),
+  st(RR('phonk'),'Record Phonk','PHONK',['RU','POP']),
+  st(RR('garage'),'Record Garage','GARAGE',['RU','HOUSE']),
+  st(RR('breakbeat'),'Record Breakbeat','BREAKBEAT',['RU','POP']),
+  st(RR('downtempo'),'Record Downtempo','DOWNTEMPO',['RU','AMBIENT']),
+  st(RR('minimal'),'Record Minimal','MINIMAL',['RU','TECHNO']),
+  st(RR('progressive'),'Record Progressive','PROGRESSIVE',['RU','TRANCE']),
+  st(RR('russian'),'Record Russian','RUSSIAN POP',['RU','POP']),
+  st(RR('gold'),'Record Gold','GOLD HITS',['RU','POP']),
+  st(RR('hits'),'Record Hits','POP HITS',['RU','POP']),
+  st(RR('dance'),'Record Dance','DANCE',['RU','HOUSE']),
+  st(RR('bass'),'Record Bass','BASS',['RU','POP']),
+  st(RR('club'),'Record Club','CLUB',['RU','HOUSE']),
+  st(RR('eurodance'),'Record Eurodance','EURODANCE',['RU','POP']),
+  st(RR('hardbass'),'Record Hardbass','HARDBASS',['RU','POP']),
+  st(RR('melodic'),'Record Melodic','MELODIC',['RU','TRANCE']),
+  st(RR('organic'),'Record Organic','ORGANIC HOUSE',['RU','DEEP','HOUSE']),
+  st(RR('afro'),'Record Afro','AFRO HOUSE',['RU','HOUSE']),
+  st(RR('vocal'),'Record Vocal','VOCAL TRANCE',['RU','TRANCE','POP']),
+  st(RR('oldschool'),'Record Oldschool','OLDSCHOOL',['RU','POP']),
+  st(RR('remixes'),'Record Remixes','REMIXES',['RU','HOUSE']),
+  st(RR('energy'),'Record Energy','ENERGY',['RU','HOUSE']),
+  st(RR('relax'),'Record Relax','RELAX',['RU','AMBIENT']),
+  st(RR('pump'),'Record Pump','PUMP',['RU','HOUSE']),
+  st(RR('mix'),'Record Megamix','MEGAMIX',['RU','HOUSE']),
+  st(RR('goa'),'Record Goa','GOA TRANCE',['RU','TRANCE']),
+
+  st('https://ep256.hostingradio.ru:8052/europaplus256.mp3','Europa Plus','RU POP',['RU','POP']),
+  st('https://rusradio.hostingradio.ru/rusradio96.aacp','Русское Радио','RU POP',['RU','POP']),
+  st('https://avtoradio.hostingradio.ru/avtoradio96.aacp','Авторадио','RU POP',['RU','POP']),
+  st('https://dfm.hostingradio.ru/dfm96.aacp','DFM','RU DANCE',['RU','HOUSE','POP']),
+  st('https://retro.hostingradio.ru/retro96.aacp','Ретро FM','RETRO',['RU','POP']),
+  st('https://hitfm.hostingradio.ru/hitfm96.aacp','Hit FM','RU HITS',['RU','POP']),
+  st('https://energy.hostingradio.ru/energy96.aacp','Energy','RU POP',['RU','POP']),
+  st('https://loveradio.hostingradio.ru/loveradio96.aacp','Love Radio','RU POP',['RU','POP']),
+  st('https://radiodacha.hostingradio.ru/radiodacha96.aacp','Радио Дача','RU POP',['RU','POP']),
+  st('https://shanson.hostingradio.ru/shanson96.aacp','Радио Шансон','CHANSON',['RU','POP']),
+  st('https://comedy.hostingradio.ru/comedy96.aacp','Comedy Radio','HUMOR',['RU','POP']),
+  st('https://likefm.hostingradio.ru/likefm96.aacp','Like FM','RU POP',['RU','POP']),
+  st('https://vestifm.hostingradio.ru/vestifm96.aacp','Вести FM','NEWS',['RU','POP']),
+  st('https://mayak.hostingradio.ru/mayak96.aacp','Маяк','RU VOICE',['RU','POP']),
+  st('https://humor.hostingradio.ru/humor96.aacp','Юмор FM','HUMOR',['RU','POP']),
+  st('https://maximum.hostingradio.ru/maximum96.aacp','Maximum','RU ROCK',['RU','POP']),
+  st('https://montecarlo.hostingradio.ru/montecarlo96.aacp','Monte Carlo','LOUNGE',['RU','POP','AMBIENT']),
+  st('https://karnaval.hostingradio.ru/karnaval96.aacp','Карнавал','RU POP',['RU','POP']),
+  st('https://megapop.hostingradio.ru/megapop96.aacp','Мега Поп','RU POP',['RU','POP']),
+  st('https://chanson.hostingradio.ru/chanson96.aacp','Шансон 24','CHANSON',['RU','POP']),
+
+  st('https://stream.radioparadise.com/mp3-192','Radio Paradise','ECLECTIC',['POP']),
+  st('https://stream.radioparadise.com/rock-192','RP Rock Mix','ROCK',['POP']),
+  st('https://stream.radioparadise.com/mellow-192','RP Mellow Mix','MELLOW',['AMBIENT']),
+  st('https://stream.radioparadise.com/global-192','RP Global Mix','GLOBAL',['POP']),
+  st('https://jazz24.streamguys1.com/jazz24-mp3','Jazz24','JAZZ',['POP','AMBIENT']),
+  st('https://kexp-mp3-128.streamguys1.com/kexp128.mp3','KEXP Seattle','INDIE',['POP']),
+  st('https://ice2.somafm.com/groovesalad-128-mp3','Groove Salad Alt','AMBIENT',['AMBIENT']),
+  st('https://ice2.somafm.com/beatblender-128-mp3','Beat Blender Alt','DEEP HOUSE',['DEEP','HOUSE']),
+  st('https://ice2.somafm.com/defcon-128-mp3','DEF CON Alt','ELECTRONIC',['TECHNO']),
+  st('https://ice2.somafm.com/thetrip-128-mp3','The Trip Alt','PROGRESSIVE',['TRANCE'])
+];
+
+let stations=raw.map((x,i)=>({...x,id:'r'+i,fav:favorites.includes('r'+i),local:false}));
+let localFiles=[];
+function getAllStations(){ return stations.concat(localFiles); }
+
+let powerOn=false,isPlaying=false,currentIndex=0,startTime=0,timeInterval=null,volume=0.8;
+let currentTheme=localStorage.getItem('theme')||'dark';
+let currentFilter='all';
+let sleepTimeout=null,sleepInterval=null,sleepEnd=0;
+let wakeLock=null,wakeLockActive=false;
+let currentEQ=localStorage.getItem('eqPreset')||'bass';
+
+let remotePlayer=null,localPlayer=null,activePlayer=null,activeIsLocal=false;
+let audioCtx=null,localSource=null,lowFilter=null,midFilter=null,highFilter=null;
+let analyser=null,realFreq=null,realWave=null;
+
+document.body.setAttribute('data-theme',currentTheme);
+updateThemeDots();
+
+const EQ_PRESETS={
+  flat:{low:0,mid:0,high:0},
+  bass:{low:8,mid:0,high:0},
+  treble:{low:0,mid:0,high:8},
+  vocal:{low:-2,mid:6,high:2},
+  car:{low:6,mid:2,high:4},
+  club:{low:7,mid:0,high:5},
+  loudness:{low:7,mid:0,high:7},
+  deep:{low:10,mid:-2,high:-4}
+};
+
+function applyEQ(){
+  if(!lowFilter) return;
+  const p=EQ_PRESETS[currentEQ]||EQ_PRESETS.flat;
+  lowFilter.gain.value=p.low;
+  midFilter.gain.value=p.mid;
+  highFilter.gain.value=p.high;
+}
+function setEQ(name,btn){
+  currentEQ=name;
+  localStorage.setItem('eqPreset',name);
+  applyEQ();
+  document.querySelectorAll('.eq-btn').forEach(b=>b.classList.toggle('active',b.dataset.eq===name));
+}
+
+function ensurePlayers(){
+  if(remotePlayer) return;
+  remotePlayer=new Audio(); remotePlayer.preload='auto'; bindPlayer(remotePlayer,false);
+  localPlayer=new Audio(); localPlayer.preload='auto'; bindPlayer(localPlayer,true);
+  try{
+    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    localSource=audioCtx.createMediaElementSource(localPlayer);
+    lowFilter=audioCtx.createBiquadFilter(); lowFilter.type='lowshelf'; lowFilter.frequency.value=200;
+    midFilter=audioCtx.createBiquadFilter(); midFilter.type='peaking'; midFilter.frequency.value=1000; midFilter.Q.value=1;
+    highFilter=audioCtx.createBiquadFilter(); highFilter.type='highshelf'; highFilter.frequency.value=4000;
+    analyser=audioCtx.createAnalyser();
+    analyser.fftSize=256;
+    analyser.smoothingTimeConstant=0.82;
+    realFreq=new Uint8Array(analyser.frequencyBinCount);
+    realWave=new Uint8Array(analyser.fftSize);
+
+    localSource.connect(lowFilter);
+    lowFilter.connect(midFilter);
+    midFilter.connect(highFilter);
+    highFilter.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    applyEQ();
+  }catch(e){ console.warn('AudioContext:',e); }
+  renderVolume();
+}
+
+function bindPlayer(player,isLocal){
+  player.addEventListener('playing',()=>{
+    if(player!==activePlayer) return;
+    isPlaying=true; startTime=Date.now();
+    document.body.classList.add('playing');
+    setPlayBtn(true);
+    setStatus('PLAY');
+    if(audioCtx && audioCtx.state==='suspended') audioCtx.resume();
+    if(timeInterval) clearInterval(timeInterval);
+    timeInterval=setInterval(updateTimer,1000);
+    updateSeekUI();
+  });
+  player.addEventListener('pause',()=>{
+    if(player!==activePlayer) return;
+    isPlaying=false;
+    document.body.classList.remove('playing');
+    setPlayBtn(false);
+    setStatus('PAUSE');
+  });
+  player.addEventListener('waiting',()=>{
+    if(player!==activePlayer) return;
+    setStatus('BUFFER');
+    setNetLed('buffering');
+  });
+  player.addEventListener('canplay',()=>{
+    if(player!==activePlayer) return;
+    setNetLed('online');
+    updateSeekUI();
+  });
+  player.addEventListener('timeupdate',()=>{ if(player===activePlayer) updateSeekUI(); });
+  player.addEventListener('loadedmetadata',()=>{ if(player===activePlayer) updateSeekUI(); });
+  player.addEventListener('durationchange',()=>{ if(player===activePlayer) updateSeekUI(); });
+  player.addEventListener('error',()=>{
+    if(player!==activePlayer) return;
+    setStatus('NO SIGNAL');
+    setNetLed('offline');
+    setTimeout(()=>{ if(powerOn) nextStation(); },2500);
+  });
+}
+
+function setStatus(t){ document.getElementById('statusText').textContent=t; }
+function setNetLed(mode){
+  const led=document.getElementById('netLed');
+  led.className='status-led network-led '+mode;
+}
+function setPlayBtn(playing){ document.getElementById('playIco').textContent=playing?'⏸':'▶'; }
+
+function togglePower(){
+  if(!powerOn){
+    powerOn=true;
+    document.body.classList.add('on');
+    ensurePlayers();
+    setStatus('HELLO');
+    document.getElementById('stationName').textContent='HONGQI HS5';
+    setTimeout(()=>{
+      loadStation(currentIndex);
+      if(activePlayer){
+        const p=activePlayer.play();
+        if(p && p.catch) p.catch(()=>setStatus('PRESS PLAY'));
+      }
+    },450);
+  }else{
+    powerOn=false; isPlaying=false;
+    if(remotePlayer) remotePlayer.pause();
+    if(localPlayer) localPlayer.pause();
+    document.body.classList.remove('on','playing');
+    setStatus('STANDBY');
+    setPlayBtn(false);
+    document.getElementById('timeDisplay').textContent='00:00';
+    document.getElementById('sleepInfo').textContent='';
+    clearSleep(false);
+    updateSeekUI();
+  }
+}
+
+function loadStation(index){
+  const all=getAllStations();
+  if(index<0||index>=all.length) return;
+  ensurePlayers();
+  currentIndex=index;
+  const s=all[index];
+  const target=s.local?localPlayer:remotePlayer;
+  if(activePlayer && activePlayer!==target){ try{activePlayer.pause();}catch(e){} }
+  activePlayer=target;
+  activeIsLocal=!!s.local;
+
+  document.getElementById('stationName').textContent=s.n.toUpperCase();
+  document.getElementById('modeText').textContent=s.local?'LOCAL · MP3':'STEREO · 128kbps';
+  document.getElementById('marqueeText').textContent=`*** CH ${index+1} · ${s.n.toUpperCase()} *** ${s.g} *** HONGQI HS5 BOSE SOUND ***`;
+  startTime=Date.now();
+  document.getElementById('timeDisplay').textContent='00:00';
+
+  target.src=s.s;
+  target.load();
+  if(powerOn){
+    const p=target.play();
+    if(p && p.catch) p.catch(e=>console.log(e));
+  }
+  updateSeekUI();
+  buildStationsList();
+}
+
+function togglePlay(){
+  if(!powerOn){ togglePower(); return; }
+  if(!activePlayer) ensurePlayers();
+  if(!activePlayer) return;
+  if(isPlaying) activePlayer.pause();
+  else { const p=activePlayer.play(); if(p&&p.catch)p.catch(e=>console.log(e)); }
+}
+function stopPlay(){
+  if(!activePlayer||!powerOn) return;
+  activePlayer.pause();
+  if(activeIsLocal) activePlayer.currentTime=0;
+  startTime=Date.now();
+  document.getElementById('timeDisplay').textContent='00:00';
+  updateSeekUI();
+}
+function nextStation(){ const all=getAllStations(); if(powerOn&&all.length) loadStation((currentIndex+1)%all.length); }
+function prevStation(){ const all=getAllStations(); if(powerOn&&all.length) loadStation((currentIndex-1+all.length)%all.length); }
+
+function updateTimer(){
+  if(!isPlaying) return;
+  const e=Math.floor((Date.now()-startTime)/1000);
+  document.getElementById('timeDisplay').textContent=String(Math.floor(e/60)).padStart(2,'0')+':'+String(e%60).padStart(2,'0');
+}
+
 const faderScale=document.getElementById('faderScale');
-for(let i=0;i<=10;i++){
-  const t=document.createElement('div');
-  t.className='tick'+(i%5===0?' major':'');
-  t.style.bottom=(i*10)+'%';
-  faderScale.appendChild(t);
-}
-
-// ═══ ГРОМКОСТЬ: сегменты на экране + фейдер ═══
-const VOL_SEGS=16, volWrap=document.getElementById('volSegments');
-for(let i=0;i<VOL_SEGS;i++){const s=document.createElement('div');s.className='vol-seg'+(i>=VOL_SEGS-2?' max':'');volWrap.appendChild(s);}
+for(let i=0;i<=10;i++){ const t=document.createElement('div'); t.className='tick'+(i%5===0?' major':''); t.style.bottom=(i*10)+'%'; faderScale.appendChild(t); }
+const VOL_SEGS=16,volWrap=document.getElementById('volSegments');
+for(let i=0;i<VOL_SEGS;i++){ const s=document.createElement('div'); s.className='vol-seg'+(i>=VOL_SEGS-2?' max':''); volWrap.appendChild(s); }
 
 function renderVolume(){
   const lit=Math.round(volume*VOL_SEGS);
@@ -604,155 +741,531 @@ function renderVolume(){
   document.getElementById('faderFill').style.height=(volume*100)+'%';
   document.getElementById('faderCap').style.bottom=(volume*100)+'%';
   document.getElementById('faderValue').textContent=Math.round(volume*100);
-  if(audio)audio.volume=volume;
+  if(remotePlayer) remotePlayer.volume=volume;
+  if(localPlayer) localPlayer.volume=volume;
 }
 renderVolume();
 
-// ═══ DJ-ФЕЙДЕР: управление перетаскиванием ═══
-const faderEl=document.getElementById('fader');
-const faderTrack=document.querySelector('.fader-track');
+const faderEl=document.getElementById('fader'),faderTrack=document.querySelector('.fader-track');
 let faderDragging=false;
-
 function setVolumeFromPointer(e){
   const rect=faderTrack.getBoundingClientRect();
   let pct=1-(e.clientY-rect.top)/rect.height;
   pct=Math.max(0,Math.min(1,pct));
-  volume=Math.round(pct*32)/32; // шаг как у сегментов
+  volume=Math.round(pct*32)/32;
   renderVolume();
 }
-faderEl.addEventListener('pointerdown',e=>{
-  faderDragging=true;
-  faderEl.setPointerCapture(e.pointerId);
-  setVolumeFromPointer(e);
-});
-faderEl.addEventListener('pointermove',e=>{ if(faderDragging) setVolumeFromPointer(e); });
-faderEl.addEventListener('pointerup',()=>{ faderDragging=false; });
-faderEl.addEventListener('pointercancel',()=>{ faderDragging=false; });
+faderEl.addEventListener('pointerdown',e=>{faderDragging=true;faderEl.setPointerCapture(e.pointerId);setVolumeFromPointer(e);});
+faderEl.addEventListener('pointermove',e=>{if(faderDragging)setVolumeFromPointer(e);});
+faderEl.addEventListener('pointerup',()=>faderDragging=false);
+faderEl.addEventListener('pointercancel',()=>faderDragging=false);
 
-function volUp(){volume=Math.min(1,volume+0.0625);renderVolume();}
-function volDown(){volume=Math.max(0,volume-0.0625);renderVolume();}
-
-// ═══ ТАЙМЕР ═══
-function updateTimer(){
-  if(!isPlaying)return;
-  const e=Math.floor((Date.now()-startTime)/1000);
-  document.getElementById('timeDisplay').textContent=String(Math.floor(e/60)).padStart(2,'0')+':'+String(e%60).padStart(2,'0');
-}
-
-// ═══ ТЕМА ═══
-function toggleTheme(){
-  currentTheme=currentTheme==='dark'?'light':'dark';
-  document.body.setAttribute('data-theme',currentTheme);
-  localStorage.setItem('theme',currentTheme);
-  updateThemeUI();
-  const meta=document.querySelector('meta[name="theme-color"]');
-  if(meta)meta.setAttribute('content',getComputedStyle(document.body).getPropertyValue('--theme-color').trim());
-}
-function updateThemeUI(){
-  const dark=currentTheme==='dark';
-  document.getElementById('themeIcon').textContent=dark?'☾':'☀';
-  document.getElementById('themeLabel').textContent=dark?'DARK':'GOLD';
-  document.getElementById('thmBtn').textContent=dark?'☀':'☾';
-}
-
-// ═══ POWER ═══
-function togglePower(){
-  if(!powerOn){
-    powerOn=true; document.body.classList.add('on');
-    if(!audio)initAudio();
-    document.getElementById('statusText').textContent='HELLO';
-    document.getElementById('stationName').textContent='HONGQI HS5';
-    setTimeout(()=>{loadStation(currentIndex);audio.play().catch(()=>{document.getElementById('statusText').textContent='PRESS PLAY';});},700);
-  } else {
-    powerOn=false; isPlaying=false;
-    if(audio)audio.pause();
-    document.body.classList.remove('on','playing');
-    document.getElementById('statusText').textContent='STANDBY';
-    setPlayBtn(false);
-    document.getElementById('timeDisplay').textContent='00:00';
+const seekTrack=document.getElementById('seekTrack'),seekFill=document.getElementById('seekFill'),seekKnob=document.getElementById('seekKnob');
+let seekDragging=false;
+function fmtTime(sec){ sec=Math.max(0,Math.floor(sec||0)); return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0'); }
+function updateSeekUI(){
+  const cur=document.getElementById('seekCurrent'),dur=document.getElementById('seekDuration');
+  if(!activeIsLocal || !activePlayer || !isFinite(activePlayer.duration) || activePlayer.duration<=0){
+    seekTrack.classList.add('disabled');
+    cur.textContent='--:--';
+    dur.textContent='LIVE';
+    seekFill.style.width='0%';
+    seekKnob.style.left='0%';
+    return;
   }
+  seekTrack.classList.remove('disabled');
+  const t=activePlayer.currentTime,d=activePlayer.duration,pct=Math.max(0,Math.min(100,(t/d)*100));
+  seekFill.style.width=pct+'%';
+  seekKnob.style.left=pct+'%';
+  cur.textContent=fmtTime(t);
+  dur.textContent=fmtTime(d);
+}
+function seekRatio(e){
+  const rect=seekTrack.getBoundingClientRect();
+  return Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
+}
+function doSeek(e){
+  if(seekTrack.classList.contains('disabled')||!activePlayer) return;
+  const r=seekRatio(e);
+  if(isFinite(activePlayer.duration)&&activePlayer.duration>0) activePlayer.currentTime=r*activePlayer.duration;
+  updateSeekUI();
+}
+seekTrack.addEventListener('pointerdown',e=>{seekDragging=true;seekTrack.setPointerCapture(e.pointerId);doSeek(e);});
+seekTrack.addEventListener('pointermove',e=>{if(seekDragging)doSeek(e);});
+seekTrack.addEventListener('pointerup',()=>seekDragging=false);
+seekTrack.addEventListener('pointercancel',()=>seekDragging=false);
+
+function setTheme(name){
+  currentTheme=name;
+  document.body.setAttribute('data-theme',name);
+  localStorage.setItem('theme',name);
+  updateThemeDots();
+  updateThemeColors();
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.setAttribute('content',getComputedStyle(document.body).getPropertyValue('--theme-color').trim());
+}
+function updateThemeDots(){ document.querySelectorAll('.theme-dot').forEach(d=>d.classList.toggle('active',d.dataset.theme===currentTheme)); }
+
+function toggleFav(id){
+  const all=getAllStations();
+  const s=all.find(x=>x.id===id);
+  if(!s) return;
+  s.fav=!s.fav;
+  if(!s.local){
+    if(s.fav){ if(!favorites.includes(s.id)) favorites.push(s.id); }
+    else { const i=favorites.indexOf(s.id); if(i>=0) favorites.splice(i,1); }
+    localStorage.setItem('favs',JSON.stringify(favorites));
+  }
+  buildStationsList();
 }
 
-function setPlayBtn(playing){
-  document.getElementById('playIco').textContent = playing?'⏸':'▶';
+function setFilter(f){
+  currentFilter=f;
+  document.querySelectorAll('.fchip').forEach(c=>c.classList.toggle('active',c.dataset.filter===f));
+  buildStationsList();
 }
-
-function initAudio(){
-  audio=new Audio(); audio.preload='auto'; audio.volume=volume;
-  audio.addEventListener('playing',()=>{
-    isPlaying=true; startTime=Date.now();
-    document.body.classList.add('playing');
-    setPlayBtn(true);
-    document.getElementById('statusText').textContent='PLAY';
-    if(timeInterval)clearInterval(timeInterval);
-    timeInterval=setInterval(updateTimer,1000);
-  });
-  audio.addEventListener('pause',()=>{
-    isPlaying=false; document.body.classList.remove('playing');
-    setPlayBtn(false);
-    document.getElementById('statusText').textContent='PAUSE';
-  });
-  audio.addEventListener('waiting',()=>{document.getElementById('statusText').textContent='BUFFER';});
-  audio.addEventListener('error',()=>{
-    document.getElementById('statusText').textContent='NO SIGNAL';
-    setTimeout(()=>{ if(powerOn) nextStation(); },2000);
-  });
-}
-
-// ═══ СТАНЦИИ ═══
-function loadStation(index){
-  if(index<0||index>=stations.length)return;
-  currentIndex=index; const s=stations[index];
-  if(!audio)return;
-  document.getElementById('stationName').textContent=s.n.toUpperCase();
-  document.getElementById('marqueeText').textContent=`*** КАНАЛ ${s.num} · ${s.n.toUpperCase()} *** ${s.g} *** HONGQI HS5 BOSE SOUND *** `;
-  startTime=Date.now();
-  document.getElementById('timeDisplay').textContent='00:00';
-  audio.src=s.s; audio.load();
-  if(powerOn&&isPlaying)audio.play().catch(e=>console.log(e));
-  document.querySelectorAll('.station-item').forEach((el,i)=>el.classList.toggle('active',i===currentIndex));
-}
-
-function togglePlay(){ if(!powerOn){togglePower();return;} if(isPlaying)audio.pause(); else audio.play().catch(e=>console.log(e)); }
-function stopPlay(){ if(!audio||!powerOn)return; audio.pause(); startTime=Date.now(); document.getElementById('timeDisplay').textContent='00:00'; }
-function nextStation(){ if(!powerOn)return; loadStation((currentIndex+1)%stations.length); }
-function prevStation(){ if(!powerOn)return; loadStation((currentIndex-1+stations.length)%stations.length); }
+document.querySelectorAll('.fchip').forEach(c=>c.onclick=()=>setFilter(c.dataset.filter));
+document.getElementById('searchBox').addEventListener('input',buildStationsList);
 
 function buildStationsList(){
   const grid=document.getElementById('stationsGrid'); grid.innerHTML='';
-  stations.forEach((s,i)=>{
+  const all=getAllStations();
+  const q=(document.getElementById('searchBox').value||'').toLowerCase();
+  const filtered=all.filter(s=>{
+    if(currentFilter==='fav'&&!s.fav) return false;
+    if(currentFilter==='local'&&!s.local) return false;
+    if(currentFilter!=='all'&&currentFilter!=='fav'&&currentFilter!=='local'){
+      if(!s.tags.includes(currentFilter)&&!s.g.toUpperCase().includes(currentFilter)) return false;
+    }
+    if(q&&!(s.n.toLowerCase().includes(q)||s.g.toLowerCase().includes(q))) return false;
+    return true;
+  });
+  document.getElementById('stationCount').textContent=filtered.length;
+  filtered.forEach(s=>{
+    const idx=all.indexOf(s);
     const item=document.createElement('div');
-    item.className='station-item'+(i===currentIndex?' active':'');
-    item.innerHTML=`<div class="station-num">${String(s.num).padStart(3,'0')}</div>
-      <div style="flex:1;min-width:0;overflow:hidden;">
-        <div class="station-name-small">${s.n}</div>
-        <div class="station-genre-small">${s.g}</div>
-      </div>`;
-    item.onclick=()=>{loadStation(i);closeStations();if(powerOn&&!isPlaying)audio.play().catch(e=>console.log(e));};
+    item.className='station-item'+(idx===currentIndex?' active':'');
+    item.innerHTML=`<div class="station-num">${String(idx+1).padStart(3,'0')}</div>
+      <div class="station-info"><div class="station-name-small">${s.local?'▤ ':''}${s.n}</div><div class="station-genre-small">${s.g}</div></div>
+      <div class="fav-star ${s.fav?'on':''}">★</div>`;
+    item.onclick=e=>{
+      if(e.target.classList.contains('fav-star')) return;
+      loadStation(idx); closeOverlay('stationsOverlay');
+    };
+    item.querySelector('.fav-star').onclick=e=>{e.stopPropagation();toggleFav(s.id);};
     grid.appendChild(item);
   });
 }
-buildStationsList();
-function openStations(){ if(!powerOn)return; document.getElementById('stationsOverlay').classList.add('show'); buildStationsList(); }
-function closeStations(){ document.getElementById('stationsOverlay').classList.remove('show'); }
 
-// ═══ СВАЙПЫ ═══
+function openOverlay(id){ if(id!=='stationsOverlay'&&!powerOn) return; document.getElementById(id).classList.add('show'); if(id==='stationsOverlay') buildStationsList(); }
+function closeOverlay(id){ document.getElementById(id).classList.remove('show'); }
+
+function clearSleep(closeButtons=true){
+  if(sleepTimeout){clearTimeout(sleepTimeout);sleepTimeout=null;}
+  if(sleepInterval){clearInterval(sleepInterval);sleepInterval=null;}
+  sleepEnd=0;
+  document.getElementById('sleepInfo').textContent='';
+  if(closeButtons) document.querySelectorAll('.sleep-btn').forEach(b=>b.classList.remove('active'));
+}
+function setSleep(minutes,btn){
+  clearSleep(true);
+  if(minutes===0){ closeOverlay('sleepOverlay'); return; }
+  if(btn){ document.querySelectorAll('.sleep-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
+  sleepEnd=Date.now()+minutes*60*1000;
+  sleepTimeout=setTimeout(()=>{
+    if(activePlayer) activePlayer.pause();
+    setStatus('SLEEP');
+    document.getElementById('sleepInfo').textContent='SLEEP';
+    sleepTimeout=null; sleepEnd=0;
+  },minutes*60*1000);
+  sleepInterval=setInterval(()=>{
+    if(!sleepEnd) return;
+    const left=Math.max(0,Math.floor((sleepEnd-Date.now())/1000));
+    document.getElementById('sleepInfo').textContent='◷ '+fmtTime(left);
+  },1000);
+  closeOverlay('sleepOverlay');
+}
+
+async function toggleWakeLock(){
+  const btn=document.getElementById('wakeLockBtn');
+  if(wakeLockActive){
+    if(wakeLock){try{wakeLock.release();}catch(e){}}
+    wakeLock=null; wakeLockActive=false; btn.classList.remove('active'); return;
+  }
+  if('wakeLock' in navigator){
+    try{
+      wakeLock=await navigator.wakeLock.request('screen');
+      wakeLockActive=true; btn.classList.add('active');
+      wakeLock.addEventListener('release',()=>{wakeLockActive=false;btn.classList.remove('active');});
+    }catch(e){ console.warn('WakeLock:',e); }
+  }else{ alert('Wake Lock not supported'); }
+}
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible'&&wakeLockActive&&!wakeLock) toggleWakeLock(); });
+
+document.getElementById('fileInput').addEventListener('change',e=>{
+  const files=Array.from(e.target.files||[]);
+  files.forEach((f,i)=>{
+    const url=URL.createObjectURL(f);
+    localFiles.push({
+      id:'local_'+Date.now()+'_'+i,
+      s:url,
+      n:f.name.replace(/\.[^/.]+$/,''),
+      g:'MY FILE',
+      tags:['LOCAL'],
+      fav:false,
+      local:true
+    });
+  });
+  e.target.value='';
+  buildStationsList();
+  if(files.length){ setFilter('local'); openOverlay('stationsOverlay'); }
+});
+
+window.addEventListener('online',()=>setNetLed('online'));
+window.addEventListener('offline',()=>setNetLed('offline'));
+setNetLed(navigator.onLine?'online':'offline');
+
 let touchX=0; const screenEl=document.querySelector('.screen-frame');
 screenEl.addEventListener('touchstart',e=>touchX=e.changedTouches[0].screenX,{passive:true});
 screenEl.addEventListener('touchend',e=>{const d=e.changedTouches[0].screenX-touchX;if(Math.abs(d)>50){d>0?prevStation():nextStation();}},{passive:true});
 
-// ═══ КЛАВИАТУРА ═══
 document.addEventListener('keydown',e=>{
   if(e.code==='Space'){e.preventDefault();togglePlay();}
   if(e.code==='ArrowLeft')prevStation();
   if(e.code==='ArrowRight')nextStation();
-  if(e.code==='ArrowUp'){e.preventDefault();volUp();}
-  if(e.code==='ArrowDown'){e.preventDefault();volDown();}
+  if(e.code==='ArrowUp'){e.preventDefault();volume=Math.min(1,volume+0.0625);renderVolume();}
+  if(e.code==='ArrowDown'){e.preventDefault();volume=Math.max(0,volume-0.0625);renderVolume();}
   if(e.code==='KeyP')togglePower();
-  if(e.code==='KeyT')toggleTheme();
   if(e.code==='KeyF')toggleFullscreen();
-  if(e.code==='KeyL'){const ov=document.getElementById('stationsOverlay');ov.classList.contains('show')?closeStations():openStations();}
+  if(e.code==='KeyL'){const ov=document.getElementById('stationsOverlay');ov.classList.contains('show')?closeOverlay('stationsOverlay'):openOverlay('stationsOverlay');}
 });
+
+/* ═══════════════════════════════════════
+   PREMIUM CANVAS ANALYZER
+   Тап по анализатору меняет режим:
+   BARS / MIRROR / WAVE / RADIAL
+   ═══════════════════════════════════════ */
+const analyzerCanvas=document.getElementById('analyzerCanvas');
+const canvasCtx=analyzerCanvas.getContext('2d');
+const MODES=['bars','mirror','wave','radial'];
+let analyzerMode=localStorage.getItem('analyzerMode')||'bars';
+if(!MODES.includes(analyzerMode)) analyzerMode='bars';
+
+const BANDS=64;
+const smooth=new Float32Array(BANDS);
+const peaks=new Float32Array(BANDS);
+const waveVals=new Float32Array(128);
+let syntheticPhase=0;
+let colors={primary:'#35c8ff',bright:'#aee9ff',deep:'#0a5a8a',bg:'#02101d'};
+
+function updateThemeColors(){
+  const cs=getComputedStyle(document.body);
+  colors.primary=cs.getPropertyValue('--blue').trim()||'#35c8ff';
+  colors.bright=cs.getPropertyValue('--blue-bright').trim()||'#aee9ff';
+  colors.deep=cs.getPropertyValue('--blue-deep').trim()||'#0a5a8a';
+  colors.bg=cs.getPropertyValue('--screen-bg').trim()||'#02101d';
+}
+function withAlpha(color,alpha){
+  color=(color||'').trim();
+  if(color.startsWith('#')){
+    let hex=color.slice(1);
+    if(hex.length===3) hex=hex.split('').map(x=>x+x).join('');
+    const num=parseInt(hex,16);
+    const r=(num>>16)&255,g=(num>>8)&255,b=num&255;
+    return `rgba(${r},${g},${b},${alpha})`;
+  }
+  return color;
+}
+function resizeAnalyzer(){
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const rect=analyzerCanvas.getBoundingClientRect();
+  analyzerCanvas.width=Math.max(1,Math.floor(rect.width*dpr));
+  analyzerCanvas.height=Math.max(1,Math.floor(rect.height*dpr));
+  canvasCtx.setTransform(dpr,0,0,dpr,0,0);
+}
+window.addEventListener('resize',resizeAnalyzer);
+if(window.ResizeObserver){
+  new ResizeObserver(resizeAnalyzer).observe(analyzerCanvas);
+}
+analyzerCanvas.addEventListener('click',()=>{
+  const idx=MODES.indexOf(analyzerMode);
+  analyzerMode=MODES[(idx+1)%MODES.length];
+  localStorage.setItem('analyzerMode',analyzerMode);
+});
+
+function generateSynthetic(dt){
+  syntheticPhase += dt*(isPlaying?1.45:0.25);
+  const energy=isPlaying?(0.55+volume*0.45):0.07;
+  for(let i=0;i<BANDS;i++){
+    const x=i/(BANDS-1);
+    const bass=Math.pow(1-x,1.55);
+    const mid=Math.exp(-Math.pow((x-0.34)*3.1,2));
+    const high=Math.pow(x,0.82)*0.42;
+    const beat=Math.pow(Math.max(0,Math.sin(syntheticPhase*2.05)),10)*0.58;
+    const flutter=Math.sin(syntheticPhase*7.1+i*0.36)*0.12 + Math.sin(syntheticPhase*13.4+i*0.18)*0.08;
+    const noise=(Math.random()-0.5)*0.09;
+    let v=(bass*0.68 + mid*0.46 + high*0.24 + beat*bass + flutter + noise)*energy;
+    v=Math.max(0.02,Math.min(1,v))*255;
+    smooth[i]+=(v-smooth[i])*(isPlaying?0.24:0.08);
+    peaks[i]=Math.max(peaks[i]-dt*70,smooth[i]);
+  }
+}
+function generateSyntheticWave(dt){
+  syntheticPhase += dt*(isPlaying?2.2:0.45);
+  const amp=isPlaying?(0.34+volume*0.42):0.05;
+  for(let i=0;i<waveVals.length;i++){
+    const x=i/waveVals.length;
+    const v=Math.sin(x*Math.PI*4+syntheticPhase*3.1)*0.45
+           +Math.sin(x*Math.PI*9+syntheticPhase*5.2)*0.24
+           +Math.sin(x*Math.PI*17+syntheticPhase*2.1)*0.10
+           +(Math.random()-0.5)*0.06;
+    waveVals[i]=v*amp;
+  }
+}
+function mapRealToBands(dt){
+  if(!realFreq) return;
+  const bins=realFreq.length;
+  for(let i=0;i<BANDS;i++){
+    const t=i/(BANDS-1);
+    const start=Math.floor(Math.pow(t,2.0)*(bins-1));
+    const end=Math.min(bins,Math.max(start+1,Math.floor(Math.pow(t+1/(BANDS-1),2.0)*(bins-1))));
+    let sum=0,count=0;
+    for(let j=start;j<end;j++){ sum+=realFreq[j]; count++; }
+    const v=count?sum/count:0;
+    smooth[i]+=(v-smooth[i])*0.34;
+    peaks[i]=Math.max(peaks[i]-dt*72,smooth[i]);
+  }
+}
+function updateAnalyzerData(dt){
+  if(activeIsLocal && analyser && isPlaying && realFreq){
+    analyser.getByteFrequencyData(realFreq);
+    if(realWave) analyser.getByteTimeDomainData(realWave);
+    mapRealToBands(dt);
+  }else{
+    generateSynthetic(dt);
+    generateSyntheticWave(dt);
+  }
+}
+
+function roundedBarPath(ctx,x,y,w,h,r){
+  r=Math.min(r,w/2,h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+}
+
+function drawAnalyzer(){
+  const w=analyzerCanvas.clientWidth;
+  const h=analyzerCanvas.clientHeight;
+  if(w<2||h<2) return;
+  canvasCtx.clearRect(0,0,w,h);
+
+  // лёгкая сетка
+  canvasCtx.save();
+  canvasCtx.strokeStyle=withAlpha(colors.primary,0.05);
+  canvasCtx.lineWidth=1;
+  for(let i=1;i<4;i++){
+    const y=Math.round(h*i/4)+0.5;
+    canvasCtx.beginPath(); canvasCtx.moveTo(0,y); canvasCtx.lineTo(w,y); canvasCtx.stroke();
+  }
+  canvasCtx.restore();
+
+  if(analyzerMode==='bars') drawBars(w,h);
+  else if(analyzerMode==='mirror') drawMirror(w,h);
+  else if(analyzerMode==='wave') drawWave(w,h);
+  else drawRadial(w,h);
+
+  // подпись режима
+  canvasCtx.save();
+  canvasCtx.font='11px VT323, monospace';
+  canvasCtx.fillStyle=withAlpha(colors.primary,0.34);
+  canvasCtx.shadowColor=withAlpha(colors.primary,0.35);
+  canvasCtx.shadowBlur=8;
+  canvasCtx.fillText(analyzerMode.toUpperCase(),7,h-6);
+  canvasCtx.restore();
+}
+
+function drawBars(w,h){
+  const gap=2;
+  const barW=(w-(BANDS-1)*gap)/BANDS;
+  for(let i=0;i<BANDS;i++){
+    const v=Math.max(0,Math.min(1,smooth[i]/255));
+    const bh=Math.max(2,v*h*0.92);
+    const x=i*(barW+gap);
+    const y=h-bh;
+    const grad=canvasCtx.createLinearGradient(0,y,0,h);
+    grad.addColorStop(0,colors.bright);
+    grad.addColorStop(0.42,colors.primary);
+    grad.addColorStop(1,colors.deep);
+    canvasCtx.save();
+    canvasCtx.shadowColor=withAlpha(colors.primary,0.55*v+0.08);
+    canvasCtx.shadowBlur=Math.min(18,14*v+2);
+    canvasCtx.fillStyle=grad;
+    roundedBarPath(canvasCtx,x,y,barW,bh,Math.min(3,barW/2));
+    canvasCtx.fill();
+    canvasCtx.restore();
+
+    // пик
+    const pv=Math.max(0,Math.min(1,peaks[i]/255));
+    const py=h-Math.max(2,pv*h*0.92);
+    canvasCtx.fillStyle=withAlpha(colors.bright,0.75);
+    canvasCtx.fillRect(x,Math.max(0,py-2),barW,2);
+  }
+}
+
+function drawMirror(w,h){
+  const gap=2;
+  const barW=(w-(BANDS-1)*gap)/BANDS;
+  const mid=h/2;
+  for(let i=0;i<BANDS;i++){
+    const v=Math.max(0,Math.min(1,smooth[i]/255));
+    const bh=Math.max(1.5,v*h*0.44);
+    const x=i*(barW+gap);
+    const grad=canvasCtx.createLinearGradient(0,mid-bh,0,mid+bh);
+    grad.addColorStop(0,colors.bright);
+    grad.addColorStop(0.5,colors.primary);
+    grad.addColorStop(1,colors.deep);
+    canvasCtx.save();
+    canvasCtx.shadowColor=withAlpha(colors.primary,0.45*v+0.06);
+    canvasCtx.shadowBlur=Math.min(16,12*v+2);
+    canvasCtx.fillStyle=grad;
+    roundedBarPath(canvasCtx,x,mid-bh,barW,bh*2,Math.min(3,barW/2));
+    canvasCtx.fill();
+    canvasCtx.restore();
+
+    const pv=Math.max(0,Math.min(1,peaks[i]/255));
+    const ph=Math.max(1.5,pv*h*0.44);
+    canvasCtx.fillStyle=withAlpha(colors.bright,0.55);
+    canvasCtx.fillRect(x,mid-ph-1.5,barW,1.5);
+    canvasCtx.fillRect(x,mid+ph,barW,1.5);
+  }
+  canvasCtx.strokeStyle=withAlpha(colors.primary,0.18);
+  canvasCtx.beginPath(); canvasCtx.moveTo(0,mid+0.5); canvasCtx.lineTo(w,mid+0.5); canvasCtx.stroke();
+}
+
+function drawWave(w,h){
+  const points=[];
+  const useReal=activeIsLocal && realWave && isPlaying;
+  const len=useReal?realWave.length:waveVals.length;
+  for(let i=0;i<len;i++){
+    const x=(i/(len-1))*w;
+    let v;
+    if(useReal) v=(realWave[i]-128)/128;
+    else v=waveVals[i];
+    const y=h/2 + v*h*0.36;
+    points.push({x,y});
+  }
+
+  // нижнее свечение
+  canvasCtx.save();
+  canvasCtx.globalCompositeOperation='lighter';
+  canvasCtx.beginPath();
+  canvasCtx.moveTo(points[0].x,h);
+  for(let i=0;i<points.length-1;i++){
+    const xc=(points[i].x+points[i+1].x)/2;
+    const yc=(points[i].y+points[i+1].y)/2;
+    canvasCtx.quadraticCurveTo(points[i].x,points[i].y,xc,yc);
+  }
+  canvasCtx.lineTo(points[points.length-1].x,h);
+  canvasCtx.closePath();
+  const fillGrad=canvasCtx.createLinearGradient(0,0,0,h);
+  fillGrad.addColorStop(0,withAlpha(colors.primary,0.18));
+  fillGrad.addColorStop(1,withAlpha(colors.deep,0.02));
+  canvasCtx.fillStyle=fillGrad;
+  canvasCtx.fill();
+  canvasCtx.restore();
+
+  // основная линия
+  canvasCtx.save();
+  canvasCtx.shadowColor=withAlpha(colors.primary,0.75);
+  canvasCtx.shadowBlur=14;
+  canvasCtx.strokeStyle=colors.bright;
+  canvasCtx.lineWidth=2.2;
+  canvasCtx.lineJoin='round';
+  canvasCtx.lineCap='round';
+  canvasCtx.beginPath();
+  canvasCtx.moveTo(points[0].x,points[0].y);
+  for(let i=0;i<points.length-1;i++){
+    const xc=(points[i].x+points[i+1].x)/2;
+    const yc=(points[i].y+points[i+1].y)/2;
+    canvasCtx.quadraticCurveTo(points[i].x,points[i].y,xc,yc);
+  }
+  canvasCtx.stroke();
+  canvasCtx.restore();
+
+  // центральная ось
+  canvasCtx.strokeStyle=withAlpha(colors.primary,0.12);
+  canvasCtx.beginPath(); canvasCtx.moveTo(0,h/2+0.5); canvasCtx.lineTo(w,h/2+0.5); canvasCtx.stroke();
+}
+
+function drawRadial(w,h){
+  const cx=w/2, cy=h/2;
+  const baseR=Math.min(w,h)*0.18;
+  const maxLen=Math.min(w,h)*0.28;
+  const rot=syntheticPhase*0.18;
+  canvasCtx.save();
+  canvasCtx.translate(cx,cy);
+  canvasCtx.rotate(rot);
+  for(let i=0;i<BANDS;i++){
+    const v=Math.max(0,Math.min(1,smooth[i]/255));
+    const angle=(i/BANDS)*Math.PI*2;
+    const len=baseR+v*maxLen;
+    const x1=Math.cos(angle)*baseR;
+    const y1=Math.sin(angle)*baseR;
+    const x2=Math.cos(angle)*len;
+    const y2=Math.sin(angle)*len;
+    const grad=canvasCtx.createLinearGradient(x1,y1,x2,y2);
+    grad.addColorStop(0,withAlpha(colors.deep,0.75));
+    grad.addColorStop(0.55,colors.primary);
+    grad.addColorStop(1,colors.bright);
+    canvasCtx.strokeStyle=grad;
+    canvasCtx.lineWidth=Math.max(1.2,(Math.min(w,h)/BANDS)*0.55);
+    canvasCtx.lineCap='round';
+    canvasCtx.shadowColor=withAlpha(colors.primary,0.45*v+0.08);
+    canvasCtx.shadowBlur=Math.min(16,12*v+2);
+    canvasCtx.beginPath();
+    canvasCtx.moveTo(x1,y1);
+    canvasCtx.lineTo(x2,y2);
+    canvasCtx.stroke();
+  }
+  canvasCtx.restore();
+
+  // внутреннее кольцо
+  canvasCtx.save();
+  canvasCtx.strokeStyle=withAlpha(colors.primary,0.18);
+  canvasCtx.shadowColor=withAlpha(colors.primary,0.25);
+  canvasCtx.shadowBlur=10;
+  canvasCtx.beginPath();
+  canvasCtx.arc(cx,cy,baseR-2,0,Math.PI*2);
+  canvasCtx.stroke();
+  canvasCtx.restore();
+}
+
+let lastAnalyzerTime=performance.now();
+function analyzerLoop(now){
+  const dt=Math.min(0.05,(now-lastAnalyzerTime)/1000);
+  lastAnalyzerTime=now;
+  updateAnalyzerData(dt);
+  drawAnalyzer();
+  requestAnimationFrame(analyzerLoop);
+}
+
+updateThemeColors();
+resizeAnalyzer();
+setTimeout(resizeAnalyzer,120);
+requestAnimationFrame(analyzerLoop);
+
+setEQ(currentEQ);
+buildStationsList();
+updateSeekUI();
 </script>
 </body>
 </html>
