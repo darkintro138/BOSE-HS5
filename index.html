@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="HongQi HS5">
 <meta name="theme-color" content="#0b0c0e">
 <title>HongQi HS5 · BOSE Sound</title>
-<link rel="manifest" href="manifest.json?v=12">
+<link rel="manifest" href="manifest.json?v=13">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -120,16 +120,16 @@ body.on .screen{box-shadow:inset 0 0 40px var(--screen-glow),inset 0 0 100px rgb
 .eq{position:relative;flex:1.4;min-height:0;overflow:hidden;border-radius:6px;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.06));box-shadow:inset 0 1px 5px rgba(0,0,0,.5),0 0 12px var(--screen-glow)}
 .eq canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer;touch-action:manipulation}
 
-/* ═══ ПРАВАЯ ПАНЕЛЬ: ЧАСЫ + ПОГОДА + БАТАРЕЯ + ГРОМКОСТЬ ═══ */
+/* ═══ ПРАВАЯ ПАНЕЛЬ: ЧАСЫ + ПОГОДА + БАТАРЕЯ + ГРОМКОСТЬ (УВЕЛИЧЕНО) ═══ */
 .scr-right{flex:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:4px;min-width:0}
 .scr-info{display:flex;flex-direction:column;align-items:flex-end;gap:1px;width:100%}
-.scr-clock{font-family:'VT323',monospace;font-size:clamp(30px,6vh,54px);line-height:.92;color:var(--screen-text);letter-spacing:2px;text-shadow:0 0 16px var(--screen-glow);display:flex;align-items:baseline;gap:3px}
-.scr-clock .sec{font-size:.44em;color:var(--screen-dim);opacity:.8;letter-spacing:1px}
-.scr-date{font-family:'VT323',monospace;font-size:clamp(10px,1.9vh,14px);color:var(--screen-dim);letter-spacing:1.5px;text-shadow:0 0 6px var(--screen-glow);text-transform:uppercase}
-.scr-wb{display:flex;align-items:center;gap:clamp(8px,1.6vw,14px);margin-top:2px}
-.scr-weather,.scr-battery{display:flex;align-items:center;gap:4px;font-family:'VT323',monospace;font-size:clamp(14px,2.6vh,19px);color:var(--screen-text);text-shadow:0 0 8px var(--screen-glow);white-space:nowrap}
+.scr-clock{font-family:'VT323',monospace;font-size:clamp(40px,8.4vh,76px);line-height:.9;color:var(--screen-text);letter-spacing:2px;text-shadow:0 0 18px var(--screen-glow);display:flex;align-items:baseline;gap:4px}
+.scr-clock .sec{font-size:.42em;color:var(--screen-dim);opacity:.85;letter-spacing:1px}
+.scr-date{font-family:'VT323',monospace;font-size:clamp(14px,2.9vh,21px);color:var(--screen-dim);letter-spacing:1.5px;text-shadow:0 0 7px var(--screen-glow);text-transform:uppercase}
+.scr-wb{display:flex;align-items:center;gap:clamp(10px,2vw,18px);margin-top:3px}
+.scr-weather,.scr-battery{display:flex;align-items:center;gap:5px;font-family:'VT323',monospace;font-size:clamp(19px,3.6vh,28px);color:var(--screen-text);text-shadow:0 0 9px var(--screen-glow);white-space:nowrap}
 .wicon,.bicon{display:flex;align-items:center;color:var(--screen-text)}
-.wicon svg,.bicon svg{width:1.35em;height:1.35em;display:block;filter:drop-shadow(0 0 5px var(--screen-glow))}
+.wicon svg,.bicon svg{width:1.5em;height:1.5em;display:block;filter:drop-shadow(0 0 6px var(--screen-glow))}
 .scr-battery.charging .bicon{color:#5dff9a}
 .scr-battery.charging{color:#5dff9a}
 .scr-battery.low .bicon,.scr-battery.low{color:#ff6a4a}
@@ -223,7 +223,9 @@ body.mini .controls{padding:6px 2px 4px}
 .eq{min-height:50px}
 .scr-right{flex-direction:row;align-items:center;justify-content:space-between;gap:8px}
 .scr-info{align-items:flex-start;width:auto;flex:1}
-.scr-clock{font-size:clamp(28px,10vw,42px)}
+.scr-clock{font-size:clamp(36px,13vw,56px)}
+.scr-date{font-size:clamp(13px,4vw,18px)}
+.scr-weather,.scr-battery{font-size:clamp(17px,5vw,24px)}
 .scr-wb{gap:12px}
 .vol-display{width:auto;align-items:flex-end}
 .stations-grid{grid-template-columns:1fr}
@@ -247,7 +249,9 @@ body.mini .system{width:100%;height:min(300px,55vh)}
 .scr-status-row{font-size:clamp(10px,2.6vh,12px)}
 .scr-mid{flex:1;min-height:0}
 .eq{min-height:0}
-.scr-clock{font-size:clamp(22px,5.2vh,38px)}
+.scr-clock{font-size:clamp(30px,7.4vh,52px)}
+.scr-date{font-size:clamp(12px,3vh,17px)}
+.scr-weather,.scr-battery{font-size:clamp(15px,3.8vh,23px)}
 .console-bottom-row{display:none}
 .seek-row{padding:4px 12px 2px}
 .seek-track{height:19px}
@@ -345,7 +349,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
     <div class="seek-row"><div class="seek-time" id="seekCurrent">--:--</div><div class="seek-track disabled" id="seekTrack"><div class="seek-fill" id="seekFill"></div><div class="seek-knob" id="seekKnob"></div></div><div class="seek-time" id="seekDuration">LIVE</div></div>
     <div class="controls"><button class="btn" onclick="prevStation()">⏮</button><button class="btn play" id="playBtn" onclick="togglePlay()"><span id="playIco">▶</span></button><button class="btn" onclick="stopPlay()">■</button><button class="btn" onclick="nextStation()">⏭</button><button class="btn" onclick="setFilter('radio');openOverlay('stationsOverlay')">☰</button><button class="btn" onclick="toggleFullscreen()">⛶</button></div>
     <div class="led-strip"></div>
-    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v3.3</div></div>
+    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v3.4</div></div>
     <div class="overlay" id="stationsOverlay">
       <div class="overlay-header"><div class="overlay-title">CHANNELS · <span id="stationCount">0</span></div><button class="overlay-close" onclick="closeOverlay('stationsOverlay')">×</button></div>
       <div class="seg-row"><button class="seg active" data-filter="radio" onclick="setFilter('radio')">RADIO</button><button class="seg" data-filter="local" onclick="setFilter('local')">FILES</button><button class="seg" data-filter="fav" onclick="setFilter('fav')">★ FAV</button></div>
@@ -477,9 +481,7 @@ function openNavigator(){
   setTimeout(()=>{f.remove();if(Date.now()-start<2500&&!document.hidden){window.open('https://yandex.ru/maps/','_blank')}},800);
 }
 
-/* ═══════════════════════════════════════════
-   ЧАСЫ (БРАТСК / IRKUTSK) + ПОГОДА + БАТАРЕЯ
-   ═══════════════════════════════════════════ */
+/* ═══ ЧАСЫ (БРАТСК) + ПОГОДА + БАТАРЕЯ ═══ */
 const TZ='Asia/Irkutsk';
 const BRATSK={lat:56.1570,lon:101.6151};
 function updateClock(){
@@ -501,8 +503,6 @@ function updateClock(){
   }catch(e){document.getElementById('dateDisplay').textContent='БРАТСК · IRKUTSK'}
 }
 setInterval(updateClock,1000);updateClock();
-
-/* Погода — иконки (SVG, цвет темы) */
 function wIcon(code){
   const st='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
   const sun=`<svg viewBox="0 0 24 24" ${st}><circle cx="12" cy="12" r="4.4"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>`;
@@ -544,7 +544,6 @@ async function fetchWeather(){
   }
 }
 fetchWeather();setInterval(fetchWeather,600000);
-
 function paintBattery(b){
   const pct=Math.round(b.level*100);
   document.getElementById('batteryLevel').textContent=pct+'%';
