@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="HongQi HS5">
 <meta name="theme-color" content="#0b0c0e">
 <title>HongQi HS5 · BOSE Sound</title>
-<link rel="manifest" href="manifest.json?v=11">
+<link rel="manifest" href="manifest.json?v=12">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -31,10 +31,7 @@ body.playing .cabinet{animation:cabVib .38s ease-in-out infinite}
 body:not(.on) .tube{opacity:.16;box-shadow:none;animation:none}
 body.playing .tube{animation-duration:2.4s}
 @keyframes tubeFlicker{0%,100%{opacity:.82;filter:brightness(.95)}18%{opacity:1;filter:brightness(1.18)}33%{opacity:.74}52%{opacity:1}69%{opacity:.86}84%{opacity:.98}}
-.drv-btn{width:46px;height:46px;border-radius:50%;position:relative;border:none;cursor:pointer;flex-shrink:0;
-  background:radial-gradient(circle at 38% 32%,var(--tweeter) 0%,var(--tweeter-dark) 100%);
-  box-shadow:inset 0 3px 6px rgba(0,0,0,.75),inset 0 -1px 2px rgba(255,255,255,.15),0 3px 8px rgba(0,0,0,.4);
-  display:flex;align-items:center;justify-content:center;color:#8a96a2;transition:all .25s;z-index:3}
+.drv-btn{width:46px;height:46px;border-radius:50%;position:relative;border:none;cursor:pointer;flex-shrink:0;background:radial-gradient(circle at 38% 32%,var(--tweeter) 0%,var(--tweeter-dark) 100%);box-shadow:inset 0 3px 6px rgba(0,0,0,.75),inset 0 -1px 2px rgba(255,255,255,.15),0 3px 8px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;color:#8a96a2;transition:all .25s;z-index:3}
 .drv-btn:before{content:'';position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(255,255,255,.07);pointer-events:none}
 .drv-btn:after{content:'';position:absolute;top:12%;left:16%;width:36%;height:26%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.3),transparent 70%);filter:blur(1px);pointer-events:none}
 .drv-btn svg{width:21px;height:21px;position:relative;z-index:2;filter:drop-shadow(0 0 3px rgba(0,0,0,.8))}
@@ -122,8 +119,20 @@ body.on .screen{box-shadow:inset 0 0 40px var(--screen-glow),inset 0 0 100px rgb
 .scr-mid{display:flex;gap:10px;align-items:stretch;flex:1;min-height:0}
 .eq{position:relative;flex:1.4;min-height:0;overflow:hidden;border-radius:6px;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.06));box-shadow:inset 0 1px 5px rgba(0,0,0,.5),0 0 12px var(--screen-glow)}
 .eq canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer;touch-action:manipulation}
+
+/* ═══ ПРАВАЯ ПАНЕЛЬ: ЧАСЫ + ПОГОДА + БАТАРЕЯ + ГРОМКОСТЬ ═══ */
 .scr-right{flex:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:4px;min-width:0}
-.scr-time{font-family:'VT323',monospace;font-size:clamp(24px,4.6vh,44px);line-height:.9;color:var(--screen-text);letter-spacing:2px;text-shadow:0 0 14px var(--screen-glow)}
+.scr-info{display:flex;flex-direction:column;align-items:flex-end;gap:1px;width:100%}
+.scr-clock{font-family:'VT323',monospace;font-size:clamp(30px,6vh,54px);line-height:.92;color:var(--screen-text);letter-spacing:2px;text-shadow:0 0 16px var(--screen-glow);display:flex;align-items:baseline;gap:3px}
+.scr-clock .sec{font-size:.44em;color:var(--screen-dim);opacity:.8;letter-spacing:1px}
+.scr-date{font-family:'VT323',monospace;font-size:clamp(10px,1.9vh,14px);color:var(--screen-dim);letter-spacing:1.5px;text-shadow:0 0 6px var(--screen-glow);text-transform:uppercase}
+.scr-wb{display:flex;align-items:center;gap:clamp(8px,1.6vw,14px);margin-top:2px}
+.scr-weather,.scr-battery{display:flex;align-items:center;gap:4px;font-family:'VT323',monospace;font-size:clamp(14px,2.6vh,19px);color:var(--screen-text);text-shadow:0 0 8px var(--screen-glow);white-space:nowrap}
+.wicon,.bicon{display:flex;align-items:center;color:var(--screen-text)}
+.wicon svg,.bicon svg{width:1.35em;height:1.35em;display:block;filter:drop-shadow(0 0 5px var(--screen-glow))}
+.scr-battery.charging .bicon{color:#5dff9a}
+.scr-battery.charging{color:#5dff9a}
+.scr-battery.low .bicon,.scr-battery.low{color:#ff6a4a}
 .vol-display{display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:100%}
 .vol-label{font-family:'VT323',monospace;font-size:clamp(10px,1.8vh,13px);color:var(--screen-dim);letter-spacing:1px;text-shadow:0 0 6px var(--screen-glow)}
 .vol-segments{display:flex;gap:2px}
@@ -210,9 +219,13 @@ body.mini .controls{padding:6px 2px 4px}
 .system{flex-direction:column;max-height:none;height:100%}
 .console{flex:1;height:100%;padding:6px 8px;border-radius:12px}
 .screen{padding:6px 8px}
-.scr-mid{flex-direction:column;gap:4px}
-.eq{min-height:52px}
-.scr-right{flex-direction:row;align-items:center;justify-content:space-between}
+.scr-mid{flex-direction:column;gap:5px}
+.eq{min-height:50px}
+.scr-right{flex-direction:row;align-items:center;justify-content:space-between;gap:8px}
+.scr-info{align-items:flex-start;width:auto;flex:1}
+.scr-clock{font-size:clamp(28px,10vw,42px)}
+.scr-wb{gap:12px}
+.vol-display{width:auto;align-items:flex-end}
 .stations-grid{grid-template-columns:1fr}
 .fader-col{flex:0 0 62px}
 .fader-track{width:15px}
@@ -234,6 +247,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
 .scr-status-row{font-size:clamp(10px,2.6vh,12px)}
 .scr-mid{flex:1;min-height:0}
 .eq{min-height:0}
+.scr-clock{font-size:clamp(22px,5.2vh,38px)}
 .console-bottom-row{display:none}
 .seek-row{padding:4px 12px 2px}
 .seek-track{height:19px}
@@ -281,7 +295,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
   <div class="console">
     <div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>
     <div class="console-top">
-      <div class="brand-wrap"><div class="brand">HONGQI HS5</div><div class="brand-sub">BOSE SOUND SYSTEM · TUBE WARM AUDIO · 12 CH</div></div>
+      <div class="brand-wrap"><div class="brand">HONGQI HS5</div><div class="brand-sub">BOSE SOUND SYSTEM · БРАТСК · IRKUTSK</div></div>
       <div class="top-right">
         <button class="mini-expand" id="miniExpand" onclick="expandPlayer()" title="Развернуть">⤢</button>
         <div class="theme-dots">
@@ -309,10 +323,20 @@ body.mini .system{width:100%;height:min(300px,55vh)}
         <div class="screen-content">
           <div class="scr-status-row"><span id="statusText">STANDBY</span><span id="modeText">STEREO · 128kbps</span><span class="live"><span class="live-dot"></span>LIVE</span></div>
           <div class="scr-station" id="stationName">HONGQI RADIO</div>
-          <div class="scr-marquee-wrap"><span class="scr-marquee" id="marqueeText">*** HONGQI HS5 BOSE SOUND *** TUBE WARM AUDIO *** PRESS POWER ***</span></div>
+          <div class="scr-marquee-wrap"><span class="scr-marquee" id="marqueeText">*** HONGQI HS5 BOSE SOUND *** БРАТСК · ИРКУТСКАЯ ОБЛАСТЬ *** PRESS POWER ***</span></div>
           <div class="scr-mid">
             <div class="eq"><canvas id="analyzerCanvas"></canvas></div>
-            <div class="scr-right"><div class="scr-time" id="timeDisplay">00:00</div><div class="vol-display"><div class="vol-label">VOL <span id="volNum">13</span></div><div class="vol-segments" id="volSegments"></div></div></div>
+            <div class="scr-right">
+              <div class="scr-info">
+                <div class="scr-clock" id="clockDisplay">--:--<span class="sec" id="clockSec">00</span></div>
+                <div class="scr-date" id="dateDisplay">БРАТСК</div>
+                <div class="scr-wb">
+                  <div class="scr-weather"><span class="wicon" id="weatherIcon"></span><span id="weatherTemp">--°</span></div>
+                  <div class="scr-battery" id="batteryWrap"><span class="bicon" id="batteryIcon"></span><span id="batteryLevel">--%</span></div>
+                </div>
+              </div>
+              <div class="vol-display"><div class="vol-label">VOL <span id="volNum">13</span></div><div class="vol-segments" id="volSegments"></div></div>
+            </div>
           </div>
         </div>
       </div></div>
@@ -321,7 +345,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
     <div class="seek-row"><div class="seek-time" id="seekCurrent">--:--</div><div class="seek-track disabled" id="seekTrack"><div class="seek-fill" id="seekFill"></div><div class="seek-knob" id="seekKnob"></div></div><div class="seek-time" id="seekDuration">LIVE</div></div>
     <div class="controls"><button class="btn" onclick="prevStation()">⏮</button><button class="btn play" id="playBtn" onclick="togglePlay()"><span id="playIco">▶</span></button><button class="btn" onclick="stopPlay()">■</button><button class="btn" onclick="nextStation()">⏭</button><button class="btn" onclick="setFilter('radio');openOverlay('stationsOverlay')">☰</button><button class="btn" onclick="toggleFullscreen()">⛶</button></div>
     <div class="led-strip"></div>
-    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v3.2</div></div>
+    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v3.3</div></div>
     <div class="overlay" id="stationsOverlay">
       <div class="overlay-header"><div class="overlay-title">CHANNELS · <span id="stationCount">0</span></div><button class="overlay-close" onclick="closeOverlay('stationsOverlay')">×</button></div>
       <div class="seg-row"><button class="seg active" data-filter="radio" onclick="setFilter('radio')">RADIO</button><button class="seg" data-filter="local" onclick="setFilter('local')">FILES</button><button class="seg" data-filter="fav" onclick="setFilter('fav')">★ FAV</button></div>
@@ -362,12 +386,12 @@ intl.forEach(x=>raw.push([x[0],x[1],x[2],x[3]]));
 let stations=raw.map((x,i)=>({s:x[0],n:x[1],g:x[2],tags:(x[3]||'').split(',').map(t=>t.trim()).filter(Boolean),id:'r'+i,fav:favorites.includes('r'+i),local:false}));
 let localFiles=[];function getAllStations(){return stations.concat(localFiles)}
 const THEMES=['dark','gold','carbon','retro'];
-let powerOn=false,isPlaying=false,currentIndex=0,startTime=0,timeInterval=null,targetVolume=.8,fadeMult=1,fadeAnim=null,fadeOutStarted=false,currentTheme=localStorage.getItem('theme')||'dark',currentFilter='radio',wakeLock=null,wakeLockActive=false,currentEQ=localStorage.getItem('eqPreset')||'bass';
+let powerOn=false,isPlaying=false,currentIndex=0,startTime=0,targetVolume=.8,fadeMult=1,fadeAnim=null,fadeOutStarted=false,currentTheme=localStorage.getItem('theme')||'dark',currentFilter='radio',wakeLock=null,wakeLockActive=false,currentEQ=localStorage.getItem('eqPreset')||'bass';
 let warmMode=localStorage.getItem('warm')!=='0';
 if(!THEMES.includes(currentTheme))currentTheme='dark';
 if(localStorage.getItem('mini')==='1')document.body.classList.add('mini');
 let remotePlayer=null,localFX=null,localPure=null,activePlayer=null,activeIsLocal=false,currentSrc='';
-let audioCtx=null,fxReady=false,localSource=null,eqLow=null,eqMid=null,eqHigh=null,bodyCut=null,presence=null,hp=null,lp=null,shaper=null,comp=null,makeup=null,analyser=null,realFreq=null,realWave=null;
+let audioCtx=null,fxReady=false,localSource=null,eqLow=null,eqMid=null,eqHigh=null,bodyCut=null,presence=null,hp=null,lp=null,shaper=null,comp=null,makeup=null,analyser=null,realFreq=null;
 document.body.setAttribute('data-theme',currentTheme);updateThemeDots();
 const EQ_PRESETS={flat:{low:0,mid:0,high:0},bass:{low:4.5,mid:0,high:0},treble:{low:0,mid:0,high:4.5},vocal:{low:-2,mid:4,high:1.5},car:{low:3.5,mid:1.5,high:2.5},club:{low:4,mid:0,high:3},loudness:{low:4,mid:-1.5,high:4},deep:{low:5,mid:-1,high:-2.5}};
 function tubeCurve(k){const n=2048,c=new Float32Array(n);const norm=Math.tanh(k+.06);for(let i=0;i<n;i++){const x=i*2/n-1;c[i]=Math.tanh(x*k+.06*x*x)/norm*.92}return c}
@@ -394,14 +418,14 @@ function ensurePlayers(){
     comp=audioCtx.createDynamicsCompressor();comp.threshold.value=-20;comp.knee.value=16;comp.ratio.value=3.2;comp.attack.value=.014;comp.release.value=.3;
     makeup=audioCtx.createGain();makeup.gain.value=.9;
     analyser=audioCtx.createAnalyser();analyser.fftSize=256;analyser.smoothingTimeConstant=.82;
-    realFreq=new Uint8Array(analyser.frequencyBinCount);realWave=new Uint8Array(analyser.fftSize);
+    realFreq=new Uint8Array(analyser.frequencyBinCount);
     localSource.connect(hp);hp.connect(eqLow);eqLow.connect(bodyCut);bodyCut.connect(eqMid);eqMid.connect(presence);presence.connect(eqHigh);eqHigh.connect(lp);lp.connect(shaper);shaper.connect(comp);comp.connect(makeup);makeup.connect(analyser);analyser.connect(audioCtx.destination);
     fxReady=true;applyEQ();
   }catch(e){console.warn('FX unavailable:',e);fxReady=false;warmMode=false;localStorage.setItem('warm','0')}
   updateWarmUI();renderVolume();
 }
 function bindPlayer(p){
-  p.addEventListener('playing',()=>{if(p!==activePlayer)return;isPlaying=true;startTime=Date.now();document.body.classList.add('playing');setPlayBtn(true);setStatus('PLAY');if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});if(timeInterval)clearInterval(timeInterval);timeInterval=setInterval(updateTimer,1000);updateSeekUI();fadeOutStarted=false;fadeMult=0;applyVolume();fadeTo(1,700);});
+  p.addEventListener('playing',()=>{if(p!==activePlayer)return;isPlaying=true;startTime=Date.now();document.body.classList.add('playing');setPlayBtn(true);setStatus('PLAY');if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});updateSeekUI();fadeOutStarted=false;fadeMult=0;applyVolume();fadeTo(1,700);});
   p.addEventListener('pause',()=>{if(p!==activePlayer)return;isPlaying=false;document.body.classList.remove('playing');setPlayBtn(false);setStatus('PAUSE');});
   p.addEventListener('waiting',()=>{if(p!==activePlayer)return;setStatus('BUFFER');setNetLed('buffering');});
   p.addEventListener('canplay',()=>{if(p!==activePlayer)return;setNetLed('online');updateSeekUI();});
@@ -417,13 +441,12 @@ function setNetLed(m){document.getElementById('netLed').className='status-led ne
 function setPlayBtn(v){document.getElementById('playIco').textContent=v?'⏸':'▶'}
 function applyVolume(){const v=Math.max(0,Math.min(1,targetVolume*fadeMult));[remotePlayer,localFX,localPure].forEach(p=>{if(p)p.volume=v})}
 function fadeTo(m,dur,cb){if(fadeAnim)cancelAnimationFrame(fadeAnim);const st=performance.now(),fr=fadeMult,df=m-fr;function step(n){const t=Math.min(1,(n-st)/dur);const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;fadeMult=fr+df*e;applyVolume();if(t<1)fadeAnim=requestAnimationFrame(step);else{fadeAnim=null;if(cb)cb()}}fadeAnim=requestAnimationFrame(step)}
-function togglePower(){if(!powerOn){powerOn=true;document.body.classList.add('on');ensurePlayers();setStatus('HELLO');document.getElementById('stationName').textContent='HONGQI HS5';setTimeout(()=>{loadStation(currentIndex);if(activePlayer){const pr=activePlayer.play();if(pr&&pr.catch)pr.catch(()=>setStatus('PRESS PLAY'))}},450)}else{powerOn=false;isPlaying=false;[remotePlayer,localFX,localPure].forEach(p=>{if(p)try{p.pause()}catch(e){}});document.body.classList.remove('on','playing');setStatus('STANDBY');setPlayBtn(false);document.getElementById('timeDisplay').textContent='00:00';updateSeekUI()}}
-function loadStation(i){const all=getAllStations();if(i<0||i>=all.length)return;ensurePlayers();fadeOutStarted=false;currentIndex=i;const s=all[i];currentSrc=s.s;const target=s.local?localTarget():remotePlayer;if(activePlayer&&activePlayer!==target)try{activePlayer.pause()}catch(e){}activePlayer=target;activeIsLocal=!!s.local;document.getElementById('stationName').textContent=s.n.toUpperCase();document.getElementById('modeText').textContent=s.local?((warmMode&&fxReady)?'LOCAL · TUBE WARM':'LOCAL · PURE'):'STEREO · 128kbps';document.getElementById('marqueeText').textContent=`*** CH ${i+1} · ${s.n.toUpperCase()} *** ${s.g} *** ${s.local&&warmMode&&fxReady?'TUBE WARM SIGNAL PATH':'DIRECT SIGNAL PATH'} ***`;startTime=Date.now();document.getElementById('timeDisplay').textContent='00:00';target.src=s.s;target.load();if(powerOn){const pr=target.play();if(pr&&pr.catch)pr.catch(e=>console.log(e))}updateSeekUI();buildStationsList()}
+function togglePower(){if(!powerOn){powerOn=true;document.body.classList.add('on');ensurePlayers();setStatus('HELLO');document.getElementById('stationName').textContent='HONGQI HS5';setTimeout(()=>{loadStation(currentIndex);if(activePlayer){const pr=activePlayer.play();if(pr&&pr.catch)pr.catch(()=>setStatus('PRESS PLAY'))}},450)}else{powerOn=false;isPlaying=false;[remotePlayer,localFX,localPure].forEach(p=>{if(p)try{p.pause()}catch(e){}});document.body.classList.remove('on','playing');setStatus('STANDBY');setPlayBtn(false);updateSeekUI()}}
+function loadStation(i){const all=getAllStations();if(i<0||i>=all.length)return;ensurePlayers();fadeOutStarted=false;currentIndex=i;const s=all[i];currentSrc=s.s;const target=s.local?localTarget():remotePlayer;if(activePlayer&&activePlayer!==target)try{activePlayer.pause()}catch(e){}activePlayer=target;activeIsLocal=!!s.local;document.getElementById('stationName').textContent=s.n.toUpperCase();document.getElementById('modeText').textContent=s.local?((warmMode&&fxReady)?'LOCAL · TUBE WARM':'LOCAL · PURE'):'STEREO · 128kbps';document.getElementById('marqueeText').textContent=`*** CH ${i+1} · ${s.n.toUpperCase()} *** ${s.g} *** БРАТСК · IRKUTSK ***`;startTime=Date.now();target.src=s.s;target.load();if(powerOn){const pr=target.play();if(pr&&pr.catch)pr.catch(e=>console.log(e))}updateSeekUI();buildStationsList()}
 function togglePlay(){if(!powerOn){togglePower();return}if(!activePlayer)ensurePlayers();if(!activePlayer)return;if(isPlaying)activePlayer.pause();else{const pr=activePlayer.play();if(pr&&pr.catch)pr.catch(e=>console.log(e))}}
-function stopPlay(){if(!activePlayer||!powerOn)return;activePlayer.pause();if(activeIsLocal)activePlayer.currentTime=0;startTime=Date.now();document.getElementById('timeDisplay').textContent='00:00';updateSeekUI()}
+function stopPlay(){if(!activePlayer||!powerOn)return;activePlayer.pause();if(activeIsLocal)activePlayer.currentTime=0;updateSeekUI()}
 function nextStation(){const a=getAllStations();if(powerOn&&a.length)loadStation((currentIndex+1)%a.length)}
 function prevStation(){const a=getAllStations();if(powerOn&&a.length)loadStation((currentIndex-1+a.length)%a.length)}
-function updateTimer(){if(!isPlaying)return;const e=Math.floor((Date.now()-startTime)/1000);document.getElementById('timeDisplay').textContent=String(Math.floor(e/60)).padStart(2,'0')+':'+String(e%60).padStart(2,'0')}
 function updateWarmUI(){const on=document.getElementById('warmOn'),off=document.getElementById('warmOff'),note=document.getElementById('warmNote');if(!on)return;const can=fxReady;on.classList.toggle('active',warmMode&&can);on.classList.toggle('disabled',!can);off.classList.toggle('active',!warmMode||!can);document.querySelectorAll('.eq-btn').forEach(b=>b.classList.toggle('disabled',!(warmMode&&can)));note.textContent=!can?'Обработка недоступна в этом браузере · режим PURE':(warmMode?'Ламповый тракт: сатурация + компрессор + мягкий срез верха · без хрипов':'Чистый бит-перфект сигнал без обработки')}
 function setWarm(on){ensurePlayers();if(on&&!fxReady){updateWarmUI();return}if(warmMode===on){updateWarmUI();return}const migrating=activeIsLocal&&activePlayer&&currentSrc;const t=migrating?activePlayer.currentTime:0;const wasPlaying=migrating&&isPlaying;if(migrating)try{activePlayer.pause()}catch(e){}warmMode=on;localStorage.setItem('warm',on?'1':'0');updateWarmUI();if(migrating){const np=on?localFX:localPure;activePlayer=np;np.src=currentSrc;np.load();const restore=()=>{try{np.currentTime=t}catch(e){}if(wasPlaying||powerOn){const pr=np.play();if(pr&&pr.catch)pr.catch(()=>{})}};np.addEventListener('loadedmetadata',restore,{once:true})}if(activePlayer&&activeIsLocal)document.getElementById('modeText').textContent=warmMode&&fxReady?'LOCAL · TUBE WARM':'LOCAL · PURE'}
 const faderScale=document.getElementById('faderScale');for(let i=0;i<=10;i++){const t=document.createElement('div');t.className='tick'+(i%5===0?' major':'');t.style.bottom=i*10+'%';faderScale.appendChild(t)}
@@ -441,11 +464,9 @@ function openOverlay(id){if(id!=='stationsOverlay'&&!powerOn)return;document.get
 function closeOverlay(id){document.getElementById(id).classList.remove('show')}
 async function toggleWakeLock(){const b=document.getElementById('wakeLockBtn');if(wakeLockActive){if(wakeLock)try{wakeLock.release()}catch(e){}wakeLock=null;wakeLockActive=false;b.classList.remove('active');return}if('wakeLock'in navigator){try{wakeLock=await navigator.wakeLock.request('screen');wakeLockActive=true;b.classList.add('active');wakeLock.addEventListener('release',()=>{wakeLockActive=false;b.classList.remove('active')})}catch(e){console.warn('WakeLock:',e)}}else alert('Wake Lock not supported')}
 function note(t){document.getElementById('marqueeText').textContent='*** '+t+' ***'}
-/* ── Сворачивание / разворачивание ── */
 function collapsePlayer(){document.body.classList.add('mini');localStorage.setItem('mini','1');setTimeout(resizeAnalyzer,120)}
 function expandPlayer(){document.body.classList.remove('mini');localStorage.setItem('mini','0');setTimeout(resizeAnalyzer,120)}
 function toggleMini(){document.body.classList.contains('mini')?expandPlayer():collapsePlayer()}
-/* ── Яндекс Навигатор ── */
 function openNavigator(){
   note('ЗАПУСК НАВИГАТОРА · ПЛЕЕР ОСТАНЕТСЯ В ФОНЕ');
   const start=Date.now();
@@ -453,25 +474,108 @@ function openNavigator(){
   f.style.cssText='position:absolute;width:0;height:0;border:0;opacity:0';
   f.src='yandexnavi://';
   document.body.appendChild(f);
-  setTimeout(()=>{
-    f.remove();
-    if(Date.now()-start<2500&&!document.hidden){
-      window.open('https://yandex.ru/maps/','_blank');
-    }
-  },800);
+  setTimeout(()=>{f.remove();if(Date.now()-start<2500&&!document.hidden){window.open('https://yandex.ru/maps/','_blank')}},800);
 }
-/* ── Возврат из фона: возобновить музыку ── */
+
+/* ═══════════════════════════════════════════
+   ЧАСЫ (БРАТСК / IRKUTSK) + ПОГОДА + БАТАРЕЯ
+   ═══════════════════════════════════════════ */
+const TZ='Asia/Irkutsk';
+const BRATSK={lat:56.1570,lon:101.6151};
+function updateClock(){
+  const now=new Date();
+  let parts;
+  try{
+    parts=new Intl.DateTimeFormat('ru-RU',{timeZone:TZ,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(now);
+  }catch(e){
+    const off=8*3600*1000;
+    const d=new Date(now.getTime()+off+now.getTimezoneOffset()*60000);
+    parts=[{type:'hour',value:String(d.getHours()).padStart(2,'0')},{type:'minute',value:String(d.getMinutes()).padStart(2,'0')},{type:'second',value:String(d.getSeconds()).padStart(2,'0')}];
+  }
+  const g=t=>{const p=parts.find(x=>x.type===t);return p?p.value:'00'};
+  document.getElementById('clockDisplay').firstChild.textContent=g('hour')+':'+g('minute');
+  document.getElementById('clockSec').textContent=g('second');
+  try{
+    const dt=new Intl.DateTimeFormat('ru-RU',{timeZone:TZ,day:'2-digit',month:'short',weekday:'short'}).format(now);
+    document.getElementById('dateDisplay').textContent=dt.replace(/\u00A0/g,' ')+' · БРАТСК';
+  }catch(e){document.getElementById('dateDisplay').textContent='БРАТСК · IRKUTSK'}
+}
+setInterval(updateClock,1000);updateClock();
+
+/* Погода — иконки (SVG, цвет темы) */
+function wIcon(code){
+  const st='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+  const sun=`<svg viewBox="0 0 24 24" ${st}><circle cx="12" cy="12" r="4.4"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>`;
+  const cloud=`<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M7.2 18.5a4.3 4.3 0 0 1-.5-8.57 6 6 0 0 1 11.5 1.3 3.9 3.9 0 0 1-1.1 7.27H7.2z"/></svg>`;
+  const suncloud=`<svg viewBox="0 0 24 24" ${st}><circle cx="8" cy="7.5" r="3"/><path d="M8 1.8v1.4M2.6 7.5H1.3M4.2 3.7l-1-1M11.8 3.7l1-1"/><path d="M9 19.5a3.6 3.6 0 0 1-.4-7.18 5 5 0 0 1 9.6 1.1 3.3 3.3 0 0 1-.9 6.08H9z" fill="currentColor" stroke="none"/></svg>`;
+  const rain=`<svg viewBox="0 0 24 24"><path d="M7.2 15a4.3 4.3 0 0 1-.5-8.57 6 6 0 0 1 11.5 1.3A3.9 3.9 0 0 1 17 15H7.2z" fill="currentColor" stroke="none"/><g ${st}><path d="M8.5 17.5l-1 3M12.5 17.5l-1 3M16.5 17.5l-1 3"/></g></svg>`;
+  const snow=`<svg viewBox="0 0 24 24" ${st}><path d="M12 2.5v19M3.7 7.2l16.6 9.6M20.3 7.2L3.7 16.8"/><path d="M12 6.2l2.1-2M12 6.2l-2.1-2M12 17.8l2.1 2M12 17.8l-2.1 2M6.4 8.6L4 8.2M6.4 8.6L6 6.2M17.6 15.4l2.4.4M17.6 15.4l.4 2.4M17.6 8.6L20 8.2M17.6 8.6L18 6.2M6.4 15.4L4 15.8M6.4 15.4L6 17.8"/></svg>`;
+  const storm=`<svg viewBox="0 0 24 24"><path d="M7.2 14a4.3 4.3 0 0 1-.5-8.57 6 6 0 0 1 11.5 1.3A3.9 3.9 0 0 1 17 14H7.2z" fill="currentColor" stroke="none"/><path d="M12.5 15.5l-3 4h3l-1.5 3.5 4-5h-3l1.5-2.5z" fill="currentColor"/></svg>`;
+  const fog=`<svg viewBox="0 0 24 24" ${st}><path d="M4 9h16M4 13h16M6 17h12M5 5h14"/></svg>`;
+  if(code===0||code===1)return sun;
+  if(code===2)return suncloud;
+  if(code===3)return cloud;
+  if(code===45||code===48)return fog;
+  if((code>=51&&code<=67)||(code>=80&&code<=82))return rain;
+  if((code>=71&&code<=77)||code===85||code===86)return snow;
+  if(code>=95)return storm;
+  return cloud;
+}
+function batteryIcon(level,charging){
+  const w=Math.max(0,Math.min(1,level));
+  const fw=(w*17).toFixed(1);
+  const bolt=charging?`<path d="M12.5 3.5l-3 4.2h2.2l-1 3.8 3.3-4.6h-2.2z" fill="#0a0a0a" stroke="none"/>`:'';
+  return `<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="2.2" width="21" height="9.6" rx="2.4"/><path d="M23.6 5.4v3.2" stroke-width="2.4" stroke-linecap="round"/><rect x="2.6" y="3.8" width="${fw}" height="6.4" rx="1.2" fill="currentColor" stroke="none"/>${bolt}</svg>`;
+}
+async function fetchWeather(){
+  try{
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${BRATSK.lat}&longitude=${BRATSK.lon}&current=temperature_2m,weather_code,is_day&timezone=${encodeURIComponent(TZ)}`;
+    const r=await fetch(url);
+    if(!r.ok)throw new Error('net');
+    const d=await r.json();
+    const c=d.current||{};
+    const temp=Math.round(c.temperature_2m);
+    const code=c.weather_code!=null?c.weather_code:3;
+    document.getElementById('weatherIcon').innerHTML=wIcon(code);
+    document.getElementById('weatherTemp').textContent=(temp>0?'+':'')+temp+'°';
+  }catch(e){
+    document.getElementById('weatherIcon').innerHTML=wIcon(3);
+    document.getElementById('weatherTemp').textContent='--°';
+  }
+}
+fetchWeather();setInterval(fetchWeather,600000);
+
+function paintBattery(b){
+  const pct=Math.round(b.level*100);
+  document.getElementById('batteryLevel').textContent=pct+'%';
+  document.getElementById('batteryIcon').innerHTML=batteryIcon(b.level,b.charging);
+  const wrap=document.getElementById('batteryWrap');
+  wrap.classList.toggle('charging',!!b.charging);
+  wrap.classList.toggle('low',!b.charging&&b.level<=0.15);
+}
+function initBattery(){
+  if(navigator.getBattery&&navigator.getBattery()){
+    navigator.getBattery().then(b=>{
+      paintBattery(b);
+      ['levelchange','chargingchange'].forEach(ev=>b.addEventListener(ev,()=>paintBattery(b)));
+    }).catch(()=>noBattery());
+  } else noBattery();
+}
+function noBattery(){
+  document.getElementById('batteryIcon').innerHTML=batteryIcon(1,false);
+  document.getElementById('batteryLevel').textContent='';
+}
+initBattery();
+
 let resumeOnVisible=false;
 document.addEventListener('visibilitychange',()=>{
-  if(document.hidden){
-    resumeOnVisible=isPlaying&&powerOn;
-  }else{
+  if(document.hidden){resumeOnVisible=isPlaying&&powerOn}
+  else{
     if(wakeLockActive&&!wakeLock)toggleWakeLock();
     if(audioCtx&&audioCtx.state==='suspended'&&isPlaying)audioCtx.resume().catch(()=>{});
-    if(resumeOnVisible&&activePlayer&&!isPlaying){
-      const p=activePlayer.play();if(p&&p.catch)p.catch(()=>{});
-    }
+    if(resumeOnVisible&&activePlayer&&!isPlaying){const p=activePlayer.play();if(p&&p.catch)p.catch(()=>{})}
     resumeOnVisible=false;
+    updateClock();fetchWeather();
   }
 });
 const AUDIO_EXT=/\.(mp3|wav|flac|ogg|oga|opus|aac|m4a)$/i,VIDEO_EXT=/\.(mp4|mov|avi|mkv|webm|3gp|m4v|wmv|flv)$/i,IMAGE_EXT=/\.(jpg|jpeg|png|gif|webp|bmp|heic|heif)$/i,BAD_NAME=/(голосовое|voice[-_ ]?memo|диктофон|видео|фото|image|video|screenshot|скриншот)/i;function isAudioFile(f){if(!f||!f.size)return false;const n=f.name||'',t=f.type||'';if(VIDEO_EXT.test(n)||IMAGE_EXT.test(n)||t.startsWith('video/')||t.startsWith('image/'))return false;if(BAD_NAME.test(n))return false;return AUDIO_EXT.test(n)||t.startsWith('audio/')}function addAudioFiles(list){const files=Array.from(list||[]).filter(isAudioFile).sort((a,b)=>(a.name||'').localeCompare(b.name||'','ru')).slice(0,300);if(!files.length){document.getElementById('marqueeText').textContent='*** NO AUDIO FILES *** USE MP3 WAV FLAC OGG M4A AAC ***';return}files.forEach((f,i)=>{localFiles.push({id:'local_'+Date.now()+'_'+i+'_'+Math.random().toString(36).slice(2,7),s:URL.createObjectURL(f),n:(f.name||'Audio file').replace(/\.[^/.]+$/,''),g:'MY FILE',tags:['LOCAL'],fav:false,local:true})});buildStationsList();setFilter('local');openOverlay('stationsOverlay')}
@@ -481,9 +585,7 @@ window.addEventListener('online',()=>setNetLed('online'));window.addEventListene
 let touchX=0;const screenEl=document.querySelector('.screen-frame');screenEl.addEventListener('touchstart',e=>{if(document.querySelector('.overlay.show'))return;touchX=e.changedTouches[0].screenX},{passive:true});screenEl.addEventListener('touchend',e=>{if(document.querySelector('.overlay.show'))return;const d=e.changedTouches[0].screenX-touchX;if(Math.abs(d)>50)d>0?prevStation():nextStation()},{passive:true});
 document.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();togglePlay()}if(e.code==='ArrowLeft')prevStation();if(e.code==='ArrowRight')nextStation();if(e.code==='ArrowUp'){e.preventDefault();targetVolume=Math.min(1,targetVolume+.0625);renderVolume()}if(e.code==='ArrowDown'){e.preventDefault();targetVolume=Math.max(0,targetVolume-.0625);renderVolume()}if(e.code==='KeyP')togglePower();if(e.code==='KeyF')toggleFullscreen();if(e.code==='KeyM')toggleMini();if(e.code==='KeyN')openNavigator();if(e.code==='KeyL'){const o=document.getElementById('stationsOverlay');o.classList.contains('show')?closeOverlay('stationsOverlay'):openOverlay('stationsOverlay')}});
 
-/* ═══════════════════════════════════════════
-   ANALYZER: 8 режимов, METERS (2×2) по умолчанию
-   ═══════════════════════════════════════════ */
+/* ═══ ANALYZER: 8 режимов, METERS (2×2) по умолчанию ═══ */
 const analyzerCanvas=document.getElementById('analyzerCanvas'),canvasCtx=analyzerCanvas.getContext('2d');
 const MODES=['meters','sphere','bars','aurora','nebula','kaleidoscope','terrain','plasma'];
 let analyzerMode=localStorage.getItem('analyzerMode')||'meters';
@@ -527,10 +629,8 @@ function updateMeters(dt){
 function dbAngle(db){return -50+(db+20)/23*100}
 function roundRectPath(c,x,y,w,h,r){r=Math.min(r,w/2,h/2);c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
 function meterArc(c,px,py,r,a1,a2){c.beginPath();const steps=28;for(let i=0;i<=steps;i++){const a=(a1+(a2-a1)*i/steps)*Math.PI/180;const X=px+Math.sin(a)*r,Y=py-Math.cos(a)*r;i===0?c.moveTo(X,Y):c.lineTo(X,Y)}c.stroke()}
-/* ── один прибор, прямоугольный (ширина mw, высота mh) ── */
 function drawOneMeter(x,y,mw,mh,label,st){
-  const c=canvasCtx;
-  const m=Math.min(mw,mh);
+  const c=canvasCtx,m=Math.min(mw,mh);
   c.save();c.translate(x,y);
   const bezR=Math.max(6,m*.14);
   const bz=c.createLinearGradient(0,0,0,mh);
@@ -542,15 +642,13 @@ function drawOneMeter(x,y,mw,mh,label,st){
   c.strokeStyle='rgba(0,0,0,.6)';c.lineWidth=1;c.stroke();
   const rim=Math.max(2,m*.055);
   roundRectPath(c,rim,rim,mw-rim*2,mh-rim*2,bezR*.8);c.fillStyle='#101014';c.fill();
-  const f=rim+Math.max(1.5,m*.025);
-  const fw=mw-f*2,fh=mh-f*2;
+  const f=rim+Math.max(1.5,m*.025),fw=mw-f*2,fh=mh-f*2;
   roundRectPath(c,f,f,fw,fh,bezR*.7);
   const fc=c.createRadialGradient(mw/2,f+fh*.25,m*.1,mw/2,f+fh*.5,Math.max(fw,fh)*.9);
   fc.addColorStop(0,'#fffdf5');fc.addColorStop(.55,'#f5edd6');fc.addColorStop(1,'#dacba6');
   c.fillStyle=fc;c.fill();
   if(powerOn){c.save();roundRectPath(c,f,f,fw,fh,bezR*.7);c.fillStyle='rgba(255,178,80,.13)';c.fill();c.restore()}
-  const px=mw/2,py=f+fh*.9;
-  const R=Math.min(fw*.42,fh*.74);
+  const px=mw/2,py=f+fh*.9,R=Math.min(fw*.42,fh*.74);
   c.lineCap='round';
   c.strokeStyle='rgba(58,53,44,.85)';c.lineWidth=Math.max(1,m*.016);
   meterArc(c,px,py,R,-50,dbAngle(0));
@@ -558,17 +656,14 @@ function drawOneMeter(x,y,mw,mh,label,st){
   meterArc(c,px,py,R,dbAngle(0),50);
   const MAJ=[-20,-10,-3,0,3];
   for(let t=0;t<=24;t++){
-    const db=-20+t*23/24;
-    const major=MAJ.some(v=>Math.abs(v-db)<.6);
-    const a=dbAngle(db)*Math.PI/180;
+    const db=-20+t*23/24,major=MAJ.some(v=>Math.abs(v-db)<.6),a=dbAngle(db)*Math.PI/180;
     const r1=R-(major?fh*.13:fh*.075),r2=R;
     c.strokeStyle=db>=0?'rgba(168,36,26,.95)':'rgba(58,53,44,.9)';
     c.lineWidth=major?Math.max(1,m*.018):Math.max(.6,m*.009);
     c.beginPath();c.moveTo(px+Math.sin(a)*r1,py-Math.cos(a)*r1);c.lineTo(px+Math.sin(a)*r2,py-Math.cos(a)*r2);c.stroke();
   }
   c.textAlign='center';
-  c.fillStyle='#3a352c';
-  c.font=`900 ${Math.max(9,m*.13)}px Orbitron, sans-serif`;
+  c.fillStyle='#3a352c';c.font=`900 ${Math.max(9,m*.13)}px Orbitron, sans-serif`;
   c.fillText(label,mw/2,f+fh*.17);
   c.fillStyle='#7a6c50';c.font=`${Math.max(8,m*.09)}px VT323, monospace`;
   c.fillText('VU',mw/2,py-fh*.07);
@@ -597,18 +692,12 @@ function drawOneMeter(x,y,mw,mh,label,st){
   c.fillStyle=gl;c.fill();
   c.restore();
 }
-/* ── сетка приборов 2×2 ── */
 function drawMeters(w,h){
-  const cols=2,rows=2;
-  const gap=Math.max(4,Math.min(w,h)*.05);
-  const cw=(w-gap*(cols+1))/cols;
-  const ch=(h-gap*(rows+1))/rows;
+  const cols=2,rows=2,gap=Math.max(4,Math.min(w,h)*.05);
+  const cw=(w-gap*(cols+1))/cols,ch=(h-gap*(rows+1))/rows;
   if(cw<30||ch<30)return;
   const labels=['L','R','BASS','TREB'];
-  for(let i=0;i<4;i++){
-    const col=i%cols,row=Math.floor(i/cols);
-    drawOneMeter(gap+col*(cw+gap),gap+row*(ch+gap),cw,ch,labels[i],meterState[i]);
-  }
+  for(let i=0;i<4;i++){const col=i%cols,row=Math.floor(i/cols);drawOneMeter(gap+col*(cw+gap),gap+row*(ch+gap),cw,ch,labels[i],meterState[i])}
 }
 function roundedBarPath(c,x,y,w,h,r){r=Math.min(r,w/2,h/2);c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.quadraticCurveTo(x+w,y,x+w,y+r);c.lineTo(x+w,y+h-r);c.quadraticCurveTo(x+w,y+h,x+w-r,y+h);c.lineTo(x+r,y+h);c.quadraticCurveTo(x,y+h,x,y+h-r);c.lineTo(x,y+r);c.quadraticCurveTo(x,y,x+r,y);c.closePath()}
 function drawAnalyzer(){const w=analyzerCanvas.clientWidth,h=analyzerCanvas.clientHeight;if(w<2||h<2||!canvasCtx)return;canvasCtx.clearRect(0,0,w,h);if(analyzerMode!=='meters'){canvasCtx.save();canvasCtx.strokeStyle=withAlpha(colors.primary,.045);canvasCtx.lineWidth=1;for(let i=1;i<4;i++){const y=Math.round(h*i/4)+.5;canvasCtx.beginPath();canvasCtx.moveTo(0,y);canvasCtx.lineTo(w,y);canvasCtx.stroke()}canvasCtx.restore()}
