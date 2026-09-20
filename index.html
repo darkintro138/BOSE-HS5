@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="HongQi HS5">
 <meta name="theme-color" content="#0b0c0e">
 <title>HongQi HS5 · BOSE Sound</title>
-<link rel="manifest" href="manifest.json?v=17">
+<link rel="manifest" href="manifest.json?v=18">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -39,7 +39,7 @@ body.playing .tube{animation-duration:2.4s}
 body.playing .drv-btn{animation:tweeterPulse .19s ease-in-out infinite}
 @keyframes tweeterPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
 .tweeter{width:46px;height:46px;border-radius:50%;position:relative;background:radial-gradient(circle at 38% 32%,var(--tweeter) 0%,var(--tweeter-dark) 100%);box-shadow:inset 0 3px 6px rgba(0,0,0,.75),inset 0 -1px 2px rgba(255,255,255,.15),0 3px 8px rgba(0,0,0,.4);flex-shrink:0}
-.tweeter:after{content:'';position:absolute;top:14%;left:18%;width:34%;height:26%;;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.35),transparent 70%);filter:blur(1px)}
+.tweeter:after{content:'';position:absolute;top:14%;left:18%;width:34%;height:26%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.35),transparent 70%);filter:blur(1px)}
 body.playing .tweeter{animation:tweeterPulse .19s ease-in-out infinite}
 .mid-driver{width:66px;height:66px;border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--cabinet-2) 0%,var(--cabinet-3) 100%);box-shadow:inset 0 4px 10px rgba(0,0,0,.75),0 2px 6px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
 .mid-cone{width:48px;height:48px;border-radius:50%;background:radial-gradient(circle at 38% 32%,var(--speaker-cone) 0%,var(--speaker-cone-dark) 100%);box-shadow:inset 0 2px 6px rgba(0,0,0,.65),inset 0 -2px 4px rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
@@ -155,7 +155,6 @@ body.on .power-hint{display:none}
 .fader-cap:after{content:'';position:absolute;left:16%;right:16%;top:50%;height:4px;transform:translateY(-50%);background:var(--blue);box-shadow:0 0 12px var(--blue);border-radius:3px}
 .fader-val{font-family:'VT323',monospace;font-size:16px;color:var(--screen-dim);letter-spacing:1px}
 body.on .fader-val{color:var(--blue);text-shadow:0 0 8px var(--ring-color)}
-/* ═══ БОЛЬШОЙ ДВИЖОК ПЕРЕМОТКИ (как громкость) ═══ */
 .seek-row{z-index:3;display:flex;align-items:center;gap:10px;padding:10px 12px 8px;font-family:'VT323',monospace;font-size:clamp(14px,2.8vh,18px);color:var(--screen-dim);letter-spacing:1px;flex-shrink:0;touch-action:none;order:3}
 .seek-time{min-width:50px;text-align:center;text-shadow:0 0 6px var(--screen-glow)}
 .seek-track{flex:1;height:clamp(24px,6.5vw,34px);border-radius:16px;background:linear-gradient(180deg,#050508,#1a1a22);box-shadow:inset 0 3px 8px rgba(0,0,0,.9),0 1px 0 rgba(255,255,255,.12);position:relative;cursor:pointer;border:1px solid rgba(0,0,0,.6)}
@@ -171,10 +170,16 @@ body.on .btn{color:var(--btn-active-color)}
 body.on .btn:before{border-color:var(--ring-color);box-shadow:0 0 8px var(--ring-color),inset 0 0 4px var(--ring-color)}
 .btn:active{transform:translateY(2px);box-shadow:inset 0 3px 8px rgba(0,0,0,.7),0 1px 3px rgba(0,0,0,.4)}
 .btn.play{width:clamp(50px,11.5vw,70px);height:clamp(50px,11.5vw,70px);font-size:clamp(21px,5.4vw,31px)}
-body.playing .btn.play{color:var(--screen-text)}
 body.playing .btn.play:before{border-color:var(--ring-color);animation:softBreath 2.6s ease-in-out infinite}
+.btn.play #playIco{display:flex;align-items:center;justify-content:center}
+.btn.play svg{width:1.5em;height:1.5em;filter:drop-shadow(0 0 5px currentColor)}
+body.playing .btn.play{color:var(--blue-bright);box-shadow:inset 0 0 16px var(--ring-color),inset 0 2px 3px rgba(255,255,255,.22),inset 0 -4px 7px rgba(0,0,0,.5),0 4px 14px rgba(0,0,0,.5),0 0 20px var(--ring-color)}
+body.playing .btn.play svg{filter:drop-shadow(0 0 8px var(--blue)) drop-shadow(0 0 18px var(--ring-color))}
 @keyframes softBreath{0%,100%{box-shadow:0 0 10px 1px var(--ring-color);opacity:.5}50%{box-shadow:0 0 22px 5px var(--ring-color);opacity:.85}}
-.led-strip{z-index:2;height:3px;margin:3px 16px 2px;border-radius:2px;background:rgba(0,0,0,.4);box-shadow:inset 0 1px 2px rgba(0,0,0,.7);position:relative;overflow:hidden;flex-shrink:0;order:4}
+.led-strip{z-index:2;height:4px;margin:4px 16px 3px;border-radius:3px;background:rgba(0,0,0,.5);box-shadow:inset 0 1px 3px rgba(0,0,0,.8);position:relative;overflow:hidden;flex-shrink:0;order:4}
+.led-strip:after{content:'';position:absolute;inset:0;opacity:0;transition:opacity .5s;background:linear-gradient(90deg,transparent,var(--blue),var(--blue-bright),var(--blue),transparent);background-size:45% 100%;background-repeat:no-repeat}
+body.on .led-strip:after{opacity:1;animation:stripRun 2.6s linear infinite}
+@keyframes stripRun{0%{background-position:-50% 0}100%{background-position:150% 0}}
 .console-bottom-row{z-index:2;display:flex;justify-content:center;align-items:center;padding:0 10px 2px;flex-shrink:0;order:5}
 .console-bottom-label{font-family:'VT323',monospace;font-size:clamp(9px,1.8vw,12px);letter-spacing:2.5px;color:var(--label-color)}
 body.mini .speaker,body.mini .features-col,body.mini .fader-col,body.mini .seek-row,body.mini .led-strip,body.mini .console-bottom-row,body.mini .theme-dots,body.mini .brand-sub{display:none}
@@ -255,11 +260,10 @@ body.mini .system{width:100%;height:min(300px,55vh)}
 .scr-date{font-size:clamp(12px,3vh,17px)}
 .scr-weather,.scr-battery{font-size:clamp(15px,3.8vh,23px)}
 .console-bottom-row{display:none}
-/* порядок: экран -> кнопки -> полоса внизу */
 .mid-section{order:1}
 .controls{order:2;padding:4px 2px 2px}
-.seek-row{order:3;padding:8px 12px 10px}
-.led-strip{order:4;margin:2px 14px 1px}
+.seek-row{order:3;padding:8px 12px 6px}
+.led-strip{order:4;margin:2px 14px 4px}
 .seek-track{height:clamp(22px,5.5vh,32px)}
 .seek-knob{width:clamp(52px,13vh,72px);height:clamp(34px,9vh,46px)}
 .btn{width:clamp(34px,8vh,46px);height:clamp(34px,8vh,46px);font-size:clamp(14px,3.6vh,20px)}
@@ -349,9 +353,9 @@ body.mini .system{width:100%;height:min(300px,55vh)}
       <div class="fader-col"><div class="fader-top-label">VOL</div><div class="fader" id="fader"><div class="fader-scale" id="faderScale"></div><div class="fader-track-wrap"><div class="fader-track"><div class="fader-fill" id="faderFill"></div><div class="fader-cap" id="faderCap"></div></div></div></div><div class="fader-val" id="faderValue">80</div></div>
     </div>
     <div class="seek-row" id="seekRow"><div class="seek-time" id="seekCurrent">--:--</div><div class="seek-track disabled" id="seekTrack"><div class="seek-fill" id="seekFill"></div><div class="seek-knob" id="seekKnob"></div></div><div class="seek-time" id="seekDuration">LIVE</div></div>
-    <div class="controls"><button class="btn" onclick="prevStation()">⏮</button><button class="btn play" id="playBtn" onclick="togglePlay()"><span id="playIco">▶</span></button><button class="btn" onclick="stopPlay()">■</button><button class="btn" onclick="nextStation()">⏭</button><button class="btn" onclick="openChannels()">☰</button><button class="btn" onclick="toggleFullscreen()">⛶</button></div>
+    <div class="controls"><button class="btn" onclick="prevStation()">⏮</button><button class="btn play" id="playBtn" onclick="togglePlay()"><span id="playIco"></span></button><button class="btn" onclick="stopPlay()">■</button><button class="btn" onclick="nextStation()">⏭</button><button class="btn" onclick="openChannels()">☰</button><button class="btn" onclick="toggleFullscreen()">⛶</button></div>
     <div class="led-strip"></div>
-    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v3.7</div></div>
+    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v3.8</div></div>
     <div class="overlay" id="stationsOverlay">
       <div class="overlay-header"><div class="overlay-title">CHANNELS · <span id="stationCount">0</span></div><button class="overlay-close" onclick="closeOverlay('stationsOverlay')">×</button></div>
       <div class="seg-row"><button class="seg active" data-filter="radio" onclick="setFilter('radio')">RADIO</button><button class="seg" data-filter="local" onclick="setFilter('local')">FILES</button><button class="seg" data-filter="fav" onclick="setFilter('fav')">★ FAV</button></div>
@@ -446,7 +450,9 @@ function bindPlayer(p){
 function autoNext(){if(!powerOn||activeIsLocal)return;nextStation()}
 function setStatus(t){document.getElementById('statusText').textContent=t}
 function setNetLed(m){document.getElementById('netLed').className='status-led network-led '+m}
-function setPlayBtn(v){document.getElementById('playIco').textContent=v?'⏸':'▶'}
+const SVG_PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+const SVG_PAUSE='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1.6"/><rect x="13.5" y="5" width="4" height="14" rx="1.6"/></svg>';
+function setPlayBtn(v){document.getElementById('playIco').innerHTML=v?SVG_PAUSE:SVG_PLAY}
 function applyVolume(){const v=Math.max(0,Math.min(1,targetVolume*fadeMult));[remotePlayer,localFX,localPure].forEach(p=>{if(p)p.volume=v})}
 function fadeTo(m,dur,cb){if(fadeAnim)cancelAnimationFrame(fadeAnim);const st=performance.now(),fr=fadeMult,df=m-fr;function step(n){const t=Math.min(1,(n-st)/dur);const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;fadeMult=fr+df*e;applyVolume();if(t<1)fadeAnim=requestAnimationFrame(step);else{fadeAnim=null;if(cb)cb()}}fadeAnim=requestAnimationFrame(step)}
 function togglePower(){if(!powerOn){powerOn=true;document.body.classList.add('on');ensurePlayers();setStatus('HELLO');document.getElementById('stationName').textContent='HONGQI HS5';setTimeout(()=>{loadStation(currentIndex);if(activePlayer){const pr=activePlayer.play();if(pr&&pr.catch)pr.catch(()=>setStatus('PRESS PLAY'))}},450)}else{powerOn=false;isPlaying=false;[remotePlayer,localFX,localPure].forEach(p=>{if(p)try{p.pause()}catch(e){}});document.body.classList.remove('on','playing');setStatus('STANDBY');setPlayBtn(false);updateSeekUI()}}
@@ -461,7 +467,6 @@ const faderScale=document.getElementById('faderScale');for(let i=0;i<=10;i++){co
 const VOL_SEGS=16,volWrap=document.getElementById('volSegments');for(let i=0;i<VOL_SEGS;i++){const s=document.createElement('div');s.className='vol-seg'+(i>=VOL_SEGS-2?' max':'');volWrap.appendChild(s)}
 function renderVolume(){const lit=Math.round(targetVolume*VOL_SEGS);document.querySelectorAll('.vol-seg').forEach((s,i)=>s.classList.toggle('lit',i<lit));document.getElementById('volNum').textContent=lit;document.getElementById('faderFill').style.height=targetVolume*100+'%';document.getElementById('faderCap').style.bottom=targetVolume*100+'%';document.getElementById('faderValue').textContent=Math.round(targetVolume*100);applyVolume()}renderVolume();
 const faderEl=document.getElementById('fader'),faderTrack=document.querySelector('.fader-track');let faderDragging=false;function setVolumeFromPointer(e){const r=faderTrack.getBoundingClientRect();let p=1-(e.clientY-r.top)/r.height;p=Math.max(0,Math.min(1,p));targetVolume=Math.round(p*32)/32;renderVolume()}faderEl.addEventListener('pointerdown',e=>{faderDragging=true;faderEl.setPointerCapture(e.pointerId);setVolumeFromPointer(e)});faderEl.addEventListener('pointermove',e=>{if(faderDragging)setVolumeFromPointer(e)});faderEl.addEventListener('pointerup',()=>faderDragging=false);faderEl.addEventListener('pointercancel',()=>faderDragging=false);
-/* ═══ БОЛЬШОЙ ДВИЖОК ПЕРЕМОТКИ: вся строка кликабельна ═══ */
 const seekRow=document.getElementById('seekRow'),seekTrack=document.getElementById('seekTrack'),seekFill=document.getElementById('seekFill'),seekKnob=document.getElementById('seekKnob');let seekDragging=false;function fmtTime(s){s=Math.max(0,Math.floor(s||0));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
 function updateSeekUI(){const c=document.getElementById('seekCurrent'),d=document.getElementById('seekDuration');
 if(nativeLocalActive&&nlDur>0){seekTrack.classList.remove('disabled');const p=Math.max(0,Math.min(100,nlPos/nlDur*100));seekFill.style.width=p+'%';seekKnob.style.left=p+'%';c.textContent=fmtTime(nlPos/1000);d.textContent=fmtTime(nlDur/1000);return}
@@ -516,7 +521,6 @@ window.addEventListener('online',()=>setNetLed('online'));window.addEventListene
 let touchX=0;const screenEl=document.querySelector('.screen-frame');screenEl.addEventListener('touchstart',e=>{if(document.querySelector('.overlay.show'))return;touchX=e.changedTouches[0].screenX},{passive:true});screenEl.addEventListener('touchend',e=>{if(document.querySelector('.overlay.show'))return;const d=e.changedTouches[0].screenX-touchX;if(Math.abs(d)>50)d>0?prevStation():nextStation()},{passive:true});
 document.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();togglePlay()}if(e.code==='ArrowLeft')prevStation();if(e.code==='ArrowRight')nextStation();if(e.code==='ArrowUp'){e.preventDefault();targetVolume=Math.min(1,targetVolume+.0625);renderVolume()}if(e.code==='ArrowDown'){e.preventDefault();targetVolume=Math.max(0,targetVolume-.0625);renderVolume()}if(e.code==='KeyP')togglePower();if(e.code==='KeyF')toggleFullscreen();if(e.code==='KeyM')toggleMini();if(e.code==='KeyL'){const o=document.getElementById('stationsOverlay');o.classList.contains('show')?closeOverlay('stationsOverlay'):openOverlay('stationsOverlay')}});
 function toggleMini(){document.body.classList.contains('mini')?expandPlayer():collapsePlayer()}
-/* ═══ АНАЛИЗАТОР ═══ */
 const analyzerCanvas=document.getElementById('analyzerCanvas'),canvasCtx=analyzerCanvas.getContext('2d');
 const MODES=['meters','sphere','bars','aurora','nebula','kaleidoscope','terrain','plasma'];
 let analyzerMode=localStorage.getItem('analyzerMode')||'meters';
@@ -606,7 +610,7 @@ function drawPlasma(w,h){const cx=w/2,cy=h/2,rings=4,baseR=Math.min(w,h)*.09,ste
 let lastT=performance.now(),lastDraw=0;
 function mainLoop(now){requestAnimationFrame(mainLoop);const dt=Math.min(.05,(now-lastT)/1000);lastT=now;updateAnalyzerData(dt);updateMeters(dt);if(now-lastDraw<33)return;lastDraw=now;drawAnalyzer()}
 updateThemeColors();buildNebSprite();resizeAnalyzer();setTimeout(resizeAnalyzer,140);requestAnimationFrame(mainLoop);
-setEQ(currentEQ);updateWarmUI();buildStationsList();updateSeekUI();
+setEQ(currentEQ);updateWarmUI();buildStationsList();updateSeekUI();setPlayBtn(false);
 </script>
 </body>
 </html>
