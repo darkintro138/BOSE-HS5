@@ -611,7 +611,17 @@ function drawPlasma(w,h){const cx=w/2,cy=h/2,rings=4,baseR=Math.min(w,h)*.09,ste
 let lastT=performance.now(),lastDraw=0;
 function mainLoop(now){requestAnimationFrame(mainLoop);const dt=Math.min(.05,(now-lastT)/1000);lastT=now;updateAnalyzerData(dt);updateMeters(dt);if(now-lastDraw<33)return;lastDraw=now;drawAnalyzer()}
 updateThemeColors();buildNebSprite();resizeAnalyzer();setTimeout(resizeAnalyzer,140);requestAnimationFrame(mainLoop);
-setEQ(currentEQ);updateWarmUI();buildStationsList();updateSeekUI();setPlayBtn(false);
+setEQ(currentEQ);updateWarmUI();buildStationsList();updateSeekUI();
+ /* ═══ TV REMOTE MODE ═══ */
+window.tvOverlayOpen=function(){var o=document.getElementById('stationsOverlay');return !!o&&o.classList.contains('show');};
+var tvIdx=-1;
+function tvItems(){return Array.prototype.slice.call(document.querySelectorAll('#stationsGrid .station-item'));}
+function tvHighlight(i){var items=tvItems();if(!items.length)return;if(i<0)i=0;if(i>=items.length)i=items.length-1;tvIdx=i;items.forEach(function(el,k){el.classList.toggle('tv-sel',k===tvIdx);if(k===tvIdx)el.scrollIntoView({block:'nearest'});});}
+window.tvMove=function(d){if(window.tvOverlayOpen()){tvHighlight((tvIdx<0?0:tvIdx+d));}};
+window.tvConfirm=function(){if(window.tvOverlayOpen()){var items=tvItems();if(tvIdx>=0&&items[tvIdx])items[tvIdx].click();}else{togglePlay();}};
+window.tvOpenList=function(){openChannels();setTimeout(function(){tvHighlight(0);},150);};
+window.tvCloseList=function(){closeOverlay('stationsOverlay');tvIdx=-1;tvItems().forEach(function(el){el.classList.remove('tv-sel');});};
+  setPlayBtn(false);
 </script>
 </body>
 </html>
