@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="HongQi HS5">
 <meta name="theme-color" content="#0b0c0e">
 <title>HongQi HS5 · BOSE Sound</title>
-<link rel="manifest" href="manifest.json?v=18">
+<link rel="manifest" href="manifest.json?v=19">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -216,6 +216,60 @@ body.mini .controls{padding:6px 2px 4px}
 .eq-btn:hover{background:var(--ring-color);color:var(--screen-bg)}
 .eq-btn.active{background:var(--screen-text);color:var(--screen-bg);box-shadow:0 0 16px var(--screen-text)}
 .eq-btn.disabled{opacity:.3;pointer-events:none}
+/* ═══ TV / BIG SCREEN ═══ */
+@media (min-width:1500px){
+  body{padding:48px}
+  .system{max-width:1600px;max-height:900px;gap:24px}
+  .speaker{flex:0 0 220px}
+  .woofer{width:170px;height:170px}
+  .woofer-cone{width:124px;height:124px}
+  .dust-cap{width:44px;height:44px}
+  .mid-driver{width:96px;height:96px}
+  .mid-cone{width:70px;height:70px}
+  .mid-cone .cap{width:26px;height:26px}
+  .tweeter,.drv-btn{width:64px;height:64px}
+  .console{padding:20px 24px;border-radius:24px}
+  .brand{font-size:34px}
+  .btn{width:84px;height:84px;font-size:34px}
+  .btn.play{width:104px;height:104px;font-size:46px}
+  .fbtn{width:84px;height:84px}
+  .fbtn .fico{font-size:36px}
+  .fbtn .fico svg{width:36px;height:36px}
+  .fbtn .ftxt{font-size:14px}
+  .pwr-btn{width:84px;height:64px}
+  .pwr-btn svg{width:36px;height:36px}
+  .theme-dot{width:36px;height:36px}
+  .seek-track{height:44px}
+  .seek-knob{width:110px;height:70px}
+  .fader-col{flex:0 0 110px}
+  .fader-track{width:26px}
+  .fader-cap{width:90px;height:50px}
+  .scr-clock{font-size:110px}
+  .scr-date{font-size:30px}
+  .scr-weather,.scr-battery{font-size:40px}
+  .scr-station{font-size:40px}
+  .scr-status-row{font-size:22px}
+  .scr-marquee{font-size:26px}
+  .vol-label{font-size:20px}
+  .vol-seg{width:7px;height:14px}
+  .seek-time{font-size:28px;min-width:90px}
+  .fader-val{font-size:26px}
+  .station-name-small{font-size:22px}
+  .station-genre-small{font-size:20px}
+  .station-num{font-size:30px}
+  .search-box{font-size:24px;padding:14px 18px}
+  .seg{font-size:24px;padding:12px}
+  .eq-btn{font-size:20px;min-height:80px}
+  .overlay-title{font-size:26px}
+  .console-bottom-label{font-size:18px}
+}
+/* Подсветка фокуса с пульта (D-pad) */
+.btn:focus,.fbtn:focus,.pwr-btn:focus,.drv-btn:focus,.theme-dot:focus,
+.seg:focus,.eq-btn:focus,.overlay-close:focus,.mini-expand:focus{
+  outline:3px solid var(--blue-bright);outline-offset:3px;
+  box-shadow:0 0 0 3px rgba(0,0,0,.6),0 0 22px var(--ring-color);z-index:5;
+}
+.station-item:focus{outline:3px solid var(--blue-bright);outline-offset:2px;background:var(--screen-glow)}
 @media (orientation:portrait),(max-width:640px){
 .speaker{display:none}
 .ponly{display:flex}
@@ -292,7 +346,6 @@ body.mini .system{width:100%;height:min(300px,55vh)}
 .drv-btn svg{width:17px;height:17px}
 .tube{width:7px;height:15px}
 .mini-expand{width:34px;height:28px;font-size:14px}
-.station-item.tv-sel{outline:3px solid var(--blue-bright);outline-offset:2px;background:var(--screen-glow)}
 }
 </style>
 </head>
@@ -356,7 +409,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
     <div class="seek-row" id="seekRow"><div class="seek-time" id="seekCurrent">--:--</div><div class="seek-track disabled" id="seekTrack"><div class="seek-fill" id="seekFill"></div><div class="seek-knob" id="seekKnob"></div></div><div class="seek-time" id="seekDuration">LIVE</div></div>
     <div class="controls"><button class="btn" onclick="prevStation()">⏮</button><button class="btn play" id="playBtn" onclick="togglePlay()"><span id="playIco"></span></button><button class="btn" onclick="stopPlay()">■</button><button class="btn" onclick="nextStation()">⏭</button><button class="btn" onclick="openChannels()">☰</button><button class="btn" onclick="toggleFullscreen()">⛶</button></div>
     <div class="led-strip"></div>
-    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v3.8</div></div>
+    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v3.9 TV</div></div>
     <div class="overlay" id="stationsOverlay">
       <div class="overlay-header"><div class="overlay-title">CHANNELS · <span id="stationCount">0</span></div><button class="overlay-close" onclick="closeOverlay('stationsOverlay')">×</button></div>
       <div class="seg-row"><button class="seg active" data-filter="radio" onclick="setFilter('radio')">RADIO</button><button class="seg" data-filter="local" onclick="setFilter('local')">FILES</button><button class="seg" data-filter="fav" onclick="setFilter('fav')">★ FAV</button></div>
@@ -488,7 +541,7 @@ function openChannels(){var hasLib=false;try{hasLib=localFiles.length>0;}catch(e
 function openFolder(){if(window.AndroidRadio&&AndroidRadio.openFolder){try{AndroidRadio.openFolder();return;}catch(e){}}note('ЗАГРУЗКА ПАПКИ ДОСТУПНА В ПРИЛОЖЕНИИ ANDROID');}
 function openBluetooth(){if(window.AndroidRadio&&AndroidRadio.openBtSettings){try{AndroidRadio.openBtSettings();return;}catch(e){}}note('BLUETOOTH ВКЛЮЧАЕТСЯ В НАСТРОЙКАХ ТЕЛЕФОНА · В ПРИЛОЖЕНИИ КНОПКА BT ОТКРОЕТ ИХ САМА');}
 document.getElementById('searchBox').addEventListener('input',buildStationsList);
-function buildStationsList(){const grid=document.getElementById('stationsGrid');grid.innerHTML='';const all=getAllStations(),q=(document.getElementById('searchBox').value||'').toLowerCase();const filtered=all.filter(s=>{if(currentFilter==='radio'&&s.local)return false;if(currentFilter==='local'&&!s.local)return false;if(currentFilter==='fav'&&!s.fav)return false;if(q&&!(s.n.toLowerCase().includes(q)||s.g.toLowerCase().includes(q)))return false;return true});document.getElementById('stationCount').textContent=filtered.length;filtered.forEach(s=>{const idx=all.indexOf(s),item=document.createElement('div');item.className='station-item'+(idx===currentIndex?' active':'');item.innerHTML=`<div class="station-num">${String(idx+1).padStart(3,'0')}</div><div class="station-info"><div class="station-name-small">${s.local?'♫ ':''}${s.n}</div><div class="station-genre-small">${s.g}</div></div><div class="fav-star ${s.fav?'on':''}">★</div>`;item.onclick=e=>{if(e.target.classList.contains('fav-star'))return;loadStation(idx);closeOverlay('stationsOverlay')};item.querySelector('.fav-star').onclick=e=>{e.stopPropagation();toggleFav(s.id)};grid.appendChild(item)})}
+function buildStationsList(){const grid=document.getElementById('stationsGrid');grid.innerHTML='';const all=getAllStations(),q=(document.getElementById('searchBox').value||'').toLowerCase();const filtered=all.filter(s=>{if(currentFilter==='radio'&&s.local)return false;if(currentFilter==='local'&&!s.local)return false;if(currentFilter==='fav'&&!s.fav)return false;if(q&&!(s.n.toLowerCase().includes(q)||s.g.toLowerCase().includes(q)))return false;return true});document.getElementById('stationCount').textContent=filtered.length;filtered.forEach(s=>{const idx=all.indexOf(s),item=document.createElement('div');item.className='station-item'+(idx===currentIndex?' active':'');item.setAttribute('tabindex','0');item.innerHTML=`<div class="station-num">${String(idx+1).padStart(3,'0')}</div><div class="station-info"><div class="station-name-small">${s.local?'♫ ':''}${s.n}</div><div class="station-genre-small">${s.g}</div></div><div class="fav-star ${s.fav?'on':''}">★</div>`;item.onclick=e=>{if(e.target.classList.contains('fav-star'))return;loadStation(idx);closeOverlay('stationsOverlay')};item.querySelector('.fav-star').onclick=e=>{e.stopPropagation();toggleFav(s.id)};grid.appendChild(item)})}
 function openOverlay(id){if(id!=='stationsOverlay'&&!powerOn)return;document.getElementById(id).classList.add('show');if(id==='stationsOverlay')buildStationsList();if(id==='eqOverlay')updateWarmUI()}
 function closeOverlay(id){document.getElementById(id).classList.remove('show')}
 function collapsePlayer(){document.body.classList.add('mini');localStorage.setItem('mini','1');setTimeout(resizeAnalyzer,120)}
@@ -520,7 +573,15 @@ document.addEventListener('visibilitychange',()=>{
 });
 window.addEventListener('online',()=>setNetLed('online'));window.addEventListener('offline',()=>setNetLed('offline'));setNetLed(navigator.onLine?'online':'offline');
 let touchX=0;const screenEl=document.querySelector('.screen-frame');screenEl.addEventListener('touchstart',e=>{if(document.querySelector('.overlay.show'))return;touchX=e.changedTouches[0].screenX},{passive:true});screenEl.addEventListener('touchend',e=>{if(document.querySelector('.overlay.show'))return;const d=e.changedTouches[0].screenX-touchX;if(Math.abs(d)>50)d>0?prevStation():nextStation()},{passive:true});
-document.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();togglePlay()}if(e.code==='ArrowLeft')prevStation();if(e.code==='ArrowRight')nextStation();if(e.code==='ArrowUp'){e.preventDefault();targetVolume=Math.min(1,targetVolume+.0625);renderVolume()}if(e.code==='ArrowDown'){e.preventDefault();targetVolume=Math.max(0,targetVolume-.0625);renderVolume()}if(e.code==='KeyP')togglePower();if(e.code==='KeyF')toggleFullscreen();if(e.code==='KeyM')toggleMini();if(e.code==='KeyL'){const o=document.getElementById('stationsOverlay');o.classList.contains('show')?closeOverlay('stationsOverlay'):openOverlay('stationsOverlay')}});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'||e.keyCode===13){var el=document.activeElement;if(el&&el.classList&&el.classList.contains('station-item')){e.preventDefault();el.click();return}}
+  if(e.code==='Space'){e.preventDefault();togglePlay()}
+  if(e.code==='ArrowLeft')prevStation();if(e.code==='ArrowRight')nextStation();
+  if(e.code==='ArrowUp'){e.preventDefault();targetVolume=Math.min(1,targetVolume+.0625);renderVolume()}
+  if(e.code==='ArrowDown'){e.preventDefault();targetVolume=Math.max(0,targetVolume-.0625);renderVolume()}
+  if(e.code==='KeyP')togglePower();if(e.code==='KeyF')toggleFullscreen();if(e.code==='KeyM')toggleMini();
+  if(e.code==='KeyL'){const o=document.getElementById('stationsOverlay');o.classList.contains('show')?closeOverlay('stationsOverlay'):openOverlay('stationsOverlay')}
+});
 function toggleMini(){document.body.classList.contains('mini')?expandPlayer():collapsePlayer()}
 const analyzerCanvas=document.getElementById('analyzerCanvas'),canvasCtx=analyzerCanvas.getContext('2d');
 const MODES=['meters','sphere','bars','aurora','nebula','kaleidoscope','terrain','plasma'];
@@ -611,17 +672,15 @@ function drawPlasma(w,h){const cx=w/2,cy=h/2,rings=4,baseR=Math.min(w,h)*.09,ste
 let lastT=performance.now(),lastDraw=0;
 function mainLoop(now){requestAnimationFrame(mainLoop);const dt=Math.min(.05,(now-lastT)/1000);lastT=now;updateAnalyzerData(dt);updateMeters(dt);if(now-lastDraw<33)return;lastDraw=now;drawAnalyzer()}
 updateThemeColors();buildNebSprite();resizeAnalyzer();setTimeout(resizeAnalyzer,140);requestAnimationFrame(mainLoop);
-setEQ(currentEQ);updateWarmUI();buildStationsList();updateSeekUI();
- /* ═══ TV REMOTE MODE ═══ */
-window.tvOverlayOpen=function(){var o=document.getElementById('stationsOverlay');return !!o&&o.classList.contains('show');};
-var tvIdx=-1;
-function tvItems(){return Array.prototype.slice.call(document.querySelectorAll('#stationsGrid .station-item'));}
-function tvHighlight(i){var items=tvItems();if(!items.length)return;if(i<0)i=0;if(i>=items.length)i=items.length-1;tvIdx=i;items.forEach(function(el,k){el.classList.toggle('tv-sel',k===tvIdx);if(k===tvIdx)el.scrollIntoView({block:'nearest'});});}
-window.tvMove=function(d){if(window.tvOverlayOpen()){tvHighlight((tvIdx<0?0:tvIdx+d));}};
-window.tvConfirm=function(){if(window.tvOverlayOpen()){var items=tvItems();if(tvIdx>=0&&items[tvIdx])items[tvIdx].click();}else{togglePlay();}};
-window.tvOpenList=function(){openChannels();setTimeout(function(){tvHighlight(0);},150);};
-window.tvCloseList=function(){closeOverlay('stationsOverlay');tvIdx=-1;tvItems().forEach(function(el){el.classList.remove('tv-sel');});};
-  setPlayBtn(false);
+/* TV: класс tv + автофокус на ▶ */
+(function(){
+  var isTV=(navigator.userAgent.indexOf('TV')>-1)||(window.innerWidth>=1500);
+  if(isTV){
+    document.body.classList.add('tv');
+    setTimeout(function(){var p=document.getElementById('playBtn');if(p)p.focus();},600);
+  }
+})();
+setEQ(currentEQ);updateWarmUI();buildStationsList();updateSeekUI();setPlayBtn(false);
 </script>
 </body>
 </html>
