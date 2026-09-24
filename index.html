@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="HongQi HS5">
 <meta name="theme-color" content="#0b0c0e">
 <title>HongQi HS5 · BOSE Sound</title>
-<link rel="manifest" href="manifest.json?v=23">
+<link rel="manifest" href="manifest.json?v=24">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -251,6 +251,13 @@ body.mini .controls{padding:6px 2px 4px}
 }
 .btn:focus,.fbtn:focus,.pwr-btn:focus,.drv-btn:focus,.theme-dot:focus,.seg:focus,.eq-btn:focus,.overlay-close:focus,.mini-expand:focus{outline:3px solid var(--blue-bright);outline-offset:3px;box-shadow:0 0 0 3px rgba(0,0,0,.6),0 0 22px var(--ring-color);z-index:5}
 .station-item:focus{outline:3px solid var(--blue-bright);outline-offset:2px;background:var(--screen-glow)}
+/* ═══ PERF MODE (слабые устройства / магнитолы) ═══ */
+body.perf .tube,body.perf .woofer-cone,body.perf .mid-cone,body.perf .tweeter,body.perf .cabinet,body.perf .drv-btn,body.perf .btn.play:before,body.perf .led-strip:after,body.perf .scr-marquee,body.perf .live-dot{animation:none!important}
+body.perf .led-strip:after{opacity:.4}
+body.perf .scr-marquee{padding-left:0;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.perf .screen:before,body.perf .screen:after{display:none}
+body.perf .overlay{backdrop-filter:none}
+body.perf .eq{box-shadow:none}
 @media (orientation:portrait),(max-width:640px){
 .speaker{display:none}
 .ponly{display:flex}
@@ -341,6 +348,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
         <button class="fbtn" id="wakeLockBtn" onclick="toggleWakeLock()"><span class="fico">☀</span><span class="ftxt">WAKE</span></button>
         <button class="fbtn" onclick="openOverlay('eqOverlay')"><span class="fico">♨</span><span class="ftxt">TUBE</span></button>
         <button class="fbtn" onclick="openFolder()"><span class="fico">▣</span><span class="ftxt">FOLD</span></button>
+        <button class="fbtn" id="perfBtn" onclick="setPerf(!document.body.classList.contains('perf'))"><span class="fico">⚡</span><span class="ftxt">PERF</span></button>
       </div>
       <div class="screen-frame"><div class="screen"><div class="power-hint">— НАЖМИТЕ POWER СВЕРХУ —</div>
         <div class="screen-content">
@@ -368,7 +376,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
     <div class="seek-row" id="seekRow"><div class="seek-time" id="seekCurrent">--:--</div><div class="seek-track disabled" id="seekTrack"><div class="seek-fill" id="seekFill"></div><div class="seek-knob" id="seekKnob"></div></div><div class="seek-time" id="seekDuration">LIVE</div></div>
     <div class="controls"><button class="btn" onclick="prevStation()">⏮</button><button class="btn play" id="playBtn" onclick="togglePlay()"><span id="playIco"></span></button><button class="btn" onclick="stopPlay()">■</button><button class="btn" onclick="nextStation()">⏭</button><button class="btn" onclick="openChannels()">☰</button><button class="btn" onclick="toggleFullscreen()">⛶</button></div>
     <div class="led-strip"></div>
-    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v4.3</div></div>
+    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v4.4</div></div>
     <div class="overlay" id="stationsOverlay">
       <div class="overlay-header"><div class="overlay-title">CHANNELS · <span id="stationCount">0</span></div><button class="overlay-close" onclick="closeOverlay('stationsOverlay')">×</button></div>
       <div class="seg-row"><button class="seg active" data-filter="radio" onclick="setFilter('radio')">RADIO</button><button class="seg" data-filter="local" onclick="setFilter('local')">FILES</button><button class="seg" data-filter="playlists" onclick="setFilter('playlists')">♫ PLY</button><button class="seg" data-filter="fav" onclick="setFilter('fav')">★ FAV</button></div>
@@ -649,7 +657,7 @@ const nebSprite=document.createElement('canvas');nebSprite.width=nebSprite.heigh
 function buildNebSprite(){const c=nebSprite.getContext('2d');c.clearRect(0,0,64,64);const g=c.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,withAlpha(colors.bright,.95));g.addColorStop(.28,withAlpha(colors.primary,.5));g.addColorStop(1,withAlpha(colors.deep,0));c.fillStyle=g;c.fillRect(0,0,64,64)}
 function updateThemeColors(){const cs=getComputedStyle(document.body);colors.primary=cs.getPropertyValue('--blue').trim()||'#35c8ff';colors.bright=cs.getPropertyValue('--blue-bright').trim()||'#aee9ff';colors.deep=cs.getPropertyValue('--blue-deep').trim()||'#0a5a8a';colors.bg=cs.getPropertyValue('--screen-bg').trim()||'#02101d'}
 function withAlpha(c,a){c=(c||'').trim();if(c.startsWith('#')){let h=c.slice(1);if(h.length===3)h=h.split('').map(x=>x+x).join('');const n=parseInt(h,16);return`rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`}return c}
-function resizeAnalyzer(){const dpr=Math.min(window.devicePixelRatio||1,1.25),r=analyzerCanvas.getBoundingClientRect();analyzerCanvas.width=Math.max(1,Math.floor(r.width*dpr));analyzerCanvas.height=Math.max(1,Math.floor(r.height*dpr));canvasCtx.setTransform(dpr,0,0,dpr,0,0)}
+function resizeAnalyzer(){const dpr=Math.min(window.devicePixelRatio||1,(document.body.classList.contains('perf')?1:1.25)),r=analyzerCanvas.getBoundingClientRect();analyzerCanvas.width=Math.max(1,Math.floor(r.width*dpr));analyzerCanvas.height=Math.max(1,Math.floor(r.height*dpr));canvasCtx.setTransform(dpr,0,0,dpr,0,0)}
 window.addEventListener('resize',resizeAnalyzer);
 window.addEventListener('orientationchange',()=>setTimeout(resizeAnalyzer,320));
 document.addEventListener('fullscreenchange',()=>setTimeout(resizeAnalyzer,260));
@@ -725,7 +733,25 @@ function drawKaleidoscope(w,h){const cx=w/2,cy=h/2,R=Math.min(w,h)*.42,seg=10,ro
 function drawTerrain(w,h){const rows=10,cols=BANDS,baseY=h*.52,rowGap=h*.03,maxH=h*.5;canvasCtx.save();for(let r=rows-1;r>=0;r--){const depth=r/rows,ys=baseY+r*rowGap,amp=maxH*(1-depth*.65),alpha=.12+(1-depth)*.72;canvasCtx.beginPath();canvasCtx.moveTo(0,h);for(let cc=0;cc<=cols;cc++){const bi=Math.min(BANDS-1,cc),v=smooth[bi]/255,wv=Math.sin(cc*.3+syntheticPhase*2+r*.4)*.1,y=ys-amp*(v+wv*.3),x=cc/cols*w;if(cc===0)canvasCtx.lineTo(x,y);else{const px2=(cc-1)/cols*w,pv=smooth[Math.min(BANDS-1,cc-1)]/255,pw=Math.sin((cc-1)*.3+syntheticPhase*2+r*.4)*.1,py2=ys-amp*(pv+pw*.3);canvasCtx.quadraticCurveTo(px2,py2,(px2+x)/2,(py2+y)/2)}}canvasCtx.lineTo(w,h);canvasCtx.closePath();const g=canvasCtx.createLinearGradient(0,ys-amp,0,ys+26);g.addColorStop(0,withAlpha(colors.bright,alpha));g.addColorStop(.5,withAlpha(colors.primary,alpha*.65));g.addColorStop(1,withAlpha(colors.deep,alpha*.18));canvasCtx.fillStyle=g;canvasCtx.fill();canvasCtx.strokeStyle=withAlpha(colors.bright,alpha*.4);canvasCtx.lineWidth=1;canvasCtx.stroke()}canvasCtx.restore()}
 function drawPlasma(w,h){const cx=w/2,cy=h/2,rings=4,baseR=Math.min(w,h)*.09,step=Math.min(w,h)*.07;canvasCtx.save();canvasCtx.globalCompositeOperation='lighter';for(let r=0;r<rings;r++){const radius=baseR+r*step,bi=Math.floor(r/rings*BANDS*.8),v=smooth[bi]/255;if(v<.02)continue;const seg=44;canvasCtx.beginPath();for(let s=0;s<=seg;s++){const a=s/seg*Math.PI*2,sb=Math.floor(((Math.sin(a*3+syntheticPhase)+1)/2)*BANDS),lv=smooth[sb]/255,rr=radius*(1+lv*.25),wb=Math.sin(a*5+syntheticPhase*3+r)*2*lv,px2=cx+Math.cos(a)*(rr+wb),py2=cy+Math.sin(a)*(rr+wb);s===0?canvasCtx.moveTo(px2,py2):canvasCtx.lineTo(px2,py2)}canvasCtx.closePath();const alpha=.15+v*.6;canvasCtx.strokeStyle=withAlpha(colors.bright,alpha);canvasCtx.lineWidth=1.4+v*2.2;canvasCtx.stroke()}const coreR=10+smooth[0]/255*24,cg=canvasCtx.createRadialGradient(cx,cy,0,cx,cy,coreR*2);cg.addColorStop(0,withAlpha(colors.bright,.9));cg.addColorStop(.3,withAlpha(colors.primary,.45));cg.addColorStop(1,withAlpha(colors.deep,0));canvasCtx.fillStyle=cg;canvasCtx.beginPath();canvasCtx.arc(cx,cy,coreR*2,0,Math.PI*2);canvasCtx.fill();canvasCtx.restore()}
 let lastT=performance.now(),lastDraw=0;
-function mainLoop(now){requestAnimationFrame(mainLoop);const dt=Math.min(.05,(now-lastT)/1000);lastT=now;updateAnalyzerData(dt);updateMeters(dt);if(now-lastDraw<33)return;lastDraw=now;drawAnalyzer()}
+function mainLoop(now){requestAnimationFrame(mainLoop);const dt=Math.min(.05,(now-lastT)/1000);lastT=now;updateAnalyzerData(dt);updateMeters(dt);if(now-lastDraw<(1000/(window.__perfFps||30)))return;lastDraw=now;drawAnalyzer()}
+/* ═══ PERF MODE ═══ */
+function perfAuto(){
+  var cores=navigator.hardwareConcurrency||8;
+  var mem=navigator.deviceMemory||4;
+  var ua=navigator.userAgent||'';
+  var headunit=/Vehicle|CarPC|HeadUnit|AndroidAuto/i.test(ua);
+  return headunit||cores<=4||mem<=2;
+}
+function setPerf(on){
+  document.body.classList.toggle('perf',on);
+  var pb=document.getElementById('perfBtn');if(pb)pb.classList.toggle('active',on);
+  try{localStorage.setItem('perf',on?'1':'0');}catch(e){}
+  window.__perfFps=on?15:30;
+  if(on&&analyzerMode!=='bars'){analyzerMode='bars';}
+  resizeAnalyzer();
+}
+var perfStored=null;try{perfStored=localStorage.getItem('perf');}catch(e){}
+setPerf(perfStored!==null?perfStored==='1':perfAuto());
 setEQ(currentEQ);updateWarmUI();buildStationsList();updateSeekUI();setPlayBtn(false);
 resizeAnalyzer();setTimeout(resizeAnalyzer,200);requestAnimationFrame(mainLoop);
 </script>
