@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="HongQi HS5">
 <meta name="theme-color" content="#0b0c0e">
 <title>HongQi HS5 · BOSE Sound</title>
-<link rel="manifest" href="manifest.json?v=22">
+<link rel="manifest" href="manifest.json?v=23">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -116,18 +116,18 @@ body.on .screen{box-shadow:inset 0 0 40px var(--screen-glow),inset 0 0 100px rgb
 .live-dot{width:6px;height:6px;border-radius:50%;background:#ff5a5a;box-shadow:0 0 8px #ff5a5a;animation:blink 1s infinite}
 @keyframes blink{50%{opacity:.2}}
 .scr-station{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(14px,2.8vh,24px);letter-spacing:1.5px;color:var(--screen-text);text-shadow:0 0 14px var(--screen-glow);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;flex-shrink:0}
+.scr-wb{display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,2.4vw,22px);flex-shrink:0;cursor:pointer}
 .scr-marquee-wrap{overflow:hidden;white-space:nowrap;height:17px;border-top:1px solid var(--screen-glow);border-bottom:1px solid var(--screen-glow);display:flex;align-items:center;flex-shrink:0}
 .scr-marquee{font-family:'VT323',monospace;font-size:clamp(12px,2.2vh,16px);letter-spacing:1px;color:var(--screen-dim);text-shadow:0 0 8px var(--screen-glow);display:inline-block;padding-left:100%;animation:marquee 26s linear infinite}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 .scr-mid{display:flex;gap:10px;align-items:stretch;flex:1;min-height:0}
-.eq{position:relative;flex:1.4;min-height:120px;overflow:hidden;border-radius:6px;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.06));box-shadow:inset 0 1px 5px rgba(0,0,0,.5),0 0 12px var(--screen-glow)}
+.eq{position:relative;flex:1.4;min-height:90px;overflow:hidden;border-radius:6px;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.06));box-shadow:inset 0 1px 5px rgba(0,0,0,.5),0 0 12px var(--screen-glow)}
 .eq canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer;touch-action:manipulation}
 .scr-right{flex:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:4px;min-width:0}
 .scr-info{display:flex;flex-direction:column;align-items:flex-end;gap:1px;width:100%}
 .scr-clock{font-family:'VT323',monospace;font-size:clamp(40px,8.4vh,76px);line-height:.9;color:var(--screen-text);letter-spacing:2px;text-shadow:0 0 18px var(--screen-glow);display:flex;align-items:baseline;gap:4px}
 .scr-clock .sec{font-size:.42em;color:var(--screen-dim);opacity:.85;letter-spacing:1px}
 .scr-date{font-family:'VT323',monospace;font-size:clamp(14px,2.9vh,21px);color:var(--screen-dim);letter-spacing:1.5px;text-shadow:0 0 7px var(--screen-glow);text-transform:uppercase}
-.scr-wb{display:flex;align-items:center;gap:clamp(12px,2.4vw,22px);margin-top:4px}
 .scr-weather,.scr-battery{display:flex;align-items:center;gap:6px;font-family:'VT323',monospace;font-size:clamp(24px,4.6vh,36px);color:var(--screen-text);text-shadow:0 0 10px var(--screen-glow);white-space:nowrap}
 .wicon,.bicon{display:flex;align-items:center;color:var(--screen-text)}
 .wicon svg,.bicon svg{width:1.6em;height:1.6em;display:block;filter:drop-shadow(0 0 7px var(--screen-glow))}
@@ -258,8 +258,8 @@ body.mini .controls{padding:6px 2px 4px}
 .console{flex:1;height:100%;padding:6px 8px;border-radius:12px}
 .screen{padding:6px 8px}
 .scr-mid{flex-direction:column;gap:6px}
-.eq{min-height:150px}
-.scr-right{flex-direction:row;align-items:center;justify-content:space-between;gap:8px}
+.eq{flex:1;min-height:70px}
+.scr-right{flex:0 0 auto;flex-direction:row;align-items:center;justify-content:space-between;gap:8px}
 .scr-info{align-items:flex-start;width:auto;flex:1}
 .scr-clock{font-size:clamp(36px,13vw,56px)}
 .scr-date{font-size:clamp(13px,4vw,18px)}
@@ -346,6 +346,10 @@ body.mini .system{width:100%;height:min(300px,55vh)}
         <div class="screen-content">
           <div class="scr-status-row"><span id="statusText">STANDBY</span><span id="modeText">STEREO · 128kbps</span><span class="live"><span class="live-dot"></span>LIVE</span></div>
           <div class="scr-station" id="stationName">HONGQI RADIO</div>
+          <div class="scr-wb" onclick="fetchWeather()">
+            <div class="scr-weather"><span class="wicon" id="weatherIcon"></span><span id="weatherTemp">--°</span></div>
+            <div class="scr-battery" id="batteryWrap"><span class="bicon" id="batteryIcon"></span><span id="batteryLevel">--%</span></div>
+          </div>
           <div class="scr-marquee-wrap"><span class="scr-marquee" id="marqueeText">*** HONGQI HS5 BOSE SOUND *** БРАТСК · ИРКУТСКАЯ ОБЛАСТЬ *** PRESS POWER ***</span></div>
           <div class="scr-mid">
             <div class="eq"><canvas id="analyzerCanvas"></canvas></div>
@@ -353,10 +357,6 @@ body.mini .system{width:100%;height:min(300px,55vh)}
               <div class="scr-info">
                 <div class="scr-clock" id="clockDisplay">--:--<span class="sec" id="clockSec">00</span></div>
                 <div class="scr-date" id="dateDisplay">БРАТСК</div>
-                <div class="scr-wb">
-                  <div class="scr-weather"><span class="wicon" id="weatherIcon"></span><span id="weatherTemp">--°</span></div>
-                  <div class="scr-battery" id="batteryWrap"><span class="bicon" id="batteryIcon"></span><span id="batteryLevel">--%</span></div>
-                </div>
               </div>
               <div class="vol-display"><div class="vol-label">VOL <span id="volNum">13</span></div><div class="vol-segments" id="volSegments"></div></div>
             </div>
@@ -368,7 +368,7 @@ body.mini .system{width:100%;height:min(300px,55vh)}
     <div class="seek-row" id="seekRow"><div class="seek-time" id="seekCurrent">--:--</div><div class="seek-track disabled" id="seekTrack"><div class="seek-fill" id="seekFill"></div><div class="seek-knob" id="seekKnob"></div></div><div class="seek-time" id="seekDuration">LIVE</div></div>
     <div class="controls"><button class="btn" onclick="prevStation()">⏮</button><button class="btn play" id="playBtn" onclick="togglePlay()"><span id="playIco"></span></button><button class="btn" onclick="stopPlay()">■</button><button class="btn" onclick="nextStation()">⏭</button><button class="btn" onclick="openChannels()">☰</button><button class="btn" onclick="toggleFullscreen()">⛶</button></div>
     <div class="led-strip"></div>
-    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v4.2</div></div>
+    <div class="console-bottom-row"><div class="console-bottom-label">PRECISION AUDIO · HS5 · v4.3</div></div>
     <div class="overlay" id="stationsOverlay">
       <div class="overlay-header"><div class="overlay-title">CHANNELS · <span id="stationCount">0</span></div><button class="overlay-close" onclick="closeOverlay('stationsOverlay')">×</button></div>
       <div class="seg-row"><button class="seg active" data-filter="radio" onclick="setFilter('radio')">RADIO</button><button class="seg" data-filter="local" onclick="setFilter('local')">FILES</button><button class="seg" data-filter="playlists" onclick="setFilter('playlists')">♫ PLY</button><button class="seg" data-filter="fav" onclick="setFilter('fav')">★ FAV</button></div>
@@ -566,25 +566,54 @@ function updateClock(){const now=new Date();let parts;try{parts=new Intl.DateTim
 setInterval(updateClock,1000);updateClock();
 function wIcon(code){const st='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';const sun=`<svg viewBox="0 0 24 24" ${st}><circle cx="12" cy="12" r="4.4"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>`;const cloud=`<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M7.2 18.5a4.3 4.3 0 0 1-.5-8.57 6 6 0 0 1 11.5 1.3 3.9 3.9 0 0 1-1.1 7.27H7.2z"/></svg>`;const suncloud=`<svg viewBox="0 0 24 24" ${st}><circle cx="8" cy="7.5" r="3"/><path d="M8 1.8v1.4M2.6 7.5H1.3M4.2 3.7l-1-1M11.8 3.7l1-1"/><path d="M9 19.5a3.6 3.6 0 0 1-.4-7.18 5 5 0 0 1 9.6 1.1 3.3 3.3 0 0 1-.9 6.08H9z" fill="currentColor" stroke="none"/></svg>`;const rain=`<svg viewBox="0 0 24 24"><path d="M7.2 15a4.3 4.3 0 0 1-.5-8.57 6 6 0 0 1 11.5 1.3A3.9 3.9 0 0 1 17 15H7.2z" fill="currentColor" stroke="none"/><g ${st}><path d="M8.5 17.5l-1 3M12.5 17.5l-1 3M16.5 17.5l-1 3"/></g></svg>`;const snow=`<svg viewBox="0 0 24 24" ${st}><path d="M12 2.5v19M3.7 7.2l16.6 9.6M20.3 7.2L3.7 16.8"/><path d="M12 6.2l2.1-2M12 6.2l-2.1-2M12 17.8l2.1 2M12 17.8l-2.1 2M6.4 8.6L4 8.2M6.4 8.6L6 6.2M17.6 15.4l2.4.4M17.6 15.4l.4 2.4M17.6 8.6L20 8.2M17.6 8.6L18 6.2M6.4 15.4L4 15.8M6.4 15.4L6 17.8"/></svg>`;const storm=`<svg viewBox="0 0 24 24"><path d="M7.2 14a4.3 4.3 0 0 1-.5-8.57 6 6 0 0 1 11.5 1.3A3.9 3.9 0 0 1 17 14H7.2z" fill="currentColor" stroke="none"/><path d="M12.5 15.5l-3 4h3l-1.5 3.5 4-5h-3l1.5-2.5z" fill="currentColor"/></svg>`;const fog=`<svg viewBox="0 0 24 24" ${st}><path d="M4 9h16M4 13h16M6 17h12M5 5h14"/></svg>`;if(code===0||code===1)return sun;if(code===2)return suncloud;if(code===3)return cloud;if(code===45||code===48)return fog;if((code>=51&&code<=67)||(code>=80&&code<=82))return rain;if((code>=71&&code<=77)||code===85||code===86)return snow;if(code>=95)return storm;return cloud;}
 function batteryIcon(level,charging){const w=Math.max(0,Math.min(1,level));const fw=(w*17).toFixed(1);const bolt=charging?`<path d="M12.5 3.5l-3 4.2h2.2l-1 3.8 3.3-4.6h-2.2z" fill="#0a0a0a" stroke="none"/>`:'';return `<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="2.2" width="21" height="9.6" rx="2.4"/><path d="M23.6 5.4v3.2" stroke-width="2.4" stroke-linecap="round"/><rect x="2.6" y="3.8" width="${fw}" height="6.4" rx="1.2" fill="currentColor" stroke="none"/>${bolt}</svg>`;}
+/* ═══ ПОГОДА: 3 источника + кэш + тап-обновление ═══ */
 let weatherTries=0;
-async function fetchWeather(){
-  const url='https://api.open-meteo.com/v1/forecast?latitude='+BRATSK.lat+'&longitude='+BRATSK.lon+'&current=temperature_2m,weather_code&timezone='+encodeURIComponent(TZ);
-  try{
-    const r=await fetch(url,{cache:'no-store'});
-    if(!r.ok)throw new Error('http '+r.status);
-    const d=await r.json();
-    const c=(d&&d.current)?d.current:null;
-    if(!c||typeof c.temperature_2m!=='number')throw new Error('bad data');
-    const temp=Math.round(c.temperature_2m);
-    const code=(typeof c.weather_code==='number')?c.weather_code:3;
-    document.getElementById('weatherIcon').innerHTML=wIcon(code);
-    document.getElementById('weatherTemp').textContent=(temp>0?'+':'')+temp+'°';
-    weatherTries=0;
-  }catch(e){
-    document.getElementById('weatherTemp').textContent='--°';
-    if(weatherTries<5){weatherTries++;setTimeout(fetchWeather,3000*weatherTries);}
-  }
+function setWeather(temp,code){
+  const wi=document.getElementById('weatherIcon'),wt=document.getElementById('weatherTemp');
+  if(wi)wi.innerHTML=wIcon(code);
+  if(wt)wt.textContent=(temp>0?'+':'')+temp+'°';
+  try{localStorage.setItem('wx',JSON.stringify({t:temp,c:code}));}catch(e){}
 }
+function showCachedWeather(){
+  try{const w=JSON.parse(localStorage.getItem('wx')||'null');if(w&&typeof w.t==='number'){setWeather(w.t,w.c||3);return true;}}catch(e){}
+  return false;
+}
+async function srcOpenMeteo(){
+  const url='https://api.open-meteo.com/v1/forecast?latitude='+BRATSK.lat+'&longitude='+BRATSK.lon+'&current=temperature_2m,weather_code&timezone='+encodeURIComponent(TZ);
+  const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw 0;
+  const d=await r.json();const c=d&&d.current;
+  if(!c||typeof c.temperature_2m!=='number')throw 0;
+  setWeather(Math.round(c.temperature_2m),(typeof c.weather_code==='number')?c.weather_code:3);
+}
+async function srcWttr(){
+  const r=await fetch('https://wttr.in/Bratsk?format=j1',{cache:'no-store'});if(!r.ok)throw 0;
+  const d=await r.json();const cc=d&&d.current_condition&&d.current_condition[0];if(!cc)throw 0;
+  const t=parseInt(cc.temp_C,10);if(isNaN(t))throw 0;
+  const desc=((cc.weatherDesc&&cc.weatherDesc[0]&&cc.weatherDesc[0].value)||'').toLowerCase();
+  let code=3;
+  if(/snow|blizzard/.test(desc))code=71;else if(/thunder/.test(desc))code=95;else if(/rain|drizzle|shower/.test(desc))code=61;else if(/fog|mist/.test(desc))code=45;else if(/clear|sun/.test(desc))code=0;else if(/cloud|overcast/.test(desc))code=3;
+  setWeather(t,code);
+}
+async function srcMetNo(){
+  const url='https://api.met.no/weatherapi/locationforecast/2.0/compact?lat='+BRATSK.lat+'&lon='+BRATSK.lon;
+  const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw 0;
+  const d=await r.json();
+  const ts=d&&d.properties&&d.properties.timeseries&&d.properties.timeseries[0];if(!ts)throw 0;
+  const det=ts.data&&ts.data.instant&&ts.data.instant.details;
+  if(!det||typeof det.air_temperature!=='number')throw 0;
+  let code=3;
+  const sym=(ts.data.next_1_hours&&ts.data.next_1_hours.summary&&ts.data.next_1_hours.summary.symbol_code)||'';
+  if(/snow/.test(sym))code=71;else if(/thunder/.test(sym))code=95;else if(/rain|drizzle/.test(sym))code=61;else if(/fog/.test(sym))code=45;else if(/clear/.test(sym))code=0;else if(/cloud|overcast/.test(sym))code=3;
+  setWeather(Math.round(det.air_temperature),code);
+}
+async function fetchWeather(){
+  try{await srcOpenMeteo();weatherTries=0;return;}catch(e){}
+  try{await srcWttr();weatherTries=0;return;}catch(e){}
+  try{await srcMetNo();weatherTries=0;return;}catch(e){}
+  if(!showCachedWeather()){const wt=document.getElementById('weatherTemp');if(wt)wt.textContent='--°';}
+  if(weatherTries<6){weatherTries++;setTimeout(fetchWeather,5000*weatherTries);}
+}
+showCachedWeather();
 fetchWeather();
 setInterval(fetchWeather,300000);
 window.addEventListener('online',function(){setTimeout(fetchWeather,1500);});
